@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-panel">
+  <div class="dm5-detail-panel">
     <div v-if="object">
       <h3>{{object.value}}</h3>
       <field-renderer :object="object" :mode="mode"></field-renderer>

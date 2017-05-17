@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "dm5": "^0.1.0",
-    "vue-quill-editor": "^2.1.6"
+    "vue-quill-minimum": "^1.0.0"
   }
 }
