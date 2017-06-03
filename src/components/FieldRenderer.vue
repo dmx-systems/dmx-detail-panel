@@ -1,17 +1,17 @@
 <template>
-  <div class="field-renderer">
+  <div class="field-renderer" v-if="object">
     <!-- simple -->
     <div v-if="isSimple" class="field">
       <div class="label">{{label}}</div>
-      <component :is="simpleComp" v-if="object" v-model="object.value" :mode="mode"></component>
+      <component :is="simpleComp" v-model="object.value" :mode="mode"></component>
     </div>
     <!-- composite -->
     <div v-else v-for="assocDef in assocDefs" :key="assocDef.id">
-      <!-- single -->
-      <field-renderer v-if="cardOne(assocDef)" :object="childObject(assocDef)" :mode="mode">
+      <!-- one -->
+      <field-renderer v-if="isOne(assocDef)" :object="childs(assocDef)" :mode="mode">
       </field-renderer>
-      <!-- multi -->
-      <field-renderer v-else v-for="object in childObjects(assocDef)" :object="object" :mode="mode" :key="object.id">
+      <!-- many -->
+      <field-renderer v-else v-for="object in childs(assocDef)" :object="object" :mode="mode" :key="object.id">
       </field-renderer>
     </div>
   </div>
@@ -55,24 +55,12 @@ export default {
 
   methods: {
 
-    // single
-    childObject (assocDef) {
-      return this.object.childs[assocDef.assocDefUri] || this.emptyTopic(assocDef)
+    isOne (assocDef) {
+      return assocDef.isOne()
     },
 
-    // multi
-    childObjects (assocDef) {
-      return this.object.childs[assocDef.assocDefUri] || []
-    },
-
-    emptyTopic (assocDef) {
-      return new dm5.Topic({
-        type_uri: assocDef.childTypeUri
-      })
-    },
-
-    cardOne (assocDef) {
-      return assocDef.childCard === 'dm4.core.one'
+    childs (assocDef) {
+      return this.object.childs[assocDef.assocDefUri]
     }
   },
 

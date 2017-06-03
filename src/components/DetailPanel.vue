@@ -3,7 +3,7 @@
     <div v-if="object">
       <h3>{{object.value}}</h3>
       <field-renderer :object="object" :mode="mode"></field-renderer>
-      <el-button size="small" @click="buttonAction">{{buttonLabel}}</el-button>
+      <el-button class="button" size="small" @click="buttonAction">{{buttonLabel}}</el-button>
     </div>
   </div>
 </template>
@@ -40,4 +40,7 @@ export default {
 </script>
 
 <style>
+.dm5-detail-panel .button {
+  margin-top: 1em;
+}
 </style>
