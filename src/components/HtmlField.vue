@@ -45,8 +45,8 @@ export default {
 
 <style>
 .ql-container {
-  font-family: "Avenir", Helvetica, Arial, sans-serif !important;
-  font-size: 1em !important;
+  font-family: var(--main-font-family);
+  font-size:   var(--main-font-size);
 }
 
 .ql-editor {
@@ -74,7 +74,7 @@ export default {
 .ql-snow .ql-toolbar .ql-picker-item:hover,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-  color: #20a0ff !important;    /* should match element-ui primary color */
+  color: var(--highlight-color);
 }
 .ql-snow.ql-toolbar button:hover .ql-fill,
 .ql-snow .ql-toolbar button:hover .ql-fill,
@@ -100,7 +100,7 @@ export default {
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
-  fill: #20a0ff !important;     /* should match element-ui primary color */
+  fill: var(--highlight-color);
 }
 .ql-snow.ql-toolbar button:hover .ql-stroke,
 .ql-snow .ql-toolbar button:hover .ql-stroke,
@@ -126,6 +126,6 @@ export default {
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
-  stroke: #20a0ff !important;   /* should match element-ui primary color */
+  stroke: var(--highlight-color);
 }
 </style>
