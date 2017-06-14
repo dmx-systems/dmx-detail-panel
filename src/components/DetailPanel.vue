@@ -1,10 +1,18 @@
 <template>
   <div class="dm5-detail-panel">
-    <div v-if="object">
-      <h3>{{object.value}}</h3>
-      <field-renderer :object="object" :mode="mode"></field-renderer>
-      <el-button class="button" size="small" @click="buttonAction">{{buttonLabel}}</el-button>
-    </div>
+    <el-tabs v-if="object">
+      <el-tab-pane :label="object.typeName">
+        <h3>{{object.value}}</h3>
+        <field-renderer :object="object" :mode="mode"></field-renderer>
+        <el-button class="button" size="small" @click="buttonAction">{{buttonLabel}}</el-button>
+      </el-tab-pane>
+      <el-tab-pane label="Related">
+      </el-tab-pane>
+      <el-tab-pane label="Meta">
+      </el-tab-pane>
+      <el-tab-pane label="Config">
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
@@ -42,5 +50,11 @@ export default {
 <style>
 .dm5-detail-panel .button {
   margin-top: 1em;
+}
+
+.dm5-detail-panel .el-tabs__item {
+  font-size: var(--label-font-size);  /* was 14px */
+  height: 40px;                       /* was 42px */
+  padding: 0 14px;                    /* was 16px */
 }
 </style>

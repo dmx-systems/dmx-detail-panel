@@ -74,7 +74,11 @@ export default {
 </script>
 
 <style>
-.field-renderer .label {
+.field-renderer .field {
+  margin-top: 1em;
+}
+
+.field-renderer .field .label {
   font-size: var(--label-font-size);
   color:     var(--label-color);
 }
