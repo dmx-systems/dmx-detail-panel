@@ -7,6 +7,10 @@
         <el-button class="button" size="small" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
+        <el-table :data="relatedTopics" :default-sort="{prop: 'typeName'}" @row-click="revealTopic">
+          <el-table-column prop="value"    label="Topic" sortable></el-table-column>
+          <el-table-column prop="typeName" label="Type"  sortable></el-table-column>
+        </el-table>
       </el-tab-pane>
       <el-tab-pane label="Meta">
       </el-tab-pane>
@@ -17,6 +21,8 @@
 </template>
 
 <script>
+import dm5 from 'dm5'
+
 export default {
 
   props: [
@@ -24,16 +30,38 @@ export default {
     'mode'      // 'info' or 'form'
   ],
 
+  data () {
+    return {
+      relatedTopics: undefined
+    }
+  },
+
   computed: {
     buttonLabel () {
       return this.infoMode ? 'Edit' : 'OK'
     }
   },
 
+  watch: {
+    object: function () {
+      // TODO: retrieve lazy
+      console.log('Retrieving related topics of topic', this.object.id)
+      dm5.restClient.getTopicRelatedTopics(this.object.id).then(topics => {
+        this.relatedTopics = topics
+      })
+    }
+  },
+
   methods: {
+
     buttonAction () {
       var action = this.infoMode ? 'edit' : 'submit'
       this.$store.dispatch(action)
+    },
+
+    revealTopic (topic) {
+      console.log('Revealing topic', topic.id)
+      // TODO
     }
   },
 
