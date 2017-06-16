@@ -44,11 +44,13 @@ export default {
 
   watch: {
     object: function () {
-      // TODO: retrieve lazy
-      console.log('Retrieving related topics of object', this.object.id)
-      this.object.getRelatedTopics().then(relTopics => {
-        this.relTopics = relTopics
-      })
+      if (this.object) {    // Note: on unselect object becomes undefined
+        // TODO: retrieve lazy
+        console.log('Retrieving related topics of object', this.object.id)
+        this.object.getRelatedTopics().then(relTopics => {
+          this.relTopics = relTopics
+        })
+      }
     }
   },
 
