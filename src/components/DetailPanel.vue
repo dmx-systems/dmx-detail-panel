@@ -83,10 +83,4 @@ export default {
 .dm5-detail-panel .button {
   margin-top: 1em;
 }
-
-.dm5-detail-panel .el-tabs__item {
-  font-size: var(--label-font-size);  /* was 14px */
-  height: 40px;                       /* was 42px */
-  padding: 0 14px;                    /* was 16px */
-}
 </style>
