@@ -1,4 +1,4 @@
-# The DeepaMehta 5 detail panel as a composable GUI component
+# DeepaMehta 5 Detail Panel
 
 ## Version History
 

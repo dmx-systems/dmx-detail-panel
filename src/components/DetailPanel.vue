@@ -7,7 +7,7 @@
         <el-button class="button" size="small" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
-        <el-table :data="relatedTopics" :default-sort="{prop: 'typeName'}" @row-click="revealTopic">
+        <el-table :data="relTopics" :default-sort="{prop: 'typeName'}" @row-click="revealTopic">
           <el-table-column prop="value"    label="Topic" sortable></el-table-column>
           <el-table-column prop="typeName" label="Type"  sortable></el-table-column>
         </el-table>
@@ -32,7 +32,7 @@ export default {
 
   data () {
     return {
-      relatedTopics: undefined
+      relTopics: undefined
     }
   },
 
@@ -45,9 +45,9 @@ export default {
   watch: {
     object: function () {
       // TODO: retrieve lazy
-      console.log('Retrieving related topics of topic', this.object.id)
-      dm5.restClient.getTopicRelatedTopics(this.object.id).then(topics => {
-        this.relatedTopics = topics
+      console.log('Retrieving related topics of object', this.object.id)
+      this.object.getRelatedTopics().then(relTopics => {
+        this.relTopics = relTopics
       })
     }
   },
@@ -59,9 +59,11 @@ export default {
       this.$store.dispatch(action)
     },
 
-    revealTopic (topic) {
-      console.log('Revealing topic', topic.id)
-      // TODO
+    revealTopic (relTopic) {
+      this.$store.dispatch('revealRelatedTopic', {
+        relTopic,
+        pos: {x: 100, y: 100}   // TODO
+      })
     }
   },
 
