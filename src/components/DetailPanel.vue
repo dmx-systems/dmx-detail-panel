@@ -14,7 +14,7 @@
       </el-tab-pane>
       <el-tab-pane label="Meta">
       </el-tab-pane>
-      <el-tab-pane label="Config">
+      <el-tab-pane label="View">
       </el-tab-pane>
     </el-tabs>
   </div>
