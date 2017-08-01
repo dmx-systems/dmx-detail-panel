@@ -52,6 +52,7 @@ export default {
 .ql-editor {
   padding-left: 8px !important;
   padding-right: 8px !important;
+  background-color: white;
 }
 
 .ql-editor p + p {
@@ -76,6 +77,7 @@ export default {
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
   color: var(--highlight-color);
 }
+
 .ql-snow.ql-toolbar button:hover .ql-fill,
 .ql-snow .ql-toolbar button:hover .ql-fill,
 .ql-snow.ql-toolbar button.ql-active .ql-fill,
@@ -102,6 +104,7 @@ export default {
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
   fill: var(--highlight-color);
 }
+
 .ql-snow.ql-toolbar button:hover .ql-stroke,
 .ql-snow .ql-toolbar button:hover .ql-stroke,
 .ql-snow.ql-toolbar button.ql-active .ql-stroke,
