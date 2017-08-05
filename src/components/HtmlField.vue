@@ -1,11 +1,13 @@
 <template>
   <div v-if="infoMode" v-html="value"></div>
   <div v-else>
-    <quill :value="value" :options="quillOptions" @input="updateValue"></quill>
+    <quill :value="value" :options="quillOptions" @quillReady="quillReady" @input="updateValue"></quill>
   </div>
 </template>
 
 <script>
+import TopicLinkManager from '../topic-link-manager'
+
 export default {
 
   props: ['value', 'mode'],
@@ -19,7 +21,7 @@ export default {
             ['blockquote', 'code-block'],
             [{'list': 'ordered'}, {'list': 'bullet'}],
             [{'header': [1, 2, 3, false]}],
-            ['link', 'image', 'video']
+            ['topic-link', 'link', 'image', 'video']    // TODO: let TopicLinkManager add topic-link button dynamically
           ]
         },
         theme: 'snow'
@@ -28,6 +30,11 @@ export default {
   },
 
   methods: {
+
+    quillReady (quill) {
+      new TopicLinkManager(quill)
+    },
+
     updateValue (html) {
       this.$emit("input", html)
     }
