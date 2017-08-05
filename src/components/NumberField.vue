@@ -1,7 +1,7 @@
 <template>
   <div v-if="infoMode">{{value}}</div>
   <div v-else>
-    <input :value="value" @input="updateValue($event)" type="number">
+    <el-input :value="value" @input="updateValue" type="number"></el-input>
   </div>
 </template>
 
@@ -11,8 +11,8 @@ export default {
   props: ['value', 'mode'],
 
   methods: {
-    updateValue (event) {
-      this.$emit("input", event.target.value)
+    updateValue (value) {
+      this.$emit("input", value)
     }
   },
 

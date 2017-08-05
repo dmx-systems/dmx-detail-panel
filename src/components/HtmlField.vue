@@ -1,7 +1,7 @@
 <template>
   <div v-if="infoMode" v-html="value"></div>
   <div v-else>
-    <quill :value="value" :options="quillOptions" @input="updateValue($event)"></quill>
+    <quill :value="value" :options="quillOptions" @input="updateValue"></quill>
   </div>
 </template>
 
