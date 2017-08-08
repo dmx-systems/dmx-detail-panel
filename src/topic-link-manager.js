@@ -2,16 +2,29 @@ class TopicLinkManager {
 
   constructor (quill) {
     this.quill = quill
-    quill.getModule('toolbar').addHandler('topic-link', this.topicLinkHandler)
+    quill.getModule('toolbar').addHandler('topic-link', this.buttonHandler)
   }
 
-  topicLinkHandler (value) {
+  buttonHandler (value) {
     // console.log('topicLinkHandler', value, this.quill, this.quill.getModule('toolbar'))
     // this.$store.dispatch('openSearchWidget')
     this.quill.format('topic-link', {
-      topicId: 1234,
+      topicId: 4667,
       linkId: 2456
     })
+  }
+
+  static addLinkHandlers (html, linkClicked) {
+
+    html.querySelectorAll('a.topic-link').forEach(link => {
+      link.addEventListener('click', linkHandler)
+    })
+
+    function linkHandler (e) {
+      const topicId = Number(e.target.dataset.topicId)
+      console.log('in-app link clicked!', topicId)
+      linkClicked(topicId)
+    }
   }
 }
 
@@ -44,7 +57,7 @@ class TopicLink extends Link {
 }
 
 TopicLink.blotName = 'topic-link'
-TopicLink.tagName = 'A'
+// TopicLink.tagName = 'A'            // not needed as it is derived
 TopicLink.className = 'topic-link'
 
 Quill.register(TopicLink)

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="infoMode" class="html-field" v-html="value"></div>
+  <div v-if="infoMode" class="html-field" v-html="value" ref="html"></div>
   <div v-else>
     <quill :value="value" :options="quillOptions" @quillReady="quillReady" @input="updateValue"></quill>
   </div>
@@ -29,6 +29,21 @@ export default {
     }
   },
 
+  created () {
+    console.log('HTMLField created()', this.mode)
+  },
+
+  mounted () {
+    console.log('HTMLField mounted()', this.mode, this.$refs.html)
+    // Note: if a topic is edited for the first time the HtmlField component is mounted in "form" mode
+    this.addLinkHandlers()
+  },
+
+  updated () {
+    console.log('HTMLField updated()', this.mode)
+    this.addLinkHandlers()
+  },
+
   methods: {
 
     quillReady (quill) {
@@ -37,6 +52,14 @@ export default {
 
     updateValue (html) {
       this.$emit("input", html)
+    },
+
+    addLinkHandlers () {
+      if (this.infoMode) {
+        TopicLinkManager.addLinkHandlers(this.$refs.html, topicId => {
+          this.$store.dispatch('revealTopicById', topicId)
+        })
+      }
     }
   },
 
