@@ -20,29 +20,31 @@ export default TopicLinkManager
 // Define 'topic-link' format
 
 import Quill from 'quill'
-const Inline = Quill.import('blots/inline')
+const Link = Quill.import('formats/link')
 
-class TopicLink extends Inline {
+class TopicLink extends Link {
 
   static create (value) {
-    // console.log('TopicLink create()', value)
     const node = super.create()
-    node.setAttribute('href', '')   // required for link style
-    node.setAttribute('data-topic-id', value.topicId)
-    node.setAttribute('data-link-id', value.linkId)
+    // console.log('TopicLink create()', value)
+    node.removeAttribute('target')    // target attribute was added by Link class
+    node.setAttribute('href', '#')    // href attribute required to render in link style
+    node.dataset.topicId = value.topicId
+    node.dataset.linkId  = value.linkId
     return node
   }
 
   static formats (node) {
     // console.log('TopicLink formats()', node)
     return {
-      topicId: node.getAttribute('data-topic-id'),    // FIXME: convert to Number?
-      linkId:  node.getAttribute('data-link-id')      // FIXME: convert to Number?
+      topicId: node.dataset.topicId,  // FIXME: convert to Number?
+      linkId:  node.dataset.linkId    // FIXME: convert to Number?
     }
   }
 }
 
 TopicLink.blotName = 'topic-link'
 TopicLink.tagName = 'A'
+TopicLink.className = 'topic-link'
 
 Quill.register(TopicLink)
