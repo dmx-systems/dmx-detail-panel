@@ -1,5 +1,5 @@
 <template>
-  <div v-if="infoMode" v-html="value"></div>
+  <div v-if="infoMode" class="html-field" v-html="value"></div>
   <div v-else>
     <quill :value="value" :options="quillOptions" @quillReady="quillReady" @input="updateValue"></quill>
   </div>
@@ -51,19 +51,32 @@ export default {
 </script>
 
 <style>
+.html-field {
+  line-height: var(--line-height);
+}
+
+.html-field p {
+  margin: 0;
+}
+
+.html-field p + p {
+  margin-top: var(--paragraph-spacing);
+}
+
 .ql-container {
   font-family: var(--main-font-family);
   font-size:   var(--main-font-size);
 }
 
 .ql-editor {
+  line-height: var(--line-height);
   padding-left: 8px !important;
   padding-right: 8px !important;
   background-color: white;
 }
 
 .ql-editor p + p {
-  margin-top: 0.75em;
+  margin-top: var(--paragraph-spacing);
 }
 
 .ql-toolbar.ql-snow {

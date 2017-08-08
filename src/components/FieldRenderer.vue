@@ -75,11 +75,12 @@ export default {
 
 <style>
 .field-renderer .field {
-  margin-top: 1em;
+  margin-top: 1.2em;
 }
 
 .field-renderer .field .label {
   font-size: var(--label-font-size);
   color:     var(--label-color);
+  margin-bottom: 0.2em;
 }
 </style>

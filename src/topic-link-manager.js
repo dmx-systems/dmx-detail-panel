@@ -27,6 +27,7 @@ class TopicLink extends Inline {
   static create (value) {
     // console.log('TopicLink create()', value)
     const node = super.create()
+    node.setAttribute('href', '')   // required for link style
     node.setAttribute('data-topic-id', value.topicId)
     node.setAttribute('data-link-id', value.linkId)
     return node
@@ -41,7 +42,7 @@ class TopicLink extends Inline {
   }
 }
 
-TopicLink.blotName = "topic-link"
+TopicLink.blotName = 'topic-link'
 TopicLink.tagName = 'A'
 
 Quill.register(TopicLink)

@@ -1,7 +1,7 @@
 <template>
   <div v-if="infoMode">{{value}}</div>
   <div v-else>
-    <el-input :value="value" @input="updateValue"></el-input>
+    <el-input :value="value" @input="updateValue" size="small"></el-input>
   </div>
 </template>
 
