@@ -54,6 +54,11 @@ export default {
     }
   },
 
+  created () {
+    this.$store.registerModule('detailPanel2', require('../detail-panel').default)
+    // TODO: move global "detailPanel" state to this module, then rename registration
+  },
+
   methods: {
 
     buttonAction () {

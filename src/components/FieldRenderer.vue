@@ -2,7 +2,7 @@
   <div class="field-renderer" v-if="object">
     <!-- simple -->
     <div v-if="isSimple" class="field">
-      <div class="label">{{label}}</div>
+      <div class="field-label">{{label}}</div>
       <component :is="simpleComp" v-model="object.value" :mode="mode"></component>
     </div>
     <!-- composite -->
@@ -76,11 +76,5 @@ export default {
 <style>
 .field-renderer .field {
   margin-top: 1.2em;
-}
-
-.field-renderer .field .label {
-  font-size: var(--label-font-size);
-  color:     var(--label-color);
-  margin-bottom: 0.2em;
 }
 </style>

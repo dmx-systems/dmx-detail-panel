@@ -1,17 +1,24 @@
 class TopicLinkManager {
 
-  constructor (quill) {
-    this.quill = quill
-    quill.getModule('toolbar').addHandler('topic-link', this.buttonHandler)
-  }
+  constructor (quill, dispatch) {
+    // console.log('TopicLinkManager', dispatch)
+    dispatch('setQuill', quill)
+    quill.getModule('toolbar').addHandler('topic-link', buttonHandler)
 
-  buttonHandler (value) {
-    // console.log('topicLinkHandler', value, this.quill, this.quill.getModule('toolbar'))
-    // this.$store.dispatch('openSearchWidget')
-    this.quill.format('topic-link', {
-      topicId: 4667,
-      linkId: 2456
-    })
+    function buttonHandler (value) {
+      // Note: "this" refers to the Toolbar instance
+      // console.log('buttonHandler', value)
+      dispatch('openSearchWidget', {
+        pos: {
+          model:  {x: 100, y: 100},
+          render: {x: 100, y: 100}
+        },
+        options: {
+          noSelect: true,
+          auxAction: "createTopicLink"
+        }
+      })
+    }
   }
 
   static addLinkHandlers (html, linkClicked) {

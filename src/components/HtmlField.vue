@@ -47,7 +47,7 @@ export default {
   methods: {
 
     quillReady (quill) {
-      new TopicLinkManager(quill)
+      new TopicLinkManager(quill, this.$store.dispatch)
     },
 
     updateValue (html) {
