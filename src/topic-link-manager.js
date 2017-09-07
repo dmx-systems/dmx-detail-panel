@@ -4,13 +4,14 @@ class TopicLinkManager {
     // console.log('TopicLinkManager', dispatch)
     dispatch('setQuill', quill)
     quill.getModule('toolbar').addHandler('topic-link', buttonHandler)
+    buttonIcon()
 
     function buttonHandler (value) {
       // Note: "this" refers to the Toolbar instance
       // console.log('buttonHandler', value)
       dispatch('openSearchWidget', {
         pos: {
-          model:  {x: 100, y: 100},
+          model:  {x: 100, y: 100},   // TODO
           render: {x: 100, y: 100}
         },
         options: {
@@ -18,6 +19,12 @@ class TopicLinkManager {
           auxAction: "createTopicLink"
         }
       })
+    }
+
+    function buttonIcon () {
+      const button = document.querySelector('button.ql-topic-link')
+      button.textContent = 'T'    // TODO: use real (SVG) icon
+      button.setAttribute('title', 'Embed a topic link')
     }
   }
 

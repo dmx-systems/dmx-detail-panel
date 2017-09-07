@@ -1,6 +1,8 @@
 <template>
   <div v-if="infoMode" class="html-field" v-html="value" ref="html"></div>
   <div v-else>
+    <!-- Without this wrapper <div> the Quill toolbar remains visible when switching to info mode.           -->
+    <!-- This is because the Quill toolbar element becomes a *sibling* (not a child) of the <quill> element. -->
     <quill :value="value" :options="quillOptions" @quillReady="quillReady" @input="updateValue"></quill>
   </div>
 </template>
@@ -21,7 +23,7 @@ export default {
             ['blockquote', 'code-block'],
             [{'list': 'ordered'}, {'list': 'bullet'}],
             [{'header': [1, 2, 3, false]}],
-            ['topic-link', 'link', 'image', 'video']    // TODO: let TopicLinkManager add topic-link button dynamically
+            ['topic-link', 'link', 'image', 'video']    // TODO: let TopicLinkManager add topic-link button dynamically?
           ]
         },
         theme: 'snow'
