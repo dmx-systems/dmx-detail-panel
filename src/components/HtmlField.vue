@@ -32,17 +32,17 @@ export default {
   },
 
   created () {
-    console.log('HTMLField created()', this.mode)
+    // console.log('HTMLField created()', this.mode)
   },
 
   mounted () {
-    console.log('HTMLField mounted()', this.mode, this.$refs.html)
+    // console.log('HTMLField mounted()', this.mode, this.$refs.html)
     // Note: if a topic is edited for the first time the HtmlField component is mounted in "form" mode
     this.addLinkHandlers()
   },
 
   updated () {
-    console.log('HTMLField updated()', this.mode)
+    // console.log('HTMLField updated()', this.mode)
     this.addLinkHandlers()
   },
 

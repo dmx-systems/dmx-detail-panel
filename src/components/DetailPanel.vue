@@ -25,8 +25,13 @@ import dm5 from 'dm5'
 
 export default {
 
+  created () {
+    this.$store.registerModule('detailPanel2', require('../detail-panel').default)
+    // TODO: move global "detailPanel" state to this module, then rename registration
+  },
+
   props: [
-    'object',   // the Topic/Association to display; if undefined an empty detail panel is rendered
+    'object',   // the Topic/Assoc to display; if undefined the detail panel is empty
     'mode'      // 'info' or 'form'
   ],
 
@@ -52,11 +57,6 @@ export default {
         })
       }
     }
-  },
-
-  created () {
-    this.$store.registerModule('detailPanel2', require('../detail-panel').default)
-    // TODO: move global "detailPanel" state to this module, then rename registration
   },
 
   methods: {

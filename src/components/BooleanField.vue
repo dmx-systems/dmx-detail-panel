@@ -1,7 +1,7 @@
 <template>
   <div v-if="infoMode">{{value}}</div>
   <div v-else>
-    <el-input :value="value" @input="updateValue" size="small"></el-input>
+    <el-checkbox :value="value" @input="updateValue"></el-checkbox>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ export default {
 
   methods: {
     updateValue (value) {
+      console.log('updateValue', value)
       this.$emit("input", value)
     }
   },
