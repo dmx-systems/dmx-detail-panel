@@ -26,14 +26,20 @@ import dm5 from 'dm5'
 export default {
 
   created () {
-    this.$store.registerModule('detailPanel2', require('../detail-panel').default)
-    // TODO: move global "detailPanel" state to this module, then rename registration
+    this.$store.registerModule('detailPanel', require('../detail-panel').default)
+    this.$store.watch(
+      state => state.detailPanel.selectedObject,
+      object => {
+        if (object) {    // Note: on unselect object becomes undefined
+          // TODO: retrieve lazy
+          console.log('Retrieving related topics of object', object.id)
+          object.getRelatedTopics().then(relTopics => {
+            this.relTopics = relTopics
+          })
+        }
+      }
+    )
   },
-
-  props: [
-    'object',   // the Topic/Assoc to display; if undefined the detail panel is empty
-    'mode'      // 'info' or 'form'
-  ],
 
   data () {
     return {
@@ -42,20 +48,17 @@ export default {
   },
 
   computed: {
+
+    object () {
+      return this.$store.state.detailPanel.selectedObject
+    },
+
+    mode () {
+      return this.$store.state.detailPanel.mode
+    },
+
     buttonLabel () {
       return this.infoMode ? 'Edit' : 'OK'
-    }
-  },
-
-  watch: {
-    object: function () {
-      if (this.object) {    // Note: on unselect object becomes undefined
-        // TODO: retrieve lazy
-        console.log('Retrieving related topics of object', this.object.id)
-        this.object.getRelatedTopics().then(relTopics => {
-          this.relTopics = relTopics
-        })
-      }
     }
   },
 
