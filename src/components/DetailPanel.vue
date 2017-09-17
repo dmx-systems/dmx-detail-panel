@@ -28,7 +28,7 @@ export default {
   created () {
     this.$store.registerModule('detailPanel', require('../detail-panel').default)
     this.$store.watch(
-      state => state.detailPanel.selectedObject,
+      state => state.detailPanel.object,
       object => {
         if (object) {    // Note: on unselect object becomes undefined
           // TODO: retrieve lazy
@@ -50,7 +50,7 @@ export default {
   computed: {
 
     object () {
-      return this.$store.state.detailPanel.selectedObject
+      return this.$store.state.detailPanel.object
     },
 
     mode () {
