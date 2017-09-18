@@ -1,8 +1,6 @@
-import dm5 from 'dm5'
-
 const state = {
 
-  object: undefined,    // the Topic/Assoc to display; if undefined the detail panel is empty
+  object: undefined,    // the displayed Topic/Assoc; if undefined nothing is displayed
 
   mode: undefined,      // 'info' or 'form'
 
@@ -12,13 +10,8 @@ const state = {
 
 const actions = {
 
-  displayTopic (_, topic) {
-    state.object = topic
-    state.mode = 'info'
-  },
-
-  displayAssoc (_, assoc) {
-    state.object = assoc
+  displayObject (_, object) {
+    state.object = object
     state.mode = 'info'
   },
 
@@ -33,10 +26,10 @@ const actions = {
   },
 
   submit ({dispatch}) {
-    state.mode = 'info'
     state.object.update().then(object => {
-      dispatch('_processDirectives', object.directives)
+      dispatch('_processDirectives', object.directives)   // TODO: move to webclient.js?
     })
+    state.mode = 'info'
   },
 
   setQuill (_, quill) {
@@ -49,62 +42,10 @@ const actions = {
       topicId: topic.id,
       linkId: undefined   // TODO
     })
-  },
-
-  // WebSocket message processing
-
-  _processDirectives ({dispatch}, directives) {
-    console.log(`DetailPanel: processing ${directives.length} directives`)
-    directives.forEach(dir => {
-      switch (dir.type) {
-      case "UPDATE_TOPIC":
-        setObjectIf(new dm5.Topic(dir.arg))
-        break
-      case "DELETE_TOPIC":
-        dispatch('unselectIf', dir.arg.id)
-        break
-      case "UPDATE_ASSOCIATION":
-        setObjectIf(new dm5.Assoc(dir.arg))
-        break
-      case "DELETE_ASSOCIATION":
-        dispatch('unselectIf', dir.arg.id)
-        break
-      case "UPDATE_TOPIC_TYPE":
-        // TODO
-        console.warn('Directive UPDATE_TOPIC_TYPE not yet implemented')
-        break
-      case "DELETE_TOPIC_TYPE":
-        // TODO
-        console.warn('Directive DELETE_TOPIC_TYPE not yet implemented')
-        break
-      case "UPDATE_ASSOCIATION_TYPE":
-        // TODO
-        console.warn('Directive UPDATE_ASSOCIATION_TYPE not yet implemented')
-        break
-      case "DELETE_ASSOCIATION_TYPE":
-        // TODO
-        console.warn('Directive DELETE_ASSOCIATION_TYPE not yet implemented')
-        break
-      default:
-        throw Error(`"${dir.type}" is an unsupported directive`)
-      }
-    })
   }
 }
 
 export default {
   state,
   actions
-}
-
-// ---
-
-function setObjectIf (object) {
-  if (isSelected(object.id)) {
-    state.object = object
-  }
-}
-
-function isSelected (id) {
-  return state.object && state.object.id === id
 }
