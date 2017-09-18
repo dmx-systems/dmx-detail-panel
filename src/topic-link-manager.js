@@ -35,6 +35,7 @@ class TopicLinkManager {
     })
 
     function linkHandler (e) {
+      e.preventDefault()    // prevent browser's default link handling
       const topicId = Number(e.target.dataset.topicId)
       console.log('in-app link clicked!', topicId)
       linkClicked(topicId)
@@ -55,7 +56,7 @@ class TopicLink extends Link {
     const node = super.create()
     // console.log('TopicLink create()', value)
     node.removeAttribute('target')    // target attribute was added by Link class
-    node.setAttribute('href', '#')    // href attribute required to render in link style
+    node.setAttribute('href', '')     // href attribute required to render in link style
     node.dataset.topicId = value.topicId
     node.dataset.linkId  = value.linkId
     return node
