@@ -2,6 +2,10 @@
 
 ## Version History
 
+**0.5** -- Oct 3, 2017
+
+* Render Boolean field as checkbox
+
 **0.4** -- Sep 7, 2017
 
 * In-app topic links in HTML fields
@@ -14,4 +18,4 @@
 
 ------------
 Jörg Richter  
-Sep 7, 2017
+Oct 3, 2017
