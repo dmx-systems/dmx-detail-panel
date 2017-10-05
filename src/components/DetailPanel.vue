@@ -3,7 +3,7 @@
     <el-tabs v-if="object">
       <el-tab-pane :label="object.typeName">
         <h3>{{object.value}}</h3>
-        <field-renderer :object="object" :mode="mode"></field-renderer>
+        <component :is="objectRenderer" :object="object" :mode="mode"></component>
         <el-button class="button" size="small" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import dm5 from 'dm5'
-
 export default {
 
+  // Note: we can't do the registrations in index.js as we have no access to the store object there, and we can't import
+  // the store there as it originates from another repo. So we use the component's created() to do the registrations.
   created () {
     this.$store.registerModule('detailPanel', require('../detail-panel').default)
     this.$store.watch(
@@ -55,6 +55,14 @@ export default {
 
     mode () {
       return this.$store.state.detailPanel.mode
+    },
+
+    objectRenderers () {
+      return this.$store.state.detailPanel.objectRenderers
+    },
+
+    objectRenderer () {
+      return this.objectRenderers[this.object.typeUri] || 'field-renderer'
     },
 
     buttonLabel () {

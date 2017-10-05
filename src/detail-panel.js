@@ -4,6 +4,11 @@ const state = {
 
   mode: undefined,      // 'info' or 'form'
 
+  objectRenderers: {},  // Registered page renderers:
+                        //   {
+                        //     typeUri: component
+                        //   }
+
   quill: undefined      // The Quill instance deployed in form mode.
                         // FIXME: support more than Quill instance per form.
 }
@@ -30,6 +35,10 @@ const actions = {
       dispatch('_processDirectives', object.directives)   // TODO: move to webclient.js?
     })
     state.mode = 'info'
+  },
+
+  registerObjectRenderer (_, {typeUri, component}) {
+    state.objectRenderers[typeUri] = component
   },
 
   setQuill (_, quill) {
