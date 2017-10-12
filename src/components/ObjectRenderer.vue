@@ -1,5 +1,5 @@
 <template>
-  <div class="field-renderer" v-if="object">
+  <div class="object-renderer" v-if="object">
     <!-- simple -->
     <div v-if="isSimple" class="field">
       <div class="field-label">{{label}}</div>
@@ -8,11 +8,11 @@
     <!-- composite -->
     <div v-else v-for="assocDef in assocDefs" :key="assocDef.id">
       <!-- one -->
-      <field-renderer v-if="isOne(assocDef)" :object="childs(assocDef)" :mode="mode">
-      </field-renderer>
+      <object-renderer v-if="isOne(assocDef)" :object="childs(assocDef)" :mode="mode">
+      </object-renderer>
       <!-- many -->
-      <field-renderer v-else v-for="object in childs(assocDef)" :object="object" :mode="mode" :key="object.id">
-      </field-renderer>
+      <object-renderer v-else v-for="object in childs(assocDef)" :object="object" :mode="mode" :key="object.id">
+      </object-renderer>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@
 <script>
 export default {
 
-  name: 'field-renderer',
+  name: 'object-renderer',
 
   props: [
     'object',   // the Topic/Assoc to render; is never undefined;
@@ -72,7 +72,7 @@ export default {
 </script>
 
 <style>
-.field-renderer .field {
+.object-renderer .field {
   margin-top: 1.2em;
 }
 </style>

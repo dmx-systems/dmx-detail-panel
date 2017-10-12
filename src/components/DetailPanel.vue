@@ -66,7 +66,7 @@ export default {
     },
 
     objectRenderer () {
-      return this.objectRenderers[this.object.typeUri] || 'field-renderer'
+      return this.objectRenderers[this.object.typeUri] || 'object-renderer'
     },
 
     isAssoc () {
@@ -98,7 +98,7 @@ export default {
   ],
 
   components: {
-    'field-renderer': require('./FieldRenderer'),
+    'object-renderer': require('./ObjectRenderer'),
     'assoc-renderer': require('./AssocRenderer')
   }
 }

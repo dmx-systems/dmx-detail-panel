@@ -6,7 +6,7 @@
       <el-option v-for="assocType in assocTypes" :label="assocType.value" :value="assocType.uri" :key="assocType.uri">
       </el-option>
     </el-select>
-    <field-renderer :object="assoc" :mode="mode"></field-renderer>
+    <object-renderer :object="assoc" :mode="mode"></object-renderer>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
   ],
 
   components: {
-    'field-renderer': require('./FieldRenderer')
+    'object-renderer': require('./ObjectRenderer')
   }
 }
 </script>
