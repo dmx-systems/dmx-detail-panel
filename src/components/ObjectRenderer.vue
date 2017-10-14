@@ -47,7 +47,7 @@ export default {
     },
 
     simpleComp () {
-      return this.type.dataType.substr('dm4.core.'.length) + '-field'
+      return this.type.dataTypeUri.substr('dm4.core.'.length) + '-field'
     }
   },
 

@@ -1,6 +1,7 @@
 const state = {
 
-  object: undefined,    // the displayed Topic/Assoc; if undefined nothing is displayed
+  object: undefined,    // The displayed Topic/Assoc/TopicType/AssocType.
+                        // If undefined nothing is displayed.
 
   mode: undefined,      // 'info' or 'form'
 
@@ -10,13 +11,13 @@ const state = {
                         //   }
 
   quill: undefined      // The Quill instance deployed in form mode.
-                        // FIXME: support more than Quill instance per form.
+                        // FIXME: support more than one Quill instance per form.
 }
 
 const actions = {
 
   displayObject (_, object) {
-    state.object = object
+    state.object = object.isType() ? object.asType() : object
     state.mode = 'info'
   },
 
@@ -30,9 +31,10 @@ const actions = {
     state.mode = 'form'
   },
 
+  // TODO: move to webclient.js
   submit ({dispatch}) {
     state.object.update().then(object => {
-      dispatch('_processDirectives', object.directives)   // TODO: move to webclient.js?
+      dispatch('_processDirectives', object.directives)
     })
     state.mode = 'info'
   },
