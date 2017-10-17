@@ -1,8 +1,14 @@
 <template>
   <div>
+    <!-- Player -->
     <div v-if="player">{{player.typeName}}: "{{player.value}}"</div>
+    <!-- Role Type -->
     <div class="field-label">Role Type</div>
-    <div>{{role.typeName}}</div>
+    <div v-if="infoMode">{{role.typeName}}</div>
+    <el-select v-else v-model="role.roleTypeUri" size="small">
+      <el-option v-for="roleType in roleTypes" :label="roleType.value" :value="roleType.uri" :key="roleType.uri">
+      </el-option>
+    </el-select>
   </div>
 </template>
 
@@ -25,6 +31,12 @@ export default {
     }
   },
 
+  computed: {
+    roleTypes () {
+      return this.$store.state.typeCache.roleTypes
+    }
+  },
+
   // for component instantiation
   created () {
     this.fetchPlayer()
@@ -43,7 +55,12 @@ export default {
         this.player = player
       })
     }
-  }
+  },
+
+  mixins: [
+    require('./mixins/mode').default,
+    require('./mixins/infoMode').default
+  ]
 }
 </script>
 

@@ -8,8 +8,8 @@
       </el-option>
     </el-select>
     <!-- Roles -->
-    <assoc-role :role="assoc.role1"></assoc-role>
-    <assoc-role :role="assoc.role2"></assoc-role>
+    <assoc-role :role="assoc.role1" :mode="mode"></assoc-role>
+    <assoc-role :role="assoc.role2" :mode="mode"></assoc-role>
     <!-- Generic Object -->
     <object-renderer :object="assoc" :mode="mode"></object-renderer>
   </div>
