@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <div class="assoc-renderer">
     <!-- Association Type -->
-    <div class="field-label">Association Type</div>
-    <div v-if="infoMode">{{assoc.typeName}}</div>
-    <el-select v-else v-model="assoc.typeUri" size="small">
-      <el-option v-for="assocType in assocTypes" :label="assocType.value" :value="assocType.uri" :key="assocType.uri">
-      </el-option>
-    </el-select>
+    <div class="field">
+      <div class="field-label">Association Type</div>
+      <div v-if="infoMode">{{assoc.typeName}}</div>
+      <el-select v-else v-model="assoc.typeUri" size="small">
+        <el-option v-for="assocType in assocTypes" :label="assocType.value" :value="assocType.uri" :key="assocType.uri">
+        </el-option>
+      </el-select>
+    </div>
     <!-- Roles -->
     <assoc-role :role="assoc.role1" :mode="mode"></assoc-role>
     <assoc-role :role="assoc.role2" :mode="mode"></assoc-role>

@@ -83,7 +83,4 @@ export default {
 </script>
 
 <style>
-.object-renderer .field {
-  margin-top: 1.2em;
-}
 </style>

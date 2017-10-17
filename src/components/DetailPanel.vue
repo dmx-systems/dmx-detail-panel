@@ -105,7 +105,11 @@ export default {
 </script>
 
 <style>
+.dm5-detail-panel .field {
+  margin-top: 1.2em;
+}
+
 .dm5-detail-panel .button {
-  margin-top: 1em;
+  margin-top: 1.2em;
 }
 </style>

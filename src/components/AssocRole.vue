@@ -1,14 +1,16 @@
 <template>
-  <div>
+  <div class="assoc-role">
     <!-- Player -->
-    <div v-if="player">{{player.typeName}}: "{{player.value}}"</div>
+    <div class="field" v-if="player">{{player.typeName}}: "{{player.value}}"</div>
     <!-- Role Type -->
-    <div class="field-label">Role Type</div>
-    <div v-if="infoMode">{{role.typeName}}</div>
-    <el-select v-else v-model="role.roleTypeUri" size="small">
-      <el-option v-for="roleType in roleTypes" :label="roleType.value" :value="roleType.uri" :key="roleType.uri">
-      </el-option>
-    </el-select>
+    <div class="field">
+      <div class="field-label">Role Type</div>
+      <div v-if="infoMode">{{role.typeName}}</div>
+      <el-select v-else v-model="role.roleTypeUri" size="small">
+        <el-option v-for="roleType in roleTypes" :label="roleType.value" :value="roleType.uri" :key="roleType.uri">
+        </el-option>
+      </el-select>
+    </div>
   </div>
 </template>
 
@@ -65,4 +67,7 @@ export default {
 </script>
 
 <style>
+.assoc-role {
+  background-color: var(--background-dark-color);
+}
 </style>

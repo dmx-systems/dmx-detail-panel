@@ -1,8 +1,6 @@
 <template>
   <div v-if="infoMode">{{value}}</div>
-  <div v-else>
-    <el-input :value="value" @input="updateValue" type="number" size="small"></el-input>
-  </div>
+  <el-input v-else :value="value" @input="updateValue" type="number" size="small"></el-input>
 </template>
 
 <script>

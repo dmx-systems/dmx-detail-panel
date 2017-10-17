@@ -1,8 +1,6 @@
 <template>
   <div v-if="infoMode">{{value}}</div>
-  <div v-else>
-    <el-checkbox :value="value" @input="updateValue"></el-checkbox>
-  </div>
+  <el-checkbox v-else :value="value" @input="updateValue"></el-checkbox>
 </template>
 
 <script>
