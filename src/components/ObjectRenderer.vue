@@ -32,12 +32,6 @@ export default {
     object: {
       type: dm5.DeepaMehtaObject,
       required: true
-    },
-    // 'info' or 'form'
-    mode: {
-      type: String,
-      required: true,
-      validator: mode => mode === 'info' || mode === 'form'
     }
   },
 
@@ -74,6 +68,10 @@ export default {
       return this.object.childs[assocDef.assocDefUri]
     }
   },
+
+  mixins: [
+    require('./mixins/mode').default
+  ],
 
   components: {
     'text-field':    require('./TextField'),

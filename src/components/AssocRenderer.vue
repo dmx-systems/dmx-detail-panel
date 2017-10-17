@@ -1,22 +1,32 @@
 <template>
   <div>
+    <!-- Association Type -->
     <div class="field-label">Association Type</div>
     <div v-if="infoMode">{{assoc.typeName}}</div>
     <el-select v-else v-model="assoc.typeUri" size="small">
       <el-option v-for="assocType in assocTypes" :label="assocType.value" :value="assocType.uri" :key="assocType.uri">
       </el-option>
     </el-select>
+    <!-- Roles -->
+    <assoc-role :role="assoc.role1"></assoc-role>
+    <assoc-role :role="assoc.role2"></assoc-role>
+    <!-- Generic Object -->
     <object-renderer :object="assoc" :mode="mode"></object-renderer>
   </div>
 </template>
 
 <script>
+import dm5 from 'dm5'
+
 export default {
 
-  props: [
-    'assoc',    // the Assoc to render
-    'mode'      // 'info' or 'form'
-  ],
+  props: {
+    // the Assoc to render
+    assoc: {
+      type: dm5.Assoc,
+      required: true
+    }
+  },
 
   computed: {
     assocTypes () {
@@ -25,10 +35,12 @@ export default {
   },
 
   mixins: [
+    require('./mixins/mode').default,
     require('./mixins/infoMode').default
   ],
 
   components: {
+    'assoc-role': require('./AssocRole'),
     'object-renderer': require('./ObjectRenderer')
   }
 }
