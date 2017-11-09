@@ -3,17 +3,18 @@
     <!-- simple -->
     <div v-if="isSimple" class="field">
       <div class="field-label">{{label}}</div>
-      <component :is="simpleComp" v-model="object.value" :mode="mode"></component>
+      <component :is="simpleComp" :object="object" :mode="mode"></component>
     </div>
     <!-- composite -->
     <template v-else v-for="assocDef in assocDefs">
       <!-- one -->
       <template v-if="isOne(assocDef)">
-        <object-renderer v-if="childs(assocDef)" :object="childs(assocDef)" :mode="mode">
+        <object-renderer v-if="childs(assocDef)" :object="childs(assocDef)" :mode="mode" :assoc-def="assocDef">
         </object-renderer>
       </template>
       <!-- many -->
-      <object-renderer v-else v-for="object in childs(assocDef)" :object="object" :mode="mode" :key="object.id">
+      <object-renderer v-else v-for="object in childs(assocDef)" :object="object" :mode="mode" :assoc-def="assocDef"
+        :key="object.id">
       </object-renderer>
     </template>
   </div>
@@ -27,12 +28,7 @@ export default {
   name: 'object-renderer',
 
   props: {
-    // the Topic/Assoc to render; is never undefined;
-    // may be an "empty" topic/assoc, without ID, with just type set
-    object: {
-      type: dm5.DeepaMehtaObject,
-      required: true
-    }
+    assocDef: dm5.AssocDef    // undefined for simple top-level object renderers
   },
 
   computed: {
@@ -54,7 +50,8 @@ export default {
     },
 
     simpleComp () {
-      return this.type.dataTypeUri.substr('dm4.core.'.length) + '-field'
+      const widget = this.assocDef && this.assocDef._getViewConfig('dm4.webclient.widget')
+      return widget && widget.uri || this.type.dataTypeUri.substr('dm4.core.'.length) + '-field'
     }
   },
 
@@ -70,6 +67,7 @@ export default {
   },
 
   mixins: [
+    require('./mixins/object').default,
     require('./mixins/mode').default
   ],
 
@@ -77,7 +75,9 @@ export default {
     'text-field':    require('./TextField'),
     'number-field':  require('./NumberField'),
     'boolean-field': require('./BooleanField'),
-    'html-field':    require('./HtmlField')
+    'html-field':    require('./HtmlField'),
+    // widgets
+    'dm4.webclient.select_empty': require('./dm4.webclient.select_empty')
   }
 }
 </script>

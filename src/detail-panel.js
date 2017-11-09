@@ -22,7 +22,7 @@ const actions = {
   },
 
   emptyDisplay () {
-    console.log('emptyDisplay')
+    // console.log('emptyDisplay')
     state.object = undefined
   },
 

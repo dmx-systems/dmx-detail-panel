@@ -1,9 +1,9 @@
 <template>
-  <div v-if="infoMode" class="html-field" v-html="value" ref="html"></div>
+  <div v-if="infoMode" class="html-field" v-html="object.value" ref="html"></div>
   <div v-else>
-    <!-- Without this wrapper <div> the Quill toolbar remains visible when switching to info mode.           -->
-    <!-- This is because the Quill toolbar element becomes a *sibling* (not a child) of the <quill> element. -->
-    <quill :value="value" :options="quillOptions" @quillReady="quillReady" @input="updateValue"></quill>
+    <!-- Without this wrapper <div> the Quill toolbar remains visible when switching to info mode.   -->
+    <!-- This is because the Quill toolbar becomes a *sibling* (not a child) of the <quill> element. -->
+    <quill v-model="object.value" :options="quillOptions" @quillReady="quillReady"></quill>
   </div>
 </template>
 
@@ -11,8 +11,6 @@
 import TopicLinkManager from '../topic-link-manager'
 
 export default {
-
-  props: ['value', 'mode'],
 
   data () {
     return {
@@ -52,10 +50,6 @@ export default {
       new TopicLinkManager(quill, this.$store.dispatch)
     },
 
-    updateValue (html) {
-      this.$emit("input", html)
-    },
-
     addLinkHandlers () {
       if (this.infoMode) {
         TopicLinkManager.addLinkHandlers(this.$refs.html, topicId => {
@@ -66,6 +60,8 @@ export default {
   },
 
   mixins: [
+    require('./mixins/object').default,
+    require('./mixins/mode').default,
     require('./mixins/infoMode').default
   ],
 
