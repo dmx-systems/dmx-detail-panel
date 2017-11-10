@@ -1,8 +1,7 @@
 <template>
   <div v-if="infoMode">{{object.value}}</div>
-  <el-select v-else v-model="selection" size="small">
-    <el-option v-for="topic in topics" :label="topic.value" :value="topic.uri" :key="topic.id">
-    </el-option>
+  <el-select v-else v-model="selection" clearable placeholder="Default" size="small">
+    <el-option v-for="topic in topics" :label="topic.value" :value="topic.uri" :key="topic.id"></el-option>
   </el-select>
 </template>
 
@@ -19,7 +18,7 @@ export default {
   },
 
   created () {
-    // console.log('created', this.formMode, this.selection)
+    // console.log('created', this.mode, this.selection, typeof this.selection, this.selection.length)
     if (this.formMode) {
       this.updateValue()
     }
@@ -30,7 +29,7 @@ export default {
 
   watch: {
     selection () {
-      // console.log('selection', this.selection)
+      // console.log('selection', this.selection, typeof this.selection, this.selection.length)
       this.updateValue()
     }
   },
