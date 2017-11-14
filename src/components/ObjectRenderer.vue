@@ -28,7 +28,7 @@ export default {
   name: 'object-renderer',
 
   props: {
-    assocDef: dm5.AssocDef    // undefined for simple top-level object renderers
+    assocDef: dm5.AssocDef    // may be undefined (simple top-level object renderers)
   },
 
   computed: {
@@ -38,7 +38,8 @@ export default {
     },
 
     label () {
-      return this.type.value
+      const customAssocType = this.assocDef && this.assocDef.getCustomAssocType()
+      return customAssocType ? customAssocType.value : this.type.value
     },
 
     isSimple () {
