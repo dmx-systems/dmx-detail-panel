@@ -3,7 +3,7 @@
     <!-- simple -->
     <div v-if="isSimple" class="field">
       <div class="field-label">{{label}}</div>
-      <component :is="simpleComp" :object="object" :mode="mode"></component>
+      <component :is="simpleRenderer" :object="object" :mode="mode" :assoc-def="assocDef"></component>
     </div>
     <!-- composite -->
     <template v-else v-for="assocDef in assocDefs">
@@ -39,7 +39,7 @@ export default {
 
     label () {
       const customAssocType = this.assocDef && this.assocDef.getCustomAssocType()
-      return customAssocType ? customAssocType.value : this.type.value
+      return customAssocType && customAssocType.isSimple() ? customAssocType.value : this.type.value
     },
 
     isSimple () {
@@ -50,7 +50,7 @@ export default {
       return this.type.assocDefs
     },
 
-    simpleComp () {
+    simpleRenderer () {
       const widget = this.assocDef && this.assocDef._getViewConfig('dm4.webclient.widget')
       return widget && widget.uri || this.type.dataTypeUri.substr('dm4.core.'.length) + '-field'
     }
@@ -78,7 +78,7 @@ export default {
     'boolean-field': require('./BooleanField'),
     'html-field':    require('./HtmlField'),
     // widgets
-    'dm4.webclient.select_empty': require('./dm4.webclient.select_empty')
+    'dm4.webclient.select': require('./dm4.webclient.select')
   }
 }
 </script>

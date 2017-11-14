@@ -1,6 +1,6 @@
 <template>
   <div v-if="infoMode">{{object.value}}</div>
-  <el-select v-else v-model="selection" clearable placeholder="Default" size="small">
+  <el-select v-else v-model="selection" :clearable="clearable" placeholder="Default" size="small">
     <el-option v-for="topic in topics" :label="topic.value" :value="topic.uri" :key="topic.id"></el-option>
   </el-select>
 </template>
@@ -10,10 +10,23 @@ import dm5 from 'dm5'
 
 export default {
 
+  props: {
+    assocDef: {
+      type: dm5.AssocDef,
+      required: true
+    }
+  },
+
   data () {
     return {
       topics: [],
       selection: this.object.uri
+    }
+  },
+
+  computed: {
+    clearable () {
+      return this.assocDef.getViewConfig('dm4.webclient.clearable')
     }
   },
 
