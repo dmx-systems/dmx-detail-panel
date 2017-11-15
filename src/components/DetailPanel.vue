@@ -36,7 +36,7 @@ export default {
       object => {
         if (object) {    // Note: on unselect object becomes undefined
           // TODO: lazy retrieval
-          console.log('Retrieving related topics of object', object.id)
+          // console.log('Retrieving related topics of object', object.id)
           object.getRelatedTopics().then(relTopics => {
             this.relTopics = relTopics
           })
