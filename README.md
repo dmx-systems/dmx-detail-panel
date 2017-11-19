@@ -2,6 +2,10 @@
 
 ## Version History
 
+**0.7** -- Nov 19, 2017
+
+* Dynamic widget mechanism for simple fields
+
 **0.6** -- Oct 19, 2017
 
 * Injectable custom renderers
@@ -14,7 +18,7 @@
 
 **0.4** -- Sep 7, 2017
 
-* HTML fields can contain in-app topic links
+* In-app topic links in HTML fields
 
 **0.3** -- Jun 30, 2017
 
@@ -24,4 +28,4 @@
 
 ------------
 Jörg Richter  
-Oct 19, 2017
+Nov 19, 2017
