@@ -31,7 +31,7 @@ const actions = {
     state.mode = 'form'
   },
 
-  // TODO: move to webclient.js
+  // TODO: move to webclient.js?
   submit ({dispatch}) {
     state.object.update().then(object => {
       dispatch('_processDirectives', object.directives)

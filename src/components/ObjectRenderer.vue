@@ -9,13 +9,13 @@
     <template v-else v-for="assocDef in assocDefs">
       <!-- one -->
       <template v-if="isOne(assocDef)">
-        <object-renderer v-if="childs(assocDef)" :object="childs(assocDef)" :mode="mode" :assoc-def="assocDef">
-        </object-renderer>
+        <child-topic v-if="childs(assocDef)" :object="childs(assocDef)" :mode="mode" :assoc-def="assocDef">
+        </child-topic>
       </template>
       <!-- many -->
-      <object-renderer v-else v-for="object in childs(assocDef)" :object="object" :mode="mode" :assoc-def="assocDef"
-        :key="object.id">
-      </object-renderer>
+      <child-topic v-else v-for="child in childs(assocDef)" :object="child" :mode="mode" :assoc-def="assocDef"
+        :key="child.id">
+      </child-topic>
     </template>
   </div>
 </template>
@@ -25,10 +25,8 @@ import dm5 from 'dm5'
 
 export default {
 
-  name: 'object-renderer',
-
   props: {
-    assocDef: dm5.AssocDef    // may be undefined (simple top-level object renderers)
+    assocDef: dm5.AssocDef    // undefined for top-level renderers
   },
 
   computed: {
@@ -73,11 +71,13 @@ export default {
   ],
 
   components: {
+    'child-topic':   require('./ChildTopic'),
+    // simple default renderers
     'text-field':    require('./TextField'),
     'number-field':  require('./NumberField'),
     'boolean-field': require('./BooleanField'),
     'html-field':    require('./HtmlField'),
-    // widgets
+    // simple widgets
     'dm4.webclient.select': require('./dm4.webclient.select')
   }
 }
