@@ -10,13 +10,6 @@ import dm5 from 'dm5'
 
 export default {
 
-  props: {
-    assocDef: {
-      type: dm5.AssocDef,
-      required: true
-    }
-  },
-
   data () {
     return {
       topics: undefined,
@@ -43,10 +36,12 @@ export default {
   },
 
   watch: {
+
     mode () {
       console.log('mode', this._uid, this.mode, this.selection, typeof this.selection, this.selection.length)
       this.updateValue()
     },
+
     selection () {
       console.log('selection', this._uid, this.mode, this.selection, typeof this.selection, this.selection.length)
       this._updateValue()
@@ -70,9 +65,10 @@ export default {
   },
 
   mixins: [
-    require('./mixins/object').default,
+    require('./mixins/object').default,     // object to render
     require('./mixins/mode').default,
-    require('./mixins/infoMode').default
+    require('./mixins/infoMode').default,
+    require('./mixins/assocDef').default    // assoc def leading to object
   ]
 }
 </script>

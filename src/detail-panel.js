@@ -29,6 +29,7 @@ const actions = {
   edit () {
     state.object.fillChilds()
     state.mode = 'form'
+    console.log('edit', state.object)
   },
 
   // TODO: move to webclient.js?
