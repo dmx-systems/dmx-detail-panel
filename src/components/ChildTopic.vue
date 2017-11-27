@@ -14,7 +14,7 @@ import dm5 from 'dm5'
 export default {
 
   beforeCreate () {
-    // Note: postponed loading resolves cyclic dependency between <object-renderer> and <child-topics>
+    // Note: postponed loading resolves cyclic dependency between <object-renderer> and <child-topic>
     this.$options.components.ObjectRenderer = require('./ObjectRenderer')
   },
 
