@@ -15,7 +15,7 @@ export default {
     return {
       topics: undefined,
       selection: this.object.id === -1 ? '' : this.object.id
-      // Note: apparently in <el-select> and empty string represents "no selection"
+      // Note: apparently in <el-select> an empty string represents "no selection"
     }
   },
 
@@ -30,14 +30,9 @@ export default {
     }
   },
 
-  // When switching from info to form mode Vue *reuses* this component in a non-uniform fashion (I don't know why):
-  //   1) Workspace: yes    ("Sharing Mode")
-  //   2) Assoc Def: yes    ("Custom Association Type")
-  //   3) View Config: no   ("Widget")
-  //   4) Person: no        ("Phone Label")
-  // "yes": component is created in info mode, mode watcher triggers when switched to form mode.
-  // "no": component is re-created in form mode, mode watcher does *not* trigger.
-  // The solution is to call updateValue() in both places, created() and the mode watcher.
+  // The component is created in info mode if an object is available. When switched to form mode the mode watcher fires.
+  // In contrast it is created only in form mode if *no* object is available yet. The mode watcher does *not* fire.
+  // That's why we call updateValue() in both places, the created() hook and the mode watcher.
   created () {
     console.log('created', this._uid, this.mode, this.selection, typeof this.selection)
     this.updateValue()
