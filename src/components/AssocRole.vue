@@ -6,7 +6,7 @@
     <div class="field">
       <div class="field-label">Role Type</div>
       <div v-if="infoMode">{{role.typeName}}</div>
-      <el-select v-else v-model="role.roleTypeUri" size="small">
+      <el-select v-else v-model="role.roleTypeUri">
         <el-option v-for="roleType in roleTypes" :label="roleType.value" :value="roleType.uri" :key="roleType.uri">
         </el-option>
       </el-select>

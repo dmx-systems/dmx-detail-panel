@@ -1,7 +1,7 @@
 <template>
   <div v-if="infoMode">{{object.value}}</div>
   <el-select v-else v-model="selection" :clearable="clearable" :filterable="customizable" :allow-create="customizable"
-      placeholder="" size="small">
+      placeholder="">
     <el-option v-for="topic in topics" :label="topic.value" :value="topic.id" :key="topic.id"></el-option>
   </el-select>
 </template>

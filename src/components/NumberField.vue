@@ -1,6 +1,6 @@
 <template>
   <div v-if="infoMode">{{object.value}}</div>
-  <el-input v-else v-model="object.value" type="number" size="small"></el-input>
+  <el-input v-else v-model="object.value" type="number"></el-input>
 </template>
 
 <script>
