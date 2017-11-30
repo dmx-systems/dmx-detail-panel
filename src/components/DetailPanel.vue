@@ -5,7 +5,7 @@
         <h3>{{object.value}}</h3>
         <assoc-renderer v-if="isAssoc" :assoc="object" :mode="mode"></assoc-renderer>
         <component v-else :is="objectRenderer" :object="object" :mode="mode"></component>
-        <el-button class="button" @click="buttonAction">{{buttonLabel}}</el-button>
+        <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
         <el-table :data="relTopics" :default-sort="{prop: 'typeName'}" @row-click="revealTopic">
@@ -74,7 +74,11 @@ export default {
     },
 
     buttonLabel () {
-      return this.infoMode ? 'Edit' : 'OK'
+      return this.infoMode ? 'Edit' : 'Save'
+    },
+
+    buttonVisibility () {
+      return !this.inlineEdit
     }
   },
 
@@ -94,7 +98,8 @@ export default {
   },
 
   mixins: [
-    require('./mixins/infoMode').default
+    require('./mixins/infoMode').default,
+    require('./mixins/inlineEdit').default
   ],
 
   components: {

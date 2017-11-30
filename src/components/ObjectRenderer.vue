@@ -1,10 +1,10 @@
 <template>
-  <div class="object-renderer" @click.stop="edit">
+  <div class="object-renderer" @click.stop="editInline">
     <!-- simple -->
     <div v-if="isSimple" class="field">
       <div class="field-label">{{label}}</div>
       <component :is="simpleRenderer" :object="object" :mode="localMode" :assoc-def="assocDef"></component>
-      <el-button v-if="inlineEdit" @click.stop="submit">OK</el-button>
+      <el-button v-if="inlineEdit" @click.stop="submitInline">Save</el-button>
     </div>
     <!-- composite -->
     <template v-else v-for="assocDef in assocDefs">
@@ -55,8 +55,12 @@ export default {
       return widget && widget.uri || this.type.dataTypeUri.substr('dm4.core.'.length) + '-field'
     },
 
+    localMode () {
+      return this.inlineEdit ? 'form' : this.mode
+    },
+
     inlineEdit () {
-      return this.mode !== this.localMode
+      return this.$store.state.detailPanel.inlineCompId === this._uid   // FIXME: _uid is Vue internal
     }
   },
 
@@ -64,18 +68,21 @@ export default {
 
     // inline editing
 
-    edit () {
-      if (this.isSimple) {
-        console.log('inline edit', this.object.typeUri, this.object.value)
-        this.localMode = 'form'
-      } else {
-        console.log('non-simple', this.object.typeUri, this.object.value)
+    editInline () {
+      // inline editing can only be started in info mode
+      if (this.infoMode) {
+        // inline editing is only supported for simple objects
+        if (this.isSimple) {
+          console.log('inline edit', this.object.typeUri, this.object.value)
+          this.$store.dispatch('editInline', this._uid)                 // FIXME: _uid is Vue internal
+        } else {
+          console.log('non-simple', this.object.typeUri, this.object.value)
+        }
       }
     },
 
-    submit () {
-      this.$store.dispatch('submit')
-      this.localMode = 'info'
+    submitInline () {
+      this.$store.dispatch('submitInline')
     },
 
     //
@@ -92,7 +99,7 @@ export default {
   mixins: [
     require('./mixins/object').default,
     require('./mixins/mode').default,
-    require('./mixins/localMode').default
+    require('./mixins/infoMode').default
   ],
 
   components: {
