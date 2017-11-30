@@ -3,7 +3,7 @@ export default {
     mode: {
       type: String,
       required: true,
-      validator: mode => mode === 'info' || mode === 'form'
+      validator: mode => ['info', 'form'].includes(mode)
     }
   }
 }

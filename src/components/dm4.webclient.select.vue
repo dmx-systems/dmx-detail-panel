@@ -34,19 +34,19 @@ export default {
   // In contrast it is created only in form mode if *no* object is available yet. The mode watcher does *not* fire.
   // That's why we call updateValue() in both places, the created() hook and the mode watcher.
   created () {
-    console.log('created', this._uid, this.mode, this.selection, typeof this.selection)
+    // console.log('created', this._uid, this.mode, this.selection, typeof this.selection)
     this.updateValue()
   },
 
   watch: {
 
     mode () {
-      console.log('mode', this._uid, this.mode, this.selection, typeof this.selection)
+      // console.log('mode', this._uid, this.mode, this.selection, typeof this.selection)
       this.updateValue()
     },
 
     selection () {
-      console.log('selection', this._uid, this.mode, this.selection, typeof this.selection)
+      // console.log('selection', this._uid, this.mode, this.selection, typeof this.selection)
       this._updateValue()
     }
   },

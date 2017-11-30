@@ -1,9 +1,10 @@
 <template>
-  <div class="object-renderer">
+  <div class="object-renderer" @click.stop="edit">
     <!-- simple -->
     <div v-if="isSimple" class="field">
       <div class="field-label">{{label}}</div>
-      <component :is="simpleRenderer" :object="object" :mode="mode" :assoc-def="assocDef"></component>
+      <component :is="simpleRenderer" :object="object" :mode="localMode" :assoc-def="assocDef"></component>
+      <el-button v-if="inlineEdit" @click.stop="submit">OK</el-button>
     </div>
     <!-- composite -->
     <template v-else v-for="assocDef in assocDefs">
@@ -52,10 +53,32 @@ export default {
     simpleRenderer () {
       const widget = this.assocDef && this.assocDef._getViewConfig('dm4.webclient.widget')
       return widget && widget.uri || this.type.dataTypeUri.substr('dm4.core.'.length) + '-field'
+    },
+
+    inlineEdit () {
+      return this.mode !== this.localMode
     }
   },
 
   methods: {
+
+    // inline editing
+
+    edit () {
+      if (this.isSimple) {
+        console.log('inline edit', this.object.typeUri, this.object.value)
+        this.localMode = 'form'
+      } else {
+        console.log('non-simple', this.object.typeUri, this.object.value)
+      }
+    },
+
+    submit () {
+      this.$store.dispatch('submit')
+      this.localMode = 'info'
+    },
+
+    //
 
     isOne (assocDef) {
       return assocDef.isOne()
@@ -68,7 +91,8 @@ export default {
 
   mixins: [
     require('./mixins/object').default,
-    require('./mixins/mode').default
+    require('./mixins/mode').default,
+    require('./mixins/localMode').default
   ],
 
   components: {
