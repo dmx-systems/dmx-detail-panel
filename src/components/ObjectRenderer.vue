@@ -3,8 +3,10 @@
     <!-- simple -->
     <div v-if="isSimple" class="field">
       <div class="field-label">{{label}}</div>
-      <component :is="simpleRenderer" :object="object" :mode="localMode" :assoc-def="assocDef"></component>
-      <el-button v-if="inlineEdit" @click.stop="submitInline">Save</el-button>
+      <div class="field-content">
+        <component :is="simpleRenderer" :object="object" :mode="localMode" :assoc-def="assocDef"></component>
+        <el-button class="save-button" v-if="inlineEdit" @click.stop="submitInline">Save</el-button>
+      </div>
     </div>
     <!-- composite -->
     <template v-else v-for="assocDef in assocDefs">
@@ -116,4 +118,12 @@ export default {
 </script>
 
 <style>
+.object-renderer .field .field-content {
+  display: flex;
+  align-items: center;
+}
+
+.object-renderer .field .field-content .save-button {
+  margin-left: 1em;
+}
 </style>
