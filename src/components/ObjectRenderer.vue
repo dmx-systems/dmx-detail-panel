@@ -1,7 +1,7 @@
 <template>
-  <div class="object-renderer" @click.stop="editInline">
+  <div :class="['object-renderer', localMode]" @click.stop="editInline">
     <!-- simple -->
-    <div v-if="isSimple" class="field">
+    <div v-if="isSimple" class="field simple">
       <div class="field-label">{{label}}</div>
       <div class="field-content">
         <component :is="simpleRenderer" :object="object" :mode="localMode" :assoc-def="assocDef"></component>
@@ -28,6 +28,12 @@
 import dm5 from 'dm5'
 
 export default {
+
+  mixins: [
+    require('./mixins/object').default,
+    require('./mixins/mode').default,
+    require('./mixins/infoMode').default
+  ],
 
   props: {
     assocDef: dm5.AssocDef    // undefined for top-level renderers
@@ -98,12 +104,6 @@ export default {
     }
   },
 
-  mixins: [
-    require('./mixins/object').default,
-    require('./mixins/mode').default,
-    require('./mixins/infoMode').default
-  ],
-
   components: {
     'child-topic':   require('./ChildTopic'),
     // simple default renderers
@@ -118,6 +118,10 @@ export default {
 </script>
 
 <style>
+.object-renderer.info > .field.simple:hover {
+  box-shadow: inset 0px 0px 1px var(--highlight-color);
+}
+
 .object-renderer .field .field-content {
   display: flex;
   align-items: center;
