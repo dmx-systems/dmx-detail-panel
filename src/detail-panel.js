@@ -19,7 +19,7 @@ const state = {
 const actions = {
 
   displayObject (_, object) {
-    console.log('displayObject')
+    // console.log('displayObject')
     state.object = object.isType() ? object.asType() : object
     state.mode = 'info'
     // Note: inline state is still set when inline editing was left without saving

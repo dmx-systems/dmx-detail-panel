@@ -10,7 +10,7 @@
       </el-select>
     </div>
     <!-- Generic Object -->
-    <object-renderer :object="assoc" :mode="mode"></object-renderer>
+    <object-renderer :object="assoc" :mode="mode" :level="0"></object-renderer>
     <!-- Roles -->
     <assoc-role :role="assoc.role1" :mode="mode"></assoc-role>
     <assoc-role :role="assoc.role2" :mode="mode"></assoc-role>
