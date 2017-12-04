@@ -12,13 +12,13 @@
     <template v-else v-for="assocDef in assocDefs">
       <!-- one -->
       <template v-if="isOne(assocDef)">
-        <child-topic v-if="childs(assocDef)" :object="childs(assocDef)" :mode="mode" :assoc-def="assocDef"
-          :key="assocDef.assocDefUri">
+        <child-topic v-if="childs(assocDef)" :object="childs(assocDef)" :mode="mode" :level="level+1"
+          :assoc-def="assocDef" :key="assocDef.assocDefUri">
         </child-topic>
       </template>
       <!-- many -->
-      <child-topic v-else v-for="child in childs(assocDef)" :object="child" :mode="mode" :assoc-def="assocDef"
-        :key="child.id">
+      <child-topic v-else v-for="child in childs(assocDef)" :object="child" :mode="mode" :level="level+1"
+        :assoc-def="assocDef" :key="child.id">
       </child-topic>
     </template>
   </div>
@@ -32,6 +32,7 @@ export default {
   mixins: [
     require('./mixins/object').default,
     require('./mixins/mode').default,
+    require('./mixins/level').default,
     require('./mixins/infoMode').default
   ],
 
@@ -119,7 +120,7 @@ export default {
 
 <style>
 .object-renderer.info > .field.simple:hover {
-  box-shadow: inset 0px 0px 1px var(--highlight-color);
+  background-color: white;
 }
 
 .object-renderer .field .field-content {

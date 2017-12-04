@@ -4,7 +4,7 @@
       <el-tab-pane :label="object.typeName">
         <h3>{{object.value}}</h3>
         <assoc-renderer v-if="isAssoc" :assoc="object" :mode="mode"></assoc-renderer>
-        <component v-else :is="objectRenderer" :object="object" :mode="mode"></component>
+        <component v-else :is="objectRenderer" :object="object" :mode="mode" :level="0"></component>
         <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
