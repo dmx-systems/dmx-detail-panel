@@ -2,6 +2,14 @@
 
 ## Version History
 
+**0.8** -- Dec 5, 2017
+
+* Editor for "relating associations"
+* Inline editing
+* Reveal child topics from info display (1st tab)
+* Configure Select widget to allow custom values
+* Adapt to Element UI 2.0
+
 **0.7** -- Nov 19, 2017
 
 * Dynamic widget mechanism for simple fields
@@ -28,4 +36,4 @@
 
 ------------
 Jörg Richter  
-Nov 19, 2017
+Dec 5, 2017
