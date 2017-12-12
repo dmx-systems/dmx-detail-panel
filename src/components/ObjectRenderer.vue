@@ -18,7 +18,7 @@
       </template>
       <!-- many -->
       <template v-else>
-        <child-topic v-for="child in childs(assocDef)" :object="child" :mode="mode" :level="level+1"
+        <child-topic v-for="child in childs(assocDef)" class="multi" :object="child" :mode="mode" :level="level+1"
           :assoc-def="assocDef" :key="child.id">
         </child-topic>
         <el-button v-if="formMode" class="add-button" icon="el-icon-plus" :title="addButtonTitle(assocDef)"
@@ -103,7 +103,7 @@ export default {
 
     addButtonTitle (assocDef) {
       const type = assocDef.getCustomAssocType()
-      return `Enter another ${type ? type.value : assocDef.getChildType().value}`
+      return `Add ${type ? type.value : assocDef.getChildType().value}`
     },
 
     addChild (assocDef) {

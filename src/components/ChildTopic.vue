@@ -6,9 +6,9 @@
     <object-renderer :object="object" :mode="mode" :level="level" :assoc-def="assocDef">
     </object-renderer>
     <!-- Reveal Button -->
-    <el-button class="reveal-button" v-if="revealButtonVisibility" type="text" @click="reveal">
-      {{object.typeName}}
-    </el-button>
+    <el-button class="hover-button" v-if="showRevealButton" type="text" @click="reveal">Reveal</el-button>
+    <!-- Remove Button -->
+    <el-button class="hover-button remove" v-if="showRemoveButton" type="text" @click="remove">Remove</el-button>
   </div>
 </template>
 
@@ -47,17 +47,26 @@ export default {
       return `level-${this.level}`
     },
 
-    revealButtonVisibility () {
+    showRevealButton () {
       return this.infoMode && this.level === 1
+    },
+
+    showRemoveButton () {
+      return this.formMode && this.assocDef.isMany()
     }
   },
 
   methods: {
+
     reveal () {
       this.$store.dispatch('revealRelatedTopic', {
         relTopic: this.object,
         pos: {x: 100, y: 100}   // TODO
       })
+    },
+
+    remove () {
+      // TODO
     }
   }
 }
@@ -68,11 +77,9 @@ export default {
   position: relative;
 }
 
-.child-topic.info.level-1:hover {
-  box-shadow: inset 0px 0px 1px var(--highlight-color);
-}
+/* Hover Button */
 
-.child-topic.info.level-1 > .reveal-button {
+.child-topic .hover-button {
   position: absolute;
   top: 0;
   right: 0;
@@ -81,7 +88,23 @@ export default {
   padding: 0;
 }
 
-.child-topic.info.level-1:hover > .reveal-button {
+.child-topic:hover .hover-button {
   visibility: visible;
+}
+
+/* Reveal Button */
+
+.child-topic.info.level-1:hover {
+  box-shadow: var(--shadow-hover) var(--highlight-color);
+}
+
+/* Remove Button */
+
+.child-topic.form.multi:hover {
+  box-shadow: var(--shadow-hover) var(--color-danger);
+}
+
+.child-topic .hover-button.remove {
+  color: var(--color-danger);
 }
 </style>
