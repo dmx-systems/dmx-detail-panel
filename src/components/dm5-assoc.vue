@@ -10,10 +10,10 @@
       </el-select>
     </div>
     <!-- Generic Object -->
-    <dm5-object :object="assoc" :mode="mode" :level="0"></dm5-object>
+    <dm5-object :object="assoc" :level="0"></dm5-object>
     <!-- Roles -->
-    <dm5-assoc-role :role="assoc.role1" :mode="mode"></dm5-assoc-role>
-    <dm5-assoc-role :role="assoc.role2" :mode="mode"></dm5-assoc-role>
+    <dm5-assoc-role :role="assoc.role1"></dm5-assoc-role>
+    <dm5-assoc-role :role="assoc.role2"></dm5-assoc-role>
   </div>
 </template>
 
@@ -21,6 +21,11 @@
 import dm5 from 'dm5'
 
 export default {
+
+  mixins: [
+    require('./mixins/mode').default,
+    require('./mixins/info-mode').default
+  ],
 
   props: {
     // the Assoc to render
@@ -35,11 +40,6 @@ export default {
       return this.$store.state.typeCache.assocTypes
     }
   },
-
-  mixins: [
-    require('./mixins/mode').default,
-    require('./mixins/info-mode').default
-  ],
 
   components: {
     'dm5-assoc-role': require('./dm5-assoc-role'),

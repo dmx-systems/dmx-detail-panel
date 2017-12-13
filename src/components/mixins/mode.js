@@ -1,9 +1,7 @@
 export default {
-  props: {
-    mode: {
-      type: String,
-      required: true,
-      validator: mode => ['info', 'form'].includes(mode)
+  computed: {
+    mode () {
+      return this.$store.state.detailPanel.mode
     }
   }
 }

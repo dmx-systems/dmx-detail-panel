@@ -5,7 +5,7 @@ const state = {
 
   mode: undefined,          // 'info' or 'form'
 
-  inlineCompId: undefined,  // ID of the renderer component that is in inline edit mode
+  inlineCompId: undefined,  // ID of the dm5-object component that is in inline edit mode
 
   objectRenderers: {},      // Registered page renderers:
                             //   {

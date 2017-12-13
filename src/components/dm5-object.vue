@@ -4,7 +4,7 @@
     <div v-if="isSimple" class="field simple">
       <div class="field-label">{{simpleLabel}}</div>
       <div class="field-content">
-        <component :is="simpleRenderer" :object="object" :mode="localMode" :assoc-def="assocDef"></component>
+        <component :is="simpleComp" :object="object" :mode="localMode" :assoc-def="assocDef"></component>
         <el-button class="save-button" v-if="inlineEdit" @click.stop="submitInline">Save</el-button>
       </div>
     </div>
@@ -12,14 +12,14 @@
     <template v-else v-for="assocDef in assocDefs">
       <!-- one -->
       <template v-if="isOne(assocDef)">
-        <dm5-child-topic v-if="childs(assocDef)" :object="childs(assocDef)" :mode="mode" :level="level+1"
-          :assoc-def="assocDef" :key="assocDef.assocDefUri">
+        <dm5-child-topic v-if="childs(assocDef)" :object="childs(assocDef)" :level="level+1" :assoc-def="assocDef"
+          :key="assocDef.assocDefUri">
         </dm5-child-topic>
       </template>
       <!-- many -->
       <template v-else>
-        <dm5-child-topic v-for="(child, i) in childs(assocDef)" class="multi" :object="child" :mode="mode"
-          :level="level+1" :assoc-def="assocDef" :key="assocDef.assocDefUri + '-' + i">
+        <dm5-child-topic v-for="(child, i) in childs(assocDef)" class="multi" :object="child" :level="level+1"
+          :assoc-def="assocDef" :key="assocDef.assocDefUri + '-' + i">
         </dm5-child-topic>
         <el-button v-if="formMode" class="add-button" icon="el-icon-plus" :title="addButtonTitle(assocDef)"
           @click="addChild(assocDef)">
@@ -36,13 +36,13 @@ export default {
 
   mixins: [
     require('./mixins/object').default,
-    require('./mixins/mode').default,
     require('./mixins/level').default,
+    require('./mixins/mode').default,
     require('./mixins/info-mode').default
   ],
 
   props: {
-    assocDef: dm5.AssocDef    // undefined for top-level renderers
+    assocDef: dm5.AssocDef    // undefined for top-level object
   },
 
   computed: {
@@ -60,7 +60,7 @@ export default {
       return customAssocType && customAssocType.isSimple() ? customAssocType.value : this.type.value
     },
 
-    simpleRenderer () {
+    simpleComp () {
       const widget = this.assocDef && this.assocDef._getViewConfig('dm4.webclient.widget')
       // Note: since Vue 2.5.10 dot is no longer a valid character in a component name
       return widget && widget.uri.replace(/\./g, '-') || `dm5-${this.type.dataTypeUri.substr('dm4.core.'.length)}-field`
@@ -89,7 +89,7 @@ export default {
         // inline editing is only supported for simple objects
         if (this.isSimple) {
           console.log('inline edit', this.object.typeUri, this.object.value)
-          this.$store.dispatch('editInline', this._uid)                 // FIXME: _uid is Vue internal
+          this.$store.dispatch('editInline', this._uid)     // FIXME: _uid is Vue internal
         } else {
           console.log('non-simple', this.object.typeUri, this.object.value)
         }
@@ -124,7 +124,7 @@ export default {
 
   components: {
     'dm5-child-topic':      require('./dm5-child-topic'),
-    // simple default renderers
+    // simple default components
     'dm5-text-field':       require('./dm5-text-field'),
     'dm5-number-field':     require('./dm5-number-field'),
     'dm5-boolean-field':    require('./dm5-boolean-field'),

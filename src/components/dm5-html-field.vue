@@ -12,6 +12,15 @@ import TopicLinkManager from '../topic-link-manager'
 
 export default {
 
+  // Note: simple components support inline editing.
+  // They get the "mode" property from parent component (not from store).
+  // That's why simple components mix in "mode-prop" (not "mode").
+  mixins: [
+    require('./mixins/object').default,
+    require('./mixins/mode-prop').default,
+    require('./mixins/info-mode').default
+  ],
+
   data () {
     return {
       quillOptions: {
@@ -58,12 +67,6 @@ export default {
       }
     }
   },
-
-  mixins: [
-    require('./mixins/object').default,
-    require('./mixins/mode').default,
-    require('./mixins/info-mode').default
-  ],
 
   components: {
     'quill': require('vue-quill-minimum')

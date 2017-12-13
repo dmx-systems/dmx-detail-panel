@@ -3,8 +3,8 @@
     <el-tabs v-if="object">
       <el-tab-pane :label="object.typeName">
         <h3>{{object.value}}</h3>
-        <dm5-assoc v-if="isAssoc" :assoc="object" :mode="mode"></dm5-assoc>
-        <component v-else :is="objectRenderer" :object="object" :mode="mode" :level="0"></component>
+        <dm5-assoc v-if="isAssoc" :assoc="object"></dm5-assoc>
+        <component v-else :is="objectRenderer" :object="object" :level="0"></component>
         <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
@@ -45,6 +45,12 @@ export default {
     )
   },
 
+  mixins: [
+    require('./mixins/mode').default,
+    require('./mixins/info-mode').default,
+    require('./mixins/inline-edit').default
+  ],
+
   data () {
     return {
       relTopics: undefined
@@ -55,10 +61,6 @@ export default {
 
     object () {
       return this.$store.state.detailPanel.object
-    },
-
-    mode () {
-      return this.$store.state.detailPanel.mode
     },
 
     objectRenderers () {
@@ -96,11 +98,6 @@ export default {
       })
     }
   },
-
-  mixins: [
-    require('./mixins/info-mode').default,
-    require('./mixins/inline-edit').default
-  ],
 
   components: {
     'dm5-object': require('./dm5-object'),
