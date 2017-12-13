@@ -16,19 +16,15 @@
           :assoc-def="assocDef" :key="assocDef.assocDefUri">
         </child-topic>
       </template>
-      <!-- many
-        Note: the keys of manually added childs (plus button) are not unique (-1). The parent div is required as it
-        avoids a clash e.g. between an added Email Address and an added URL (Contacts model). At the other hand e.g.
-        2 added Email Addresses do not clash. Possibly because with the parent div they are the *last* childs.
-      -->
-      <div v-else>
-        <child-topic v-for="child in childs(assocDef)" class="multi" :object="child" :mode="mode" :level="level+1"
-          :assoc-def="assocDef" :key="child.id">
+      <!-- many -->
+      <template v-else>
+        <child-topic v-for="(child, i) in childs(assocDef)" class="multi" :object="child" :mode="mode" :level="level+1"
+          :assoc-def="assocDef" :key="assocDef.assocDefUri + '-' + i">
         </child-topic>
         <el-button v-if="formMode" class="add-button" icon="el-icon-plus" :title="addButtonTitle(assocDef)"
           @click="addChild(assocDef)">
         </el-button>
-      </div>
+      </template>
     </template>
   </div>
 </template>
@@ -66,7 +62,8 @@ export default {
 
     simpleRenderer () {
       const widget = this.assocDef && this.assocDef._getViewConfig('dm4.webclient.widget')
-      return widget && widget.uri || this.type.dataTypeUri.substr('dm4.core.'.length) + '-field'
+      // Note: since Vue 2.5.10 dot is no longer a valid character in a component name
+      return widget && widget.uri.replace(/\./g, '-') || this.type.dataTypeUri.substr('dm4.core.'.length) + '-field'
     },
 
     localMode () {
@@ -133,7 +130,7 @@ export default {
     'boolean-field': require('./BooleanField'),
     'html-field':    require('./HtmlField'),
     // simple widgets
-    'dm4.webclient.select': require('./dm4.webclient.select')
+    'dm4-webclient-select': require('./dm4-webclient-select')
   }
 }
 </script>
