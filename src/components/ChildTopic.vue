@@ -1,6 +1,5 @@
 <template>
-  <div :class="['child-topic', mode, levelClass]">
-    <!-- Note: object.assoc is undefined when object is a relating assoc -->
+  <div v-if="!deleted" :class="['child-topic', mode, levelClass]">
     <object-renderer v-if="showRelatingAssoc" :object="object.assoc" :mode="mode" :level="level" :assoc-def="assocDef">
     </object-renderer>
     <object-renderer :object="object" :mode="mode" :level="level" :assoc-def="assocDef">
@@ -17,6 +16,11 @@ import dm5 from 'dm5'
 
 export default {
 
+  beforeCreate () {
+    // Note: postponed loading resolves cyclic dependency between <object-renderer> and <child-topic>
+    this.$options.components.ObjectRenderer = require('./ObjectRenderer')
+  },
+
   mixins: [
     require('./mixins/object').default,     // child topic to render
     require('./mixins/mode').default,
@@ -25,14 +29,10 @@ export default {
     require('./mixins/assocDef').default    // assoc def leading to child topic
   ],
 
-  beforeCreate () {
-    // Note: postponed loading resolves cyclic dependency between <object-renderer> and <child-topic>
-    this.$options.components.ObjectRenderer = require('./ObjectRenderer')
-  },
-
   computed: {
 
     showRelatingAssoc () {
+      // object.assoc is undefined if object is a relating assoc
       if (this.object.assoc) {
         // sanity check
         if (this.object.assoc.typeUri !== this.assocDef.instanceLevelAssocTypeUri) {
@@ -43,16 +43,24 @@ export default {
       }
     },
 
-    levelClass () {
-      return `level-${this.level}`
-    },
-
     showRevealButton () {
       return this.infoMode && this.level === 1
     },
 
     showRemoveButton () {
       return this.formMode && this.assocDef.isMany()
+    },
+
+    levelClass () {
+      return `level-${this.level}`
+    },
+
+    delRef () {
+      return `del_id:${this.object.id}`
+    },
+
+    deleted () {
+      return this.object.value === this.delRef
     }
   },
 
@@ -66,7 +74,7 @@ export default {
     },
 
     remove () {
-      // TODO
+      this.object.value = this.delRef
     }
   }
 }
