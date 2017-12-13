@@ -16,15 +16,19 @@
           :assoc-def="assocDef" :key="assocDef.assocDefUri">
         </child-topic>
       </template>
-      <!-- many -->
-      <template v-else>
+      <!-- many
+        Note: the keys of manually added childs (plus button) are not unique (-1). The parent div is required as it
+        avoids a clash e.g. between an added Email Address and an added URL (Contacts model). At the other hand e.g.
+        2 added Email Addresses do not clash. Possibly because with the parent div they are the *last* childs.
+      -->
+      <div v-else>
         <child-topic v-for="child in childs(assocDef)" class="multi" :object="child" :mode="mode" :level="level+1"
           :assoc-def="assocDef" :key="child.id">
         </child-topic>
         <el-button v-if="formMode" class="add-button" icon="el-icon-plus" :title="addButtonTitle(assocDef)"
           @click="addChild(assocDef)">
         </el-button>
-      </template>
+      </div>
     </template>
   </div>
 </template>

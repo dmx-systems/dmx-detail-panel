@@ -40,19 +40,16 @@ const actions = {
   // TODO: move to webclient.js?
   submit ({dispatch}) {
     dispatch('_updateObject')
-    // Note: updating causes a displayObject() call. Info mode is set there.
-    // state.mode = 'info'
+    state.mode = 'info'
   },
 
   editInline (_, compId) {
     state.inlineCompId = compId
   },
 
-  // TODO: drop it? Call submit() instead?
   submitInline ({dispatch}) {
     dispatch('_updateObject')
-    // Note: updating causes a displayObject() call. Inline state is cleared there.
-    // state.inlineCompId = undefined
+    state.inlineCompId = undefined
   },
 
   registerObjectRenderer (_, {typeUri, component}) {
