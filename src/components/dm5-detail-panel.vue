@@ -3,7 +3,7 @@
     <el-tabs v-if="object">
       <el-tab-pane :label="object.typeName">
         <h3>{{object.value}}</h3>
-        <assoc-renderer v-if="isAssoc" :assoc="object" :mode="mode"></assoc-renderer>
+        <dm5-assoc v-if="isAssoc" :assoc="object" :mode="mode"></dm5-assoc>
         <component v-else :is="objectRenderer" :object="object" :mode="mode" :level="0"></component>
         <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
@@ -66,7 +66,7 @@ export default {
     },
 
     objectRenderer () {
-      return this.objectRenderers[this.object.typeUri] || 'object-renderer'
+      return this.objectRenderers[this.object.typeUri] || 'dm5-object'
     },
 
     isAssoc () {
@@ -98,13 +98,13 @@ export default {
   },
 
   mixins: [
-    require('./mixins/infoMode').default,
-    require('./mixins/inlineEdit').default
+    require('./mixins/info-mode').default,
+    require('./mixins/inline-edit').default
   ],
 
   components: {
-    'object-renderer': require('./ObjectRenderer'),
-    'assoc-renderer': require('./AssocRenderer')
+    'dm5-object': require('./dm5-object'),
+    'dm5-assoc':  require('./dm5-assoc')
   }
 }
 </script>

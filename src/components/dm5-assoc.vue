@@ -1,5 +1,5 @@
 <template>
-  <div class="assoc-renderer">
+  <div class="dm5-assoc">
     <!-- Association Type -->
     <div class="field">
       <div class="field-label">Association Type</div>
@@ -10,10 +10,10 @@
       </el-select>
     </div>
     <!-- Generic Object -->
-    <object-renderer :object="assoc" :mode="mode" :level="0"></object-renderer>
+    <dm5-object :object="assoc" :mode="mode" :level="0"></dm5-object>
     <!-- Roles -->
-    <assoc-role :role="assoc.role1" :mode="mode"></assoc-role>
-    <assoc-role :role="assoc.role2" :mode="mode"></assoc-role>
+    <dm5-assoc-role :role="assoc.role1" :mode="mode"></dm5-assoc-role>
+    <dm5-assoc-role :role="assoc.role2" :mode="mode"></dm5-assoc-role>
   </div>
 </template>
 
@@ -38,12 +38,12 @@ export default {
 
   mixins: [
     require('./mixins/mode').default,
-    require('./mixins/infoMode').default
+    require('./mixins/info-mode').default
   ],
 
   components: {
-    'assoc-role': require('./AssocRole'),
-    'object-renderer': require('./ObjectRenderer')
+    'dm5-assoc-role': require('./dm5-assoc-role'),
+    'dm5-object':     require('./dm5-object')
   }
 }
 </script>

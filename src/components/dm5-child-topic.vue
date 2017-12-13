@@ -1,9 +1,9 @@
 <template>
-  <div v-if="!deleted" :class="['child-topic', mode, levelClass]">
-    <object-renderer v-if="showRelatingAssoc" :object="object.assoc" :mode="mode" :level="level" :assoc-def="assocDef">
-    </object-renderer>
-    <object-renderer :object="object" :mode="mode" :level="level" :assoc-def="assocDef">
-    </object-renderer>
+  <div v-if="!deleted" :class="['dm5-child-topic', mode, levelClass]">
+    <dm5-object v-if="showRelatingAssoc" :object="object.assoc" :mode="mode" :level="level" :assoc-def="assocDef">
+    </dm5-object>
+    <dm5-object :object="object" :mode="mode" :level="level" :assoc-def="assocDef">
+    </dm5-object>
     <!-- Reveal Button -->
     <el-button class="hover-button" v-if="showRevealButton" type="text" @click="reveal">Reveal</el-button>
     <!-- Remove Button -->
@@ -17,16 +17,16 @@ import dm5 from 'dm5'
 export default {
 
   beforeCreate () {
-    // Note: postponed loading resolves cyclic dependency between <object-renderer> and <child-topic>
-    this.$options.components.ObjectRenderer = require('./ObjectRenderer')
+    // Note: postponed loading resolves cyclic dependency between <dm5-object> and <dm5-child-topic>
+    this.$options.components['dm5-object'] = require('./dm5-object')
   },
 
   mixins: [
-    require('./mixins/object').default,     // child topic to render
+    require('./mixins/object').default,       // child topic to render
     require('./mixins/mode').default,
-    require('./mixins/infoMode').default,
+    require('./mixins/info-mode').default,
     require('./mixins/level').default,
-    require('./mixins/assocDef').default    // assoc def leading to child topic
+    require('./mixins/assoc-def').default     // assoc def leading to child topic
   ],
 
   computed: {
@@ -81,13 +81,13 @@ export default {
 </script>
 
 <style>
-.child-topic {
+.dm5-child-topic {
   position: relative;
 }
 
 /* Hover Button */
 
-.child-topic .hover-button {
+.dm5-child-topic .hover-button {
   position: absolute;
   top: 0;
   right: 0;
@@ -96,23 +96,23 @@ export default {
   padding: 0;
 }
 
-.child-topic:hover .hover-button {
+.dm5-child-topic:hover .hover-button {
   visibility: visible;
 }
 
 /* Reveal Button */
 
-.child-topic.info.level-1:hover {
+.dm5-child-topic.info.level-1:hover {
   box-shadow: var(--shadow-hover) var(--highlight-color);
 }
 
 /* Remove Button */
 
-.child-topic.form.multi:hover {
+.dm5-child-topic.form.multi:hover {
   box-shadow: var(--shadow-hover) var(--color-danger);
 }
 
-.child-topic .hover-button.remove {
+.dm5-child-topic .hover-button.remove {
   color: var(--color-danger);
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['object-renderer', localMode]" @click.stop="editInline">
+  <div :class="['dm5-object', localMode]" @click.stop="editInline">
     <!-- simple -->
     <div v-if="isSimple" class="field simple">
       <div class="field-label">{{simpleLabel}}</div>
@@ -12,15 +12,15 @@
     <template v-else v-for="assocDef in assocDefs">
       <!-- one -->
       <template v-if="isOne(assocDef)">
-        <child-topic v-if="childs(assocDef)" :object="childs(assocDef)" :mode="mode" :level="level+1"
+        <dm5-child-topic v-if="childs(assocDef)" :object="childs(assocDef)" :mode="mode" :level="level+1"
           :assoc-def="assocDef" :key="assocDef.assocDefUri">
-        </child-topic>
+        </dm5-child-topic>
       </template>
       <!-- many -->
       <template v-else>
-        <child-topic v-for="(child, i) in childs(assocDef)" class="multi" :object="child" :mode="mode" :level="level+1"
-          :assoc-def="assocDef" :key="assocDef.assocDefUri + '-' + i">
-        </child-topic>
+        <dm5-child-topic v-for="(child, i) in childs(assocDef)" class="multi" :object="child" :mode="mode"
+          :level="level+1" :assoc-def="assocDef" :key="assocDef.assocDefUri + '-' + i">
+        </dm5-child-topic>
         <el-button v-if="formMode" class="add-button" icon="el-icon-plus" :title="addButtonTitle(assocDef)"
           @click="addChild(assocDef)">
         </el-button>
@@ -38,7 +38,7 @@ export default {
     require('./mixins/object').default,
     require('./mixins/mode').default,
     require('./mixins/level').default,
-    require('./mixins/infoMode').default
+    require('./mixins/info-mode').default
   ],
 
   props: {
@@ -63,7 +63,7 @@ export default {
     simpleRenderer () {
       const widget = this.assocDef && this.assocDef._getViewConfig('dm4.webclient.widget')
       // Note: since Vue 2.5.10 dot is no longer a valid character in a component name
-      return widget && widget.uri.replace(/\./g, '-') || this.type.dataTypeUri.substr('dm4.core.'.length) + '-field'
+      return widget && widget.uri.replace(/\./g, '-') || `dm5-${this.type.dataTypeUri.substr('dm4.core.'.length)}-field`
     },
 
     localMode () {
@@ -123,33 +123,33 @@ export default {
   },
 
   components: {
-    'child-topic':   require('./ChildTopic'),
+    'dm5-child-topic':      require('./dm5-child-topic'),
     // simple default renderers
-    'text-field':    require('./TextField'),
-    'number-field':  require('./NumberField'),
-    'boolean-field': require('./BooleanField'),
-    'html-field':    require('./HtmlField'),
+    'dm5-text-field':       require('./dm5-text-field'),
+    'dm5-number-field':     require('./dm5-number-field'),
+    'dm5-boolean-field':    require('./dm5-boolean-field'),
+    'dm5-html-field':       require('./dm5-html-field'),
     // simple widgets
-    'dm4-webclient-select': require('./dm4-webclient-select')
+    'dm4-webclient-select': require('./dm5-webclient-select')   // TODO: change URI prefixes in migrations to "dm5"
   }
 }
 </script>
 
 <style>
-.object-renderer.info > .field.simple:hover {
+.dm5-object.info > .field.simple:hover {
   background-color: white;
 }
 
-.object-renderer .field .field-content {
+.dm5-object .field .field-content {
   display: flex;
   align-items: center;
 }
 
-.object-renderer .field .field-content .save-button {
+.dm5-object .field .field-content .save-button {
   margin-left: 1em;
 }
 
-.object-renderer .add-button {
+.dm5-object .add-button {
   font-size: var(--label-font-size) !important;
   padding: 3px;
   position: absolute;

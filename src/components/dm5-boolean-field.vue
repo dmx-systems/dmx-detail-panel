@@ -9,7 +9,7 @@ export default {
     require('./mixins/object').default,
     require('./mixins/prop').default,
     require('./mixins/mode').default,
-    require('./mixins/infoMode').default
+    require('./mixins/info-mode').default
   ]
 }
 </script>

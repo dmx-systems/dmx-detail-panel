@@ -1,5 +1,5 @@
 <template>
-  <div class="assoc-role">
+  <div class="dm5-assoc-role">
     <!-- Player -->
     <div class="field" v-if="player">{{player.typeName}}: "{{player.value}}"</div>
     <!-- Role Type -->
@@ -61,13 +61,13 @@ export default {
 
   mixins: [
     require('./mixins/mode').default,
-    require('./mixins/infoMode').default
+    require('./mixins/info-mode').default
   ]
 }
 </script>
 
 <style>
-.assoc-role {
+.dm5-assoc-role {
   background-color: var(--background-dark-color);
 }
 </style>

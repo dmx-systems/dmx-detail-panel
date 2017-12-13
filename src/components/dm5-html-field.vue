@@ -1,5 +1,5 @@
 <template>
-  <div v-if="infoMode" class="html-field" v-html="object.value" ref="html"></div>
+  <div v-if="infoMode" class="dm5-html-field" v-html="object.value" ref="html"></div>
   <div v-else>
     <!-- Without this wrapper <div> the Quill toolbar remains visible when switching to info mode.   -->
     <!-- This is because the Quill toolbar becomes a *sibling* (not a child) of the <quill> element. -->
@@ -30,17 +30,17 @@ export default {
   },
 
   created () {
-    // console.log('HTMLField created()', this.mode)
+    // console.log('dm5-html-field created()', this.mode)
   },
 
   mounted () {
-    // console.log('HTMLField mounted()', this.mode, this.$refs.html)
-    // Note: if a topic is edited for the first time the HtmlField component is mounted in "form" mode
+    // console.log('dm5-html-field mounted()', this.mode, this.$refs.html)
+    // Note: if a topic is edited for the first time the dm5-html-field component is mounted in "form" mode
     this.addLinkHandlers()
   },
 
   updated () {
-    // console.log('HTMLField updated()', this.mode)
+    // console.log('dm5-html-field updated()', this.mode)
     this.addLinkHandlers()
   },
 
@@ -62,7 +62,7 @@ export default {
   mixins: [
     require('./mixins/object').default,
     require('./mixins/mode').default,
-    require('./mixins/infoMode').default
+    require('./mixins/info-mode').default
   ],
 
   components: {
@@ -72,15 +72,15 @@ export default {
 </script>
 
 <style>
-.html-field {
+.dm5-html-field {
   line-height: var(--line-height);
 }
 
-.html-field p {
+.dm5-html-field p {
   margin: 0;
 }
 
-.html-field p + p {
+.dm5-html-field p + p {
   margin-top: var(--paragraph-spacing);
 }
 

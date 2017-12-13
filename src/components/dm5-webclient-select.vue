@@ -12,10 +12,10 @@ import dm5 from 'dm5'
 export default {
 
   mixins: [
-    require('./mixins/object').default,     // object to render
-    require('./mixins/assocDef').default,   // assoc def leading to object
+    require('./mixins/object').default,       // object to render
+    require('./mixins/assoc-def').default,    // assoc def leading to object
     require('./mixins/mode').default,
-    require('./mixins/infoMode').default
+    require('./mixins/info-mode').default
   ],
 
   data () {

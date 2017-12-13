@@ -1,1 +1,1 @@
-module.exports = require('./src/components/DetailPanel.vue')
+module.exports = require('./src/components/dm5-detail-panel')
