@@ -9,8 +9,10 @@
       </el-tab-pane>
       <el-tab-pane label="Related">
         <el-table :data="relTopics" :default-sort="{prop: 'typeName'}" @row-click="revealTopic">
-          <el-table-column prop="value"    label="Topic" sortable></el-table-column>
-          <el-table-column prop="typeName" label="Type"  sortable></el-table-column>
+          <el-table-column prop="value" label="Topic" sortable>
+            <dm5-topic slot-scope="table" :topic="table.row"></dm5-topic>
+          </el-table-column>
+          <el-table-column prop="typeName" label="Type" sortable></el-table-column>
         </el-table>
       </el-tab-pane>
       <el-tab-pane label="Meta">
@@ -101,6 +103,7 @@ export default {
 
   components: {
     'dm5-object': require('./dm5-object'),
+    'dm5-topic':  require('./dm5-topic'),
     'dm5-assoc':  require('./dm5-assoc')
   }
 }
