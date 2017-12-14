@@ -8,11 +8,13 @@
         <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
-        <el-table :data="relTopics" :default-sort="{prop: 'typeName'}" @row-click="revealTopic">
+        <div class="rel-count">{{relCount}} Topics</div>
+        <el-table :data="relTopics" :default-sort="{prop: 'typeName'}" :span-method="span" @row-click="revealTopic">
           <el-table-column prop="value" label="Topic" sortable>
             <dm5-topic slot-scope="table" :topic="table.row"></dm5-topic>
           </el-table-column>
           <el-table-column prop="typeName" label="Type" sortable></el-table-column>
+          <el-table-column prop="assoc.typeName" label="Assoc" sortable></el-table-column>
         </el-table>
       </el-tab-pane>
       <el-tab-pane label="Meta">
@@ -83,6 +85,10 @@ export default {
 
     buttonVisibility () {
       return !this.inlineEdit
+    },
+
+    relCount () {
+      return this.relTopics && this.relTopics.length
     }
   },
 
@@ -98,6 +104,13 @@ export default {
         relTopic,
         pos: {x: 100, y: 100}   // TODO
       })
+    },
+
+    span ({columnIndex}) {
+      return {
+        rowspan: 1,
+        colspan: columnIndex === 0 ? 3 : 0
+      }
     }
   },
 
@@ -116,5 +129,12 @@ export default {
 
 .dm5-detail-panel .button {
   margin-top: 1.2em;
+}
+
+.dm5-detail-panel .rel-count {
+  font-size: var(--label-font-size);
+  color: var(--label-color);
+  margin-top: 1em;
+  margin-bottom: 1.5em;
 }
 </style>
