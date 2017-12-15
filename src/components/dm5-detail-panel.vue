@@ -9,6 +9,7 @@
       </el-tab-pane>
       <el-tab-pane label="Related">
         <div class="rel-count">{{relCount}} Topics</div>
+        <dm5-topic-list :topics="relTopics" @topic-click="revealTopic"></dm5-topic-list>
         <el-table :data="relTopics" :default-sort="{prop: 'typeName'}" :span-method="span" @row-click="revealTopic">
           <el-table-column prop="value" label="Topic" sortable>
             <dm5-topic slot-scope="table" :topic="table.row"></dm5-topic>
@@ -106,7 +107,7 @@ export default {
       })
     },
 
-    span ({columnIndex}) {
+    span ({columnIndex}) {  // TODO: drop
       return {
         rowspan: 1,
         colspan: columnIndex === 0 ? 3 : 0
@@ -115,9 +116,10 @@ export default {
   },
 
   components: {
-    'dm5-object': require('./dm5-object'),
-    'dm5-topic':  require('./dm5-topic'),
-    'dm5-assoc':  require('./dm5-assoc')
+    'dm5-object':     require('./dm5-object'),
+    'dm5-topic':      require('./dm5-topic'),   // TODO: drop
+    'dm5-assoc':      require('./dm5-assoc'),
+    'dm5-topic-list': require('./dm5-topic-list')
   }
 }
 </script>

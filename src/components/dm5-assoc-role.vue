@@ -68,6 +68,6 @@ export default {
 
 <style>
 .dm5-assoc-role {
-  background-color: var(--background-dark-color);
+  background-color: var(--border-color-lighter);
 }
 </style>

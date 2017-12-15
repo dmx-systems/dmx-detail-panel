@@ -1,11 +1,11 @@
 <template>
   <div class="dm5-topic">
-    <div class="label">{{topic.typeName}}</div>
+    <div class="type label">{{topic.typeName}}</div>
     <div class="topic">
       <div class="icon">{{topic.getIcon()}}</div>
       <div>
-        {{topic.value}}
-        <div class="label">{{assoc}}</div>
+        <div class="value">{{topic.value}}</div>
+        <div class="assoc label">{{assoc}}</div>
       </div>
     </div>
   </div>
@@ -36,16 +36,24 @@ export default {
 <style>
 .dm5-topic .topic {
   display: flex;
+  align-items: baseline;
 }
 
 .dm5-topic .icon {
   font-family: FontAwesome;
   color: var(--color-topic-icon);
-  margin-right: 0.5em;
+  margin-right: 6px;
 }
 
-.dm5-topic .label {
-  font-size: var(--label-font-size);
-  color: var(--label-color);
+.dm5-topic .value {
+  line-height: var(--line-height);
+}
+
+.dm5-topic .type {
+  margin-bottom: 8px;
+}
+
+.dm5-topic .assoc {
+  margin-top: 8px;
 }
 </style>
