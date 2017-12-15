@@ -8,15 +8,7 @@
         <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
-        <div class="rel-count">{{relCount}} Topics</div>
         <dm5-topic-list :topics="relTopics" @topic-click="revealTopic"></dm5-topic-list>
-        <el-table :data="relTopics" :default-sort="{prop: 'typeName'}" :span-method="span" @row-click="revealTopic">
-          <el-table-column prop="value" label="Topic" sortable>
-            <dm5-topic slot-scope="table" :topic="table.row"></dm5-topic>
-          </el-table-column>
-          <el-table-column prop="typeName" label="Type" sortable></el-table-column>
-          <el-table-column prop="assoc.typeName" label="Assoc" sortable></el-table-column>
-        </el-table>
       </el-tab-pane>
       <el-tab-pane label="Meta">
       </el-tab-pane>
@@ -86,10 +78,6 @@ export default {
 
     buttonVisibility () {
       return !this.inlineEdit
-    },
-
-    relCount () {
-      return this.relTopics && this.relTopics.length
     }
   },
 
@@ -105,19 +93,11 @@ export default {
         relTopic,
         pos: {x: 100, y: 100}   // TODO
       })
-    },
-
-    span ({columnIndex}) {  // TODO: drop
-      return {
-        rowspan: 1,
-        colspan: columnIndex === 0 ? 3 : 0
-      }
     }
   },
 
   components: {
     'dm5-object':     require('./dm5-object'),
-    'dm5-topic':      require('./dm5-topic'),   // TODO: drop
     'dm5-assoc':      require('./dm5-assoc'),
     'dm5-topic-list': require('./dm5-topic-list')
   }
@@ -131,12 +111,5 @@ export default {
 
 .dm5-detail-panel .button {
   margin-top: 1.2em;
-}
-
-.dm5-detail-panel .rel-count {
-  font-size: var(--label-font-size);
-  color: var(--label-color);
-  margin-top: 1em;
-  margin-bottom: 1.5em;
 }
 </style>
