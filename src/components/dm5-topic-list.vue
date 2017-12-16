@@ -12,7 +12,9 @@
           {{group.title}} <span class="count">({{group.topics.length}})</span>
         </div>
         <div>
-          <dm5-topic v-for="topic in group.topics" :topic="topic" :omit="omit" :key="topic.id"></dm5-topic>
+          <dm5-topic v-for="topic in group.topics" :topic="topic" :omit="omit" :key="topic.id"
+            @click.native="click(topic)">
+          </dm5-topic>
         </div>
       </template>
     </div>
@@ -80,9 +82,14 @@ export default {
   },
 
   methods: {
+
     compareFn () {
       const select = selectFn[this.sort]
       return (t1, t2) => select(t1).localeCompare(select(t2))
+    },
+
+    click (topic) {
+      this.$emit('click-topic', topic)
     }
   },
 

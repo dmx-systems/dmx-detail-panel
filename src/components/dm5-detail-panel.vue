@@ -8,7 +8,7 @@
         <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
-        <dm5-topic-list :topics="relTopics" @topic-click="revealTopic"></dm5-topic-list>
+        <dm5-topic-list :topics="relTopics" @click-topic="revealTopic"></dm5-topic-list>
       </el-tab-pane>
       <el-tab-pane label="Meta">
       </el-tab-pane>
