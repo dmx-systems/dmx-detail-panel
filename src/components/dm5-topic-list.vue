@@ -12,7 +12,9 @@
           {{group.title}} <span class="count">({{group.topics.length}})</span>
         </div>
         <div>
-          <dm5-topic v-for="topic in group.topics" :topic="topic" :omit="omit" :key="topic.id"
+          <!-- Note: the same topic might be related more than once. In order to avoid a key clash we
+               use the relating assoc ID as key. (An alternative would be just using the loop index.) -->
+          <dm5-topic v-for="topic in group.topics" :topic="topic" :omit="omit" :key="topic.assoc.id"
             @click.native="click(topic)">
           </dm5-topic>
         </div>
