@@ -1,11 +1,11 @@
 <template>
   <div class="dm5-topic">
-    <div class="label type" v-if="omit !== 'type'">{{topic.typeName}}</div>
+    <div class="type label" v-if="show('type')">{{topic.typeName}}</div>
     <div class="topic">
       <div class="icon">{{topic.getIcon()}}</div>
       <div>
         <div class="value">{{topic.value}}</div>
-        <div class="label assoc" v-if="omit !== 'assoc'">{{assoc}}</div>
+        <div class="assoc label" v-if="show('assoc')">{{assoc}}</div>
       </div>
     </div>
   </div>
@@ -31,6 +31,12 @@ export default {
       const _value = this.topic.assoc.value
       const value = _value && `: ${_value}`
       return `${this.topic.assoc.typeName}${value}`
+    }
+  },
+
+  methods: {
+    show (part) {
+      return this.omit !== part
     }
   }
 }

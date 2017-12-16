@@ -1,16 +1,20 @@
 <template>
   <div class="dm5-topic-list">
-    <div class="field-label info">{{count}} Topics, sorted by</div>
+    <div class="info field-label">{{count}} Topics, sorted by</div>
     <el-select v-model="sort">
       <el-option label="Topic" value="topic"></el-option>
       <el-option label="Topic Type" value="type"></el-option>
       <el-option label="Association Type" value="assoc"></el-option>
     </el-select>
     <div class="groups">
-      <div v-for="group in groups">
-        <h4 v-if="sort !== 'topic'">{{group.title}} ({{group.topics.length}})</h4>
-        <dm5-topic v-for="topic in group.topics" :topic="topic" :omit="omit" :key="topic.id"></dm5-topic>
-      </div>
+      <template v-for="group in groups">
+        <div class="title" v-if="!topicSort">
+          {{group.title}} <span class="count">({{group.topics.length}})</span>
+        </div>
+        <div>
+          <dm5-topic v-for="topic in group.topics" :topic="topic" :omit="omit" :key="topic.id"></dm5-topic>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -28,11 +32,15 @@ export default {
 
   computed: {
 
+    count () {
+      return this.topics && this.topics.length
+    },
+
     groups () {
       const groups = []
       if (this.topics) {
         this.topics.sort(this.compareFn())
-        if (this.sort === 'topic') {
+        if (this.topicSort) {
           groups.push({topics: this.topics})
         } else {
           const select = selectFn[this.sort]
@@ -60,14 +68,14 @@ export default {
       return groups
     },
 
-    omit () {
-      if (this.sort !== 'topic') {
-        return this.sort
-      }
+    topicSort () {
+      return this.sort === 'topic'
     },
 
-    count () {
-      return this.topics && this.topics.length
+    omit () {
+      if (!this.topicSort) {
+        return this.sort
+      }
     }
   },
 
@@ -99,6 +107,16 @@ const selectFn = {
   margin-top: 2em;
 }
 
+.dm5-topic-list .groups .title {
+  margin-top: 1.8em;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+.dm5-topic-list .groups .title .count {
+  font-weight: initial;
+}
+
 .dm5-topic-list .dm5-topic {
   border-bottom: 1px solid var(--border-color);
   background-color: white;
@@ -106,7 +124,7 @@ const selectFn = {
   padding: 12px;
 }
 
-.dm5-topic-list .dm5-topic:nth-of-type(1) {
+.dm5-topic-list .dm5-topic:nth-child(1) {
   border-top: 1px solid var(--border-color);
 }
 
