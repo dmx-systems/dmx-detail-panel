@@ -9,7 +9,7 @@
     <div class="groups">
       <div v-for="group in groups">
         <h4 v-if="sort !== 'topic'">{{group.title}} ({{group.topics.length}})</h4>
-        <dm5-topic v-for="topic in group.topics" :topic="topic" :key="topic.id"></dm5-topic>
+        <dm5-topic v-for="topic in group.topics" :topic="topic" :omit="omit" :key="topic.id"></dm5-topic>
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@ export default {
 
   data () {
     return {
-      sort: 'type'
+      sort: 'type'      // selected sort mode: "topic", "type", "assoc"
     }
   },
 
@@ -41,10 +41,12 @@ export default {
           this.topics.forEach(topic => {
             const _title = startGroup()
             if (_title) {
+              // start new group
               title = _title
               group = {title, topics: [topic]}
               groups.push(group)
             } else {
+              // append to current group
               group.topics.push(topic)
             }
 
@@ -58,6 +60,12 @@ export default {
       return groups
     },
 
+    omit () {
+      if (this.sort !== 'topic') {
+        return this.sort
+      }
+    },
+
     count () {
       return this.topics && this.topics.length
     }
@@ -66,9 +74,7 @@ export default {
   methods: {
     compareFn () {
       const select = selectFn[this.sort]
-      return (t1, t2) => {
-        return select(t1).localeCompare(select(t2))
-      }
+      return (t1, t2) => select(t1).localeCompare(select(t2))
     }
   },
 
@@ -78,9 +84,9 @@ export default {
 }
 
 const selectFn = {
-  topic: (topic) => topic.value,
-  type:  (topic) => topic.typeName,
-  assoc: (topic) => topic.assoc.typeName
+  topic: topic => topic.value,
+  type:  topic => topic.typeName,
+  assoc: topic => topic.assoc.typeName
 }
 </script>
 

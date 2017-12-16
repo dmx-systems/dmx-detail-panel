@@ -1,11 +1,11 @@
 <template>
   <div class="dm5-topic">
-    <div class="label type">{{topic.typeName}}</div>
+    <div class="label type" v-if="omit !== 'type'">{{topic.typeName}}</div>
     <div class="topic">
       <div class="icon">{{topic.getIcon()}}</div>
       <div>
         <div class="value">{{topic.value}}</div>
-        <div class="label assoc">{{assoc}}</div>
+        <div class="label assoc" v-if="omit !== 'assoc'">{{assoc}}</div>
       </div>
     </div>
   </div>
@@ -17,10 +17,13 @@ import dm5 from 'dm5'
 export default {
 
   props: {
+
     topic: {
       type: dm5.Topic,
       required: true
-    }
+    },
+
+    omit: String    // optional: part that is ommitted from rendering: "type", "assoc"
   },
 
   computed: {
