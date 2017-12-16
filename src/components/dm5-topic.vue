@@ -1,11 +1,11 @@
 <template>
   <div class="dm5-topic">
-    <div class="type label">{{topic.typeName}}</div>
+    <div class="label type">{{topic.typeName}}</div>
     <div class="topic">
       <div class="icon">{{topic.getIcon()}}</div>
       <div>
         <div class="value">{{topic.value}}</div>
-        <div class="assoc label">{{assoc}}</div>
+        <div class="label assoc">{{assoc}}</div>
       </div>
     </div>
   </div>
