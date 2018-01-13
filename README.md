@@ -2,6 +2,15 @@
 
 ## Version History
 
+**0.9** -- Jan 13, 2018
+
+* "Info" tab:
+    * Multi-value fields
+* "Related" tab:
+    * Topic list is sorted and grouped
+    * Show topic icons
+    * Show assocs
+
 **0.8** -- Dec 5, 2017
 
 * Editor for "relating associations"
@@ -36,4 +45,4 @@
 
 ------------
 Jörg Richter  
-Dec 5, 2017
+Jan 13, 2018
