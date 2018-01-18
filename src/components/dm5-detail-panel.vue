@@ -60,6 +60,10 @@ export default {
       return this.$store.state.detailPanel.object
     },
 
+    writable () {
+      return this.$store.state.detailPanel.writable
+    },
+
     objectRenderers () {
       return this.$store.state.detailPanel.objectRenderers
     },
@@ -77,7 +81,7 @@ export default {
     },
 
     buttonVisibility () {
-      return !this.inlineEdit
+      return this.writable && !this.inlineEdit
     }
   },
 
