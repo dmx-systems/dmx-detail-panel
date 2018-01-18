@@ -5,7 +5,7 @@
       <div class="field-label">{{simpleLabel}}</div>
       <div class="field-content">
         <component :is="simpleComp" :object="object" :mode="localMode" :assoc-def="assocDef"></component>
-        <el-button class="save-button" v-if="inlineEdit" @click.stop="submitInline">Save</el-button>
+        <el-button class="save-button" v-if="inlineEdit" @click.stop="submit">Save</el-button>
       </div>
     </div>
     <!-- composite -->
@@ -100,8 +100,8 @@ export default {
       }
     },
 
-    submitInline () {
-      this.$store.dispatch('submitInline')
+    submit () {
+      this.$store.dispatch('submit')
     },
 
     // add value

@@ -24,8 +24,7 @@ const actions = {
     // console.log('displayObject')
     state.object = object.isType() ? object.asType() : object
     _initWritable()
-    state.mode = 'info'
-    state.inlineCompId = undefined    // Note: inline state is still set when inline editing was left without saving
+    cancelEdit()    // Note: inline state is still set when inline editing was left without saving
   },
 
   emptyDisplay () {
@@ -34,24 +33,21 @@ const actions = {
   },
 
   edit () {
+    console.log('edit', state.object)
     state.object.fillChilds()
     state.mode = 'form'
-    console.log('edit', state.object)
-  },
-
-  // TODO: move to webclient.js?
-  submit ({dispatch}) {
-    dispatch('_updateObject')
-    state.mode = 'info'
   },
 
   editInline (_, compId) {
     state.inlineCompId = compId
   },
 
-  submitInline ({dispatch}) {
-    dispatch('_updateObject')
-    state.inlineCompId = undefined
+  // TODO: move to webclient.js?
+  submit ({dispatch}) {
+    state.object.update().then(object => {
+      dispatch('_processDirectives', object.directives)
+    })
+    cancelEdit()
   },
 
   registerObjectRenderer (_, {typeUri, component}) {
@@ -70,12 +66,6 @@ const actions = {
     })
   },
 
-  _updateObject ({dispatch}) {
-    state.object.update().then(object => {
-      dispatch('_processDirectives', object.directives)
-    })
-  },
-
   //
 
   loggedIn () {
@@ -84,6 +74,7 @@ const actions = {
 
   loggedOut () {
     initWritable()
+    cancelEdit()
   }
 }
 
@@ -95,6 +86,11 @@ function _initWritable() {
   state.object.isWritable().then(writable => {
     state.writable = writable
   })
+}
+
+function cancelEdit () {
+  state.mode = 'info'               // cancel form edit
+  state.inlineCompId = undefined    // cancel inline edit
 }
 
 export default {
