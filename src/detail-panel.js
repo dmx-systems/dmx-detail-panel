@@ -20,7 +20,7 @@ const state = {
 
 const actions = {
 
-  displayObject ({dispatch}, object) {
+  displayObject (_, object) {
     // console.log('displayObject')
     state.object = object.isType() ? object.asType() : object
     _initWritable()

@@ -1,7 +1,7 @@
 <template>
-  <div :class="['dm5-object', localMode]" @click.stop="editInline">
+  <div :class="['dm5-object', localMode, {writable}]" @click.stop="editInline">
     <!-- simple -->
-    <div v-if="isSimple" class="field simple">
+    <div v-if="isSimple" class="field">
       <div class="field-label">{{simpleLabel}}</div>
       <div class="field-content">
         <component :is="simpleComp" :object="object" :mode="localMode" :assoc-def="assocDef"></component>
@@ -74,6 +74,10 @@ export default {
       return this.$store.state.detailPanel.inlineCompId === this._uid   // FIXME: _uid is Vue internal
     },
 
+    writable () {
+      return this.$store.state.detailPanel.writable
+    },
+
     assocDefs () {
       return this.type.assocDefs
     }
@@ -85,7 +89,7 @@ export default {
 
     editInline () {
       // inline editing can only be started in info mode
-      if (this.infoMode) {
+      if (this.infoMode && this.writable) {
         // inline editing is only supported for simple objects
         if (this.isSimple) {
           console.log('inline edit', this.object.typeUri, this.object.value)
@@ -136,7 +140,9 @@ export default {
 </script>
 
 <style>
-.dm5-object.info > .field.simple:hover {
+/* To be hoverable the *direct* parent dm5-object must be in info mode.      */
+/* Otherwise an object already in inline edit mode would still be hoverable. */
+.dm5-object.info.writable > .field:hover {
   background-color: white;
 }
 
