@@ -4,7 +4,7 @@
       <el-tab-pane :label="object.typeName">
         <h3>{{object.value}}</h3>
         <dm5-assoc v-if="isAssoc" :assoc="object"></dm5-assoc>
-        <component v-else :is="objectRenderer" :object="object" :level="0"></component>
+        <dm5-object-renderer v-else></dm5-object-renderer>
         <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
@@ -64,14 +64,6 @@ export default {
       return this.$store.state.detailPanel.writable
     },
 
-    objectRenderers () {
-      return this.$store.state.detailPanel.objectRenderers
-    },
-
-    objectRenderer () {
-      return this.objectRenderers[this.object.typeUri] || 'dm5-object'
-    },
-
     isAssoc () {
       return this.object instanceof dm5.Assoc
     },
@@ -101,7 +93,7 @@ export default {
   },
 
   components: {
-    'dm5-object':     require('./dm5-object'),
+    'dm5-object-renderer': require('dm5-object-renderer'),
     'dm5-assoc':      require('./dm5-assoc'),
     'dm5-topic-list': require('./dm5-topic-list')
   }
