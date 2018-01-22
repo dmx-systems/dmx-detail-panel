@@ -27,9 +27,8 @@ export default {
   // and we can't import the store object either as it is not part of a Node.js module. So we use the
   // component's created() hook to do the registrations.
   created () {
-    this.$store.registerModule('detailPanel', require('../detail-panel').default)
     this.$store.watch(
-      state => state.detailPanel.object,
+      state => state.object,
       object => {
         if (object) {    // Note: on unselect object becomes undefined
           // TODO: lazy retrieval
@@ -57,11 +56,11 @@ export default {
   computed: {
 
     object () {
-      return this.$store.state.detailPanel.object
+      return this.$store.state.object
     },
 
     writable () {
-      return this.$store.state.detailPanel.writable
+      return this.$store.state.writable
     },
 
     isAssoc () {
