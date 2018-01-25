@@ -4,7 +4,7 @@
       <el-tab-pane :label="object.typeName">
         <h3>{{object.value}}</h3>
         <dm5-assoc v-if="isAssoc" :assoc="object"></dm5-assoc>
-        <component v-else :is="objectRenderer" :object="object" :level="0"></component>
+        <dm5-object-renderer v-else></dm5-object-renderer>
         <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
@@ -27,9 +27,8 @@ export default {
   // and we can't import the store object either as it is not part of a Node.js module. So we use the
   // component's created() hook to do the registrations.
   created () {
-    this.$store.registerModule('detailPanel', require('../detail-panel').default)
     this.$store.watch(
-      state => state.detailPanel.object,
+      state => state.object,
       object => {
         if (object) {    // Note: on unselect object becomes undefined
           // TODO: lazy retrieval
@@ -57,19 +56,11 @@ export default {
   computed: {
 
     object () {
-      return this.$store.state.detailPanel.object
+      return this.$store.state.object
     },
 
     writable () {
-      return this.$store.state.detailPanel.writable
-    },
-
-    objectRenderers () {
-      return this.$store.state.detailPanel.objectRenderers
-    },
-
-    objectRenderer () {
-      return this.objectRenderers[this.object.typeUri] || 'dm5-object'
+      return this.$store.state.writable
     },
 
     isAssoc () {
@@ -101,7 +92,7 @@ export default {
   },
 
   components: {
-    'dm5-object':     require('./dm5-object'),
+    'dm5-object-renderer': require('dm5-object-renderer'),
     'dm5-assoc':      require('./dm5-assoc'),
     'dm5-topic-list': require('./dm5-topic-list')
   }
