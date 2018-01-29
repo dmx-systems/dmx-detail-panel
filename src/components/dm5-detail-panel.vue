@@ -4,7 +4,7 @@
       <el-tab-pane :label="object.typeName">
         <h3>{{object.value}}</h3>
         <dm5-assoc v-if="isAssoc" :assoc="object"></dm5-assoc>
-        <dm5-object-renderer v-else></dm5-object-renderer>
+        <dm5-object-renderer v-else :object="object"></dm5-object-renderer>
         <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
       </el-tab-pane>
       <el-tab-pane label="Related">
@@ -22,6 +22,8 @@
 import dm5 from 'dm5'
 
 export default {
+
+  // TODO: reusability => pass data as props instead of accessing store
 
   // Note: we can't do the store registrations in index.js as we have no access to the store object there,
   // and we can't import the store object either as it is not part of a Node.js module. So we use the
@@ -47,6 +49,12 @@ export default {
     require('./mixins/inline-edit').default
   ],
 
+  props: {
+    // The selected Topic/Assoc/TopicType/AssocType.
+    // Undefined if nothing is selected.
+    object: dm5.DeepaMehtaObject
+  },
+
   data () {
     return {
       relTopics: undefined
@@ -55,9 +63,7 @@ export default {
 
   computed: {
 
-    object () {
-      return this.$store.state.object
-    },
+    // TODO: reusability => pass data as props instead of accessing store
 
     writable () {
       return this.$store.state.writable
