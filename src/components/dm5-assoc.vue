@@ -23,8 +23,7 @@ import dm5 from 'dm5'
 export default {
 
   mixins: [
-    require('./mixins/mode').default,
-    require('./mixins/info-mode').default
+    require('./mixins/mode').default
   ],
 
   props: {
@@ -36,6 +35,7 @@ export default {
   },
 
   computed: {
+    // TODO: reusability => inject context instead accessing store
     assocTypes () {
       return this.$store.state.typeCache.assocTypes
     }

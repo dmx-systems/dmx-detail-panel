@@ -1,3 +1,4 @@
+// TODO: drop it. Still accessed by Type Editor.
 export default {
   computed: {
     infoMode () {

@@ -23,33 +23,9 @@ import dm5 from 'dm5'
 
 export default {
 
-  // TODO: reusability => use injected context instead of accessing store
-
-  // Note: we can't do the store registrations in index.js as we have no access to the store object there,
-  // and we can't import the store object either as it is not part of a Node.js module. So we use the
-  // component's created() hook to do the registrations.
-  created () {
-    this.$store.watch(
-      state => state.object,
-      object => {
-        if (object) {    // Note: on unselect object becomes undefined
-          // TODO: lazy retrieval
-          // console.log('Retrieving related topics of object', object.id)
-          object.getRelatedTopics().then(relTopics => {
-            this.relTopics = relTopics
-          })
-        }
-      }
-    )
-  },
-
   mixins: [
-    require('./mixins/mode').default,
-    require('./mixins/info-mode').default,
-    require('./mixins/inline-edit').default
+    require('./mixins/mode').default
   ],
-
-  inject: ['context'],
 
   data () {
     return {
@@ -59,14 +35,16 @@ export default {
 
   computed: {
 
-    // TODO: reusability => use injected context instead of accessing store
-
     object () {
       return this.context.object
     },
 
     writable () {
-      return this.$store.state.writable
+      return this.context.writable
+    },
+
+    inlineEdit () {
+      return this.context.inlineCompId
     },
 
     isAssoc () {
@@ -82,7 +60,21 @@ export default {
     }
   },
 
+  watch: {
+    object () {
+      if (this.object) {    // Note: on unselect object becomes undefined
+        // TODO: lazy retrieval
+        // console.log('Retrieving related topics of object', this.object.id)
+        this.object.getRelatedTopics().then(relTopics => {
+          this.relTopics = relTopics
+        })
+      }
+    }
+  },
+
   methods: {
+
+    // TODO: component reusability => emit events instead of dispatching actions
 
     buttonAction () {
       const action = this.infoMode ? 'edit' : 'submit'
