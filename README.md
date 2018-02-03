@@ -2,6 +2,11 @@
 
 ## Version History
 
+**0.10** -- Feb 3, 2018
+
+* Access Control
+* Composability: access injected context instead of store state
+
 **0.9** -- Jan 13, 2018
 
 * "Info" tab:
@@ -45,4 +50,4 @@
 
 ------------
 Jörg Richter  
-Jan 13, 2018
+Feb 3, 2018
