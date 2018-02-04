@@ -7,8 +7,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jri/dm5-detail-panel.git"
-  },
-  "dependencies": {
-    "vue-quill-minimum": "^1.1.0"
   }
 }

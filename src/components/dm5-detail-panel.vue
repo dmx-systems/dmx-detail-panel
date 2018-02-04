@@ -15,6 +15,7 @@
       <el-tab-pane label="View">
       </el-tab-pane>
     </el-tabs>
+    <el-button class="close-button fa fa-close" type="text" @click="close"></el-button>
   </div>
 </template>
 
@@ -86,6 +87,10 @@ export default {
         relTopic,
         pos: {x: 100, y: 100}   // TODO
       })
+    },
+
+    close () {
+      this.$store.dispatch('closeDetailPanel')
     }
   },
 
@@ -104,5 +109,12 @@ export default {
 
 .dm5-detail-panel .button {
   margin-top: 1.2em;
+}
+
+.dm5-detail-panel .close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
 }
 </style>
