@@ -7,6 +7,15 @@ export default {
 
   inject: ['context'],
 
+  created () {
+    // console.log('dm5-tab-related created')
+    this.fetchRelatedTopics()
+  },
+
+  mounted () {
+    // console.log('dm5-tab-related mounted')
+  },
+
   data () {
     return {
       relTopics: undefined
@@ -14,24 +23,42 @@ export default {
   },
 
   computed: {
+
     object () {
       return this.context.object
+    },
+
+    detail () {
+      return this.context.detail
     }
   },
 
   watch: {
+
     object () {
-      if (this.object) {    // Note: on unselect object becomes undefined
-        // TODO: lazy retrieval
-        // console.log('Retrieving related topics of object', this.object.id)
-        this.object.getRelatedTopics().then(relTopics => {
-          this.relTopics = relTopics
-        })
-      }
+      // console.log('Object watcher', this.object.id)
+      this.fetchRelatedTopics()
+    },
+
+    detail () {
+      // TODO: suppress unnecessary refetching when browsing between tabs and revisit the "Related" tab
+      // console.log('Detail watcher', this.detail)
+      this.fetchRelatedTopics()
     }
   },
 
   methods: {
+
+    fetchRelatedTopics () {
+      // console.log('fetchRelatedTopics', this.object.id, this.detail === 'related')
+      // fetch only if the "Related" tab is selected
+      if (this.detail === 'related') {
+        this.object.getRelatedTopics().then(relTopics => {
+          this.relTopics = relTopics
+        })
+      }
+    },
+
     // TODO: component reusability => emit events instead of dispatching actions
     revealTopic (relTopic) {
       this.$store.dispatch('revealRelatedTopic', {

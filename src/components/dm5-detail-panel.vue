@@ -34,7 +34,7 @@ export default {
         return this.context.detail
       },
       set (detail) {
-        console.log('set detail', detail)
+        // console.log('set detail', detail)
         this.$store.dispatch('callRoute', {
           params: {detail}
         })
