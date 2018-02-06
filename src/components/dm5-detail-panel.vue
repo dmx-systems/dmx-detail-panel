@@ -2,10 +2,10 @@
   <div class="dm5-detail-panel">
     <el-tabs v-if="object">
       <el-tab-pane :label="object.typeName">
-        <router-view></router-view>
+        <dm5-tab-edit></dm5-tab-edit>
       </el-tab-pane>
       <el-tab-pane label="Related">
-        <router-view></router-view>
+        <dm5-tab-related></dm5-tab-related>
       </el-tab-pane>
       <el-tab-pane label="Meta">
       </el-tab-pane>
@@ -34,6 +34,11 @@ export default {
     close () {
       this.$store.dispatch('closeDetailPanel')
     }
+  },
+
+  components: {
+    'dm5-tab-edit':    require('./dm5-tab-edit'),
+    'dm5-tab-related': require('./dm5-tab-related')
   }
 }
 </script>
