@@ -1,15 +1,15 @@
 <template>
   <div class="dm5-detail-panel">
-    <el-tabs v-if="object">
-      <el-tab-pane :label="object.typeName">
+    <el-tabs v-if="object" v-model="detail"><!-- TODO: sync display, then drop v-if? -->
+      <el-tab-pane :label="object.typeName" name="edit">
         <dm5-tab-edit></dm5-tab-edit>
       </el-tab-pane>
-      <el-tab-pane label="Related">
+      <el-tab-pane label="Related" name="related">
         <dm5-tab-related></dm5-tab-related>
       </el-tab-pane>
-      <el-tab-pane label="Meta">
+      <el-tab-pane label="Meta" name="meta">
       </el-tab-pane>
-      <el-tab-pane label="View">
+      <el-tab-pane label="View" name="view">
       </el-tab-pane>
     </el-tabs>
     <el-button class="close-button fa fa-close" type="text" @click="close"></el-button>
@@ -24,15 +24,28 @@ export default {
   inject: ['context'],
 
   computed: {
+
     object () {
       return this.context.object
+    },
+
+    detail: {
+      get () {
+        return this.context.detail
+      },
+      set (detail) {
+        console.log('set detail', detail)
+        this.$store.dispatch('callRoute', {
+          params: {detail}
+        })
+      }
     }
   },
 
   methods: {
     // TODO: component reusability => emit events instead of dispatching actions
     close () {
-      this.$store.dispatch('closeDetailPanel')
+      this.$store.dispatch('stripDetailFromRoute')
     }
   },
 
