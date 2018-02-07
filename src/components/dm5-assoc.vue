@@ -10,7 +10,7 @@
       </el-select>
     </div>
     <!-- Generic Object -->
-    <dm5-object :object="assoc" :level="0"></dm5-object>
+    <dm5-object :object="assoc" :mode="mode" :level="0"></dm5-object>
     <!-- Roles -->
     <dm5-assoc-role :role="assoc.role1"></dm5-assoc-role>
     <dm5-assoc-role :role="assoc.role2"></dm5-assoc-role>
