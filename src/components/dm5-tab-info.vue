@@ -1,8 +1,8 @@
 <template>
-  <div class="dm5-tab-edit">
+  <div class="dm5-tab-info">
     <h3>{{object.value}}</h3>
     <dm5-assoc v-if="isAssoc" :assoc="object"></dm5-assoc>
-    <dm5-object-renderer v-else :mode="mode"></dm5-object-renderer>
+    <dm5-object-renderer v-else :object="objectToRender" :mode="mode"></dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
   </div>
 </template>
@@ -12,14 +12,41 @@ import dm5 from 'dm5'
 
 export default {
 
+  created () {
+    console.log('dm5-tab-info created')
+  },
+
+  destroyed () {
+    console.log('dm5-tab-info destroyed')
+  },
+
   mixins: [
     require('./mixins/mode').default
   ],
+
+  data () {
+    return {
+      objectToEdit: undefined
+    }
+  },
 
   computed: {
 
     object () {
       return this.context.object
+    },
+
+    objectToRender () {
+      if (this.infoMode) {
+        return this.object
+      } else {
+        console.log('Preparing', this.object.id)
+        // if (!this.objectToEdit) {      // TODO: needed?
+        // console.log('fillChilds')
+        this.objectToEdit = this.object.clone().fillChilds()
+        // }
+        return this.objectToEdit
+      }
     },
 
     writable () {
@@ -31,7 +58,7 @@ export default {
     },
 
     isAssoc () {
-      return this.object instanceof dm5.Assoc
+      return this.object.isAssoc()
     },
 
     buttonLabel () {
@@ -46,8 +73,11 @@ export default {
   methods: {
     // TODO: component reusability => emit events instead of dispatching actions
     buttonAction () {
-      const action = this.infoMode ? 'edit' : 'submit'
-      this.$store.dispatch(action)
+      if (this.infoMode) {
+        this.$store.dispatch('edit')
+      } else {
+        this.$store.dispatch('submit', this.objectToEdit)
+      }
     }
   },
 
@@ -59,7 +89,7 @@ export default {
 </script>
 
 <style>
-.dm5-tab-edit .button {
+.dm5-tab-info .button {
   margin-top: 1.2em;
 }
 </style>
