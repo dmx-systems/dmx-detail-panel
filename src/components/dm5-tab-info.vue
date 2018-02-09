@@ -2,7 +2,8 @@
   <div class="dm5-tab-info">
     <h3>{{object.value}}</h3>
     <dm5-assoc v-if="isAssoc" :assoc="object"></dm5-assoc>
-    <dm5-object-renderer v-else :object="objectToRender" :mode="mode"></dm5-object-renderer>
+    <dm5-object-renderer v-else :object="objectToRender" :mode="mode" :renderers="objectRenderers">
+    </dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
   </div>
 </template>
@@ -67,6 +68,10 @@ export default {
 
     buttonVisibility () {
       return this.writable && !this.inlineEdit
+    },
+
+    objectRenderers () {
+      return this.context.objectRenderers
     }
   },
 
