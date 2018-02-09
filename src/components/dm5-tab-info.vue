@@ -1,7 +1,7 @@
 <template>
   <div class="dm5-tab-info">
     <h3>{{object.value}}</h3>
-    <dm5-assoc v-if="isAssoc" :assoc="object"></dm5-assoc>
+    <dm5-assoc v-if="isAssoc" :assoc="objectToRender"></dm5-assoc>
     <dm5-object-renderer v-else :object="objectToRender" :mode="mode" :renderers="objectRenderers">
     </dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
@@ -55,7 +55,7 @@ export default {
     },
 
     inlineEdit () {
-      return this.context.inlineCompId
+      return false  // this.context.inlineCompId ### TODO
     },
 
     isAssoc () {
