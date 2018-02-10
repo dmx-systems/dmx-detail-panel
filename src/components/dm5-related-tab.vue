@@ -8,12 +8,12 @@ export default {
   inject: ['context'],
 
   created () {
-    // console.log('dm5-tab-related created')
+    // console.log('dm5-related-tab created')
     this.fetchRelatedTopics()
   },
 
   mounted () {
-    // console.log('dm5-tab-related mounted')
+    // console.log('dm5-related-tab mounted')
   },
 
   data () {

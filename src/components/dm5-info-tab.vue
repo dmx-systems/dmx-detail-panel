@@ -1,9 +1,7 @@
 <template>
-  <div class="dm5-tab-info">
+  <div class="dm5-info-tab">
     <h3>{{object.value}}</h3>
-    <dm5-assoc v-if="isAssoc" :assoc="objectToRender"></dm5-assoc>
-    <dm5-object-renderer v-else :object="objectToRender" :mode="mode" :renderers="objectRenderers">
-    </dm5-object-renderer>
+    <dm5-object-renderer :object="objectToRender" :mode="mode" :renderers="objectRenderers"></dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
   </div>
 </template>
@@ -14,11 +12,11 @@ import dm5 from 'dm5'
 export default {
 
   created () {
-    console.log('dm5-tab-info created')
+    console.log('dm5-info-tab created')
   },
 
   destroyed () {
-    console.log('dm5-tab-info destroyed')
+    console.log('dm5-info-tab destroyed')
   },
 
   mixins: [
@@ -58,10 +56,6 @@ export default {
       return false  // this.context.inlineCompId ### TODO
     },
 
-    isAssoc () {
-      return this.object.isAssoc()
-    },
-
     buttonLabel () {
       return this.infoMode ? 'Edit' : 'Save'
     },
@@ -87,14 +81,13 @@ export default {
   },
 
   components: {
-    'dm5-object-renderer': require('dm5-object-renderer'),
-    'dm5-assoc': require('./dm5-assoc')
+    'dm5-object-renderer': require('dm5-object-renderer')
   }
 }
 </script>
 
 <style>
-.dm5-tab-info .button {
+.dm5-info-tab .button {
   margin-top: 1.2em;
 }
 </style>

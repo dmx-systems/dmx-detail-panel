@@ -2,10 +2,10 @@
   <div class="dm5-detail-panel">
     <el-tabs v-if="object" v-model="detail"><!-- TODO: sync display, then drop v-if? -->
       <el-tab-pane :label="object.typeName" name="edit">
-        <dm5-tab-info></dm5-tab-info>
+        <dm5-info-tab></dm5-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
-        <dm5-tab-related></dm5-tab-related>
+        <dm5-related-tab></dm5-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
       </el-tab-pane>
@@ -50,8 +50,8 @@ export default {
   },
 
   components: {
-    'dm5-tab-info':    require('./dm5-tab-info'),
-    'dm5-tab-related': require('./dm5-tab-related')
+    'dm5-info-tab':    require('./dm5-info-tab'),
+    'dm5-related-tab': require('./dm5-related-tab')
   }
 }
 </script>
