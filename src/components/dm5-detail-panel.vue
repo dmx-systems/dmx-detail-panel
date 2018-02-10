@@ -2,7 +2,7 @@
   <div class="dm5-detail-panel">
     <el-tabs v-if="object" v-model="detail"><!-- TODO: sync display, then drop v-if? -->
       <el-tab-pane :label="object.typeName" name="edit">
-        <dm5-info-tab></dm5-info-tab>
+        <dm5-info-tab :object="object" :writable="writable" :mode="mode"></dm5-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
         <dm5-related-tab></dm5-related-tab>
@@ -23,12 +23,13 @@ export default {
 
   inject: ['context'],
 
+  mixins: [
+    require('./mixins/object').default,
+    require('./mixins/writable').default,
+    require('./mixins/mode-prop').default
+  ],
+
   computed: {
-
-    object () {
-      return this.context.object
-    },
-
     detail: {
       get () {
         return this.context.detail

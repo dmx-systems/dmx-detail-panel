@@ -1,7 +1,8 @@
 <template>
   <div class="dm5-info-tab">
     <h3>{{object.value}}</h3>
-    <dm5-object-renderer :object="objectToRender" :mode="mode" :renderers="objectRenderers" @inline="inline">
+    <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="objectRenderers"
+      @inline="inline">
     </dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
   </div>
@@ -20,8 +21,12 @@ export default {
     console.log('dm5-info-tab destroyed')
   },
 
+  inject: ['context'],
+
   mixins: [
-    require('./mixins/mode').default
+    require('./mixins/object').default,
+    require('./mixins/writable').default,
+    require('./mixins/mode-prop').default
   ],
 
   data () {
@@ -32,10 +37,6 @@ export default {
   },
 
   computed: {
-
-    object () {
-      return this.context.object
-    },
 
     objectToRender () {
       if (this.infoMode) {
@@ -48,10 +49,6 @@ export default {
         // }
         return this.objectToEdit
       }
-    },
-
-    writable () {
-      return this.context.writable
     },
 
     buttonLabel () {
