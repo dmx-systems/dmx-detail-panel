@@ -1,7 +1,8 @@
 <template>
   <div class="dm5-info-tab">
     <h3>{{object.value}}</h3>
-    <dm5-object-renderer :object="objectToRender" :mode="mode" :renderers="objectRenderers"></dm5-object-renderer>
+    <dm5-object-renderer :object="objectToRender" :mode="mode" :renderers="objectRenderers" @inline="inline">
+    </dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
   </div>
 </template>
@@ -25,7 +26,8 @@ export default {
 
   data () {
     return {
-      objectToEdit: undefined
+      objectToEdit: undefined,
+      inlineId: undefined
     }
   },
 
@@ -52,16 +54,12 @@ export default {
       return this.context.writable
     },
 
-    inlineEdit () {
-      return false  // this.context.inlineCompId ### TODO
-    },
-
     buttonLabel () {
       return this.infoMode ? 'Edit' : 'Save'
     },
 
     buttonVisibility () {
-      return this.writable && !this.inlineEdit
+      return this.writable && !this.inlineId
     },
 
     objectRenderers () {
@@ -70,6 +68,7 @@ export default {
   },
 
   methods: {
+
     // TODO: component reusability => emit events instead of dispatching actions
     buttonAction () {
       if (this.infoMode) {
@@ -77,6 +76,10 @@ export default {
       } else {
         this.$store.dispatch('submit', this.objectToEdit)
       }
+    },
+
+    inline (id) {
+      this.inlineId = id
     }
   },
 
