@@ -23,10 +23,19 @@ export default {
 
   inject: ['context'],
 
+  props: {
+    // The topic/assoc to display.
+    // May be an "empty" object, without ID, with just type set.
+    object: {
+      type: dm5.DeepaMehtaObject,
+      required: true
+    }
+  },
+
   mixins: [
-    require('./mixins/object').default,
     require('./mixins/writable').default,
-    require('./mixins/mode').default
+    require('./mixins/mode').default,
+    require('./mixins/info-mode').default
   ],
 
   data () {

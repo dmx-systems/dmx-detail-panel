@@ -1,6 +1,6 @@
 <template>
-  <div class="dm5-detail-panel">
-    <el-tabs v-if="object" v-model="detail"><!-- TODO: sync display, then drop v-if? -->
+  <div class="dm5-detail-panel"><!-- background is already shown for the sake of feedback -->
+    <el-tabs v-if="object" v-model="detail"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object.typeName" name="edit">
         <dm5-info-tab :object="object" :writable="writable" :mode="mode"></dm5-info-tab>
       </el-tab-pane>
@@ -24,10 +24,14 @@ export default {
   inject: ['context'],
 
   mixins: [
-    require('./mixins/object').default,
     require('./mixins/writable').default,
     require('./mixins/mode').default
   ],
+
+  props: {
+    // The topic/assoc to display. Undefined if data not yet arrived.
+    object: dm5.DeepaMehtaObject
+  },
 
   computed: {
     detail: {
@@ -58,10 +62,6 @@ export default {
 </script>
 
 <style>
-.dm5-detail-panel .field {
-  /* margin-top: 1.2em;   ### TODO: needed? */
-}
-
 .dm5-detail-panel .close-button {
   position: absolute;
   top: 0;
