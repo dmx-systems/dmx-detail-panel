@@ -26,7 +26,7 @@ export default {
   mixins: [
     require('./mixins/object').default,
     require('./mixins/writable').default,
-    require('./mixins/mode-prop').default
+    require('./mixins/mode').default
   ],
 
   data () {

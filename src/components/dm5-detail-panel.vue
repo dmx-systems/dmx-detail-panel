@@ -26,7 +26,7 @@ export default {
   mixins: [
     require('./mixins/object').default,
     require('./mixins/writable').default,
-    require('./mixins/mode-prop').default
+    require('./mixins/mode').default
   ],
 
   computed: {
@@ -59,7 +59,7 @@ export default {
 
 <style>
 .dm5-detail-panel .field {
-  margin-top: 1.2em;
+  /* margin-top: 1.2em;   ### TODO: needed? */
 }
 
 .dm5-detail-panel .close-button {
