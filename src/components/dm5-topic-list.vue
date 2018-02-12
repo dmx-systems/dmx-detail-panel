@@ -138,6 +138,6 @@ const selectFn = {
 }
 
 .dm5-topic-list .dm5-topic:hover {
-  background-color: var(--border-color);
+  background-color: var(--background-color-darker);
 }
 </style>
