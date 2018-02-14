@@ -29,7 +29,7 @@ export default {
   mixins: [
     require('./mixins/writable').default,
     require('./mixins/tab').default,
-    require('./mixins/mode').default,
+    require('./mixins/mode-default').default,
     require('./mixins/object-renderers').default
   ],
 
