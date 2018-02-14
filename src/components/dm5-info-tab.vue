@@ -21,21 +21,12 @@ export default {
     console.log('dm5-info-tab destroyed')
   },
 
-  inject: ['context'],
-
-  props: {
-    // The topic/assoc to display.
-    // May be an "empty" object, without ID, with just type set.
-    object: {
-      type: dm5.DeepaMehtaObject,
-      required: true
-    }
-  },
-
   mixins: [
+    require('./mixins/object').default,
     require('./mixins/writable').default,
     require('./mixins/mode').default,
-    require('./mixins/info-mode').default
+    require('./mixins/info-mode').default,
+    require('./mixins/object-renderers').default
   ],
 
   data () {
@@ -66,10 +57,6 @@ export default {
 
     buttonVisibility () {
       return this.writable && !this.inlineId
-    },
-
-    objectRenderers () {
-      return this.context.objectRenderers
     }
   },
 

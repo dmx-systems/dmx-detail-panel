@@ -5,31 +5,23 @@
 <script>
 export default {
 
-  inject: ['context'],
-
   created () {
     // console.log('dm5-related-tab created')
     this.fetchRelatedTopics()
   },
 
-  mounted () {
-    // console.log('dm5-related-tab mounted')
+  destroyed () {
+    // console.log('dm5-related-tab destroyed')
   },
+
+  mixins: [
+    require('./mixins/object').default,
+    require('./mixins/tab').default
+  ],
 
   data () {
     return {
       relTopics: undefined
-    }
-  },
-
-  computed: {
-
-    object () {
-      return this.context.object
-    },
-
-    detail () {
-      return this.context.detail
     }
   },
 
@@ -40,9 +32,9 @@ export default {
       this.fetchRelatedTopics()
     },
 
-    detail () {
+    tab () {
       // TODO: suppress unnecessary refetching when browsing between tabs and revisit the "Related" tab
-      // console.log('Detail watcher', this.detail)
+      // console.log('Detail watcher', this.tab)
       this.fetchRelatedTopics()
     }
   },
@@ -50,9 +42,9 @@ export default {
   methods: {
 
     fetchRelatedTopics () {
-      // console.log('fetchRelatedTopics', this.object.id, this.detail === 'related')
+      // console.log('fetchRelatedTopics', this.object.id, this.tab === 'related')
       // fetch only if the "Related" tab is selected
-      if (this.detail === 'related') {
+      if (this.tab === 'related') {
         this.object.getRelatedTopics().then(relTopics => {
           this.relTopics = relTopics
         })

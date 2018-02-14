@@ -1,11 +1,12 @@
 <template>
   <div class="dm5-detail-panel"><!-- background is already shown for the sake of feedback -->
-    <el-tabs v-if="object" v-model="detail"><!-- tabs are shown once object arrives -->
-      <el-tab-pane :label="object.typeName" name="edit">
-        <dm5-info-tab :object="object" :writable="writable" :mode="mode"></dm5-info-tab>
+    <el-tabs v-if="object" :value="tab" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
+      <el-tab-pane :label="object.typeName" name="info">
+        <dm5-info-tab :object="object" :writable="writable" :mode="mode" :object-renderers="objectRenderers">
+        </dm5-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
-        <dm5-related-tab></dm5-related-tab>
+        <dm5-related-tab :object="object" :tab="tab"></dm5-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
       </el-tab-pane>
@@ -21,33 +22,23 @@ import dm5 from 'dm5'
 
 export default {
 
-  inject: ['context'],
+  props: {
+    object: dm5.DeepaMehtaObject    // The topic/assoc to display. Undefined if data not yet arrived.
+  },
 
   mixins: [
     require('./mixins/writable').default,
-    require('./mixins/mode').default
+    require('./mixins/tab').default,
+    require('./mixins/mode').default,
+    require('./mixins/object-renderers').default
   ],
 
-  props: {
-    // The topic/assoc to display. Undefined if data not yet arrived.
-    object: dm5.DeepaMehtaObject
-  },
-
-  computed: {
-    detail: {
-      get () {
-        return this.context.detail
-      },
-      set (detail) {
-        // console.log('set detail', detail)
-        this.$store.dispatch('callRoute', {
-          params: {detail}
-        })
-      }
-    }
-  },
-
   methods: {
+
+    tabClick (tabPane) {
+      this.$emit('tab-click', tabPane.name)
+    },
+
     // TODO: component reusability => emit events instead of dispatching actions
     close () {
       this.$store.dispatch('stripDetailFromRoute')
