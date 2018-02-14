@@ -1,6 +1,10 @@
 export default {
   props: {
-    tab: String   // The selected tab: "info", "related", ...
-    // TODO: required?
+    // The selected tab: 'info', 'related', ...
+    tab: {
+      type: String,
+      required: false,
+      default: 'info'
+    }
   }
 }

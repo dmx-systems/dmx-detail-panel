@@ -14,11 +14,11 @@ import dm5 from 'dm5'
 export default {
 
   created () {
-    console.log('dm5-info-tab created')
+    // console.log('dm5-info-tab created')
   },
 
   destroyed () {
-    console.log('dm5-info-tab destroyed')
+    // console.log('dm5-info-tab destroyed')
   },
 
   mixins: [

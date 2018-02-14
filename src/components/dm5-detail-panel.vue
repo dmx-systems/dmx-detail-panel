@@ -22,6 +22,14 @@ import dm5 from 'dm5'
 
 export default {
 
+  created () {
+    // console.log('dm5-detail-panel created', this)
+  },
+
+  destroyed () {
+    // console.log('dm5-detail-panel destroyed')
+  },
+
   props: {
     object: dm5.DeepaMehtaObject    // The topic/assoc to display. Undefined if data not yet arrived.
   },
