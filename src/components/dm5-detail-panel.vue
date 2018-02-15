@@ -1,5 +1,5 @@
 <template>
-  <div class="dm5-detail-panel"><!-- background is already shown for the sake of feedback -->
+  <div class="dm5-detail-panel" v-if="visible"><!-- background is already shown for the sake of feedback -->
     <el-tabs v-if="object" :value="tab" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object.typeName" name="info">
         <dm5-info-tab :object="object" :writable="writable" :mode="mode" :object-renderers="objectRenderers">
@@ -13,7 +13,6 @@
       <el-tab-pane label="View" name="view">
       </el-tab-pane>
     </el-tabs>
-    <el-button class="close-button fa fa-close" type="text" @click="close"></el-button>
   </div>
 </template>
 
@@ -23,7 +22,7 @@ import dm5 from 'dm5'
 export default {
 
   created () {
-    // console.log('dm5-detail-panel created', this)
+    // console.log('dm5-detail-panel created', this.visible)
   },
 
   destroyed () {
@@ -31,25 +30,26 @@ export default {
   },
 
   props: {
-    object: dm5.DeepaMehtaObject    // The topic/assoc to display. Undefined if data not yet arrived.
+    visible: {                      // Trueish if the detail panel is visible. Optional. Default is true.
+      type: Boolean,
+      default: true
+    },
+    object: dm5.DeepaMehtaObject,   // The topic/assoc to display. Undefined if data not yet arrived.
+    tab: {                          // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
+      type: String,
+      default: 'info'
+    }
   },
 
   mixins: [
     require('./mixins/writable').default,
-    require('./mixins/tab').default,
     require('./mixins/mode-default').default,
     require('./mixins/object-renderers').default
   ],
 
   methods: {
-
     tabClick (tabPane) {
       this.$emit('tab-click', tabPane.name)
-    },
-
-    // TODO: component reusability => emit events instead of dispatching actions
-    close () {
-      this.$store.dispatch('stripDetailFromRoute')
     }
   },
 
@@ -61,10 +61,4 @@ export default {
 </script>
 
 <style>
-.dm5-detail-panel .close-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0;
-}
 </style>

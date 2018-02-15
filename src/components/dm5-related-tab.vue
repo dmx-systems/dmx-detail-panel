@@ -15,9 +15,15 @@ export default {
   },
 
   mixins: [
-    require('./mixins/object').default,
-    require('./mixins/tab').default
+    require('./mixins/object').default
   ],
+
+  props: {
+    tab: {    // The selected tab: 'info', 'related', ...
+      type: String,
+      required: true
+    }
+  },
 
   data () {
     return {
