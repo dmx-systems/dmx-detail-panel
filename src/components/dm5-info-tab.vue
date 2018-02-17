@@ -2,7 +2,7 @@
   <div class="dm5-info-tab">
     <h3>{{object.value}}</h3>
     <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="objectRenderers"
-      @inline="inline">
+      @inline="setInlineId">
     </dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
   </div>
@@ -32,7 +32,7 @@ export default {
   data () {
     return {
       objectToEdit: undefined,
-      inlineId: undefined
+      inlineId: undefined       // trueish if inline edit is active in this object or in *any* child topic (recursively)
     }
   },
 
@@ -62,16 +62,15 @@ export default {
 
   methods: {
 
-    // TODO: component reusability => emit events instead of dispatching actions
     buttonAction () {
       if (this.infoMode) {
-        this.$store.dispatch('edit')
+        this.$emit('edit')
       } else {
-        this.$store.dispatch('submit', this.objectToEdit)
+        this.$emit('submit', this.objectToEdit)
       }
     },
 
-    inline (id) {
+    setInlineId (id) {
       this.inlineId = id
     }
   },
