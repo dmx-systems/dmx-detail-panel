@@ -2,6 +2,15 @@
 
 ## Version History
 
+**0.11** -- Feb 21, 2018
+
+* Better composability:
+    * Component relies on explicit props (instead of context injection).
+    * Props have reasonable defaults.
+    * Emits events (instead of dispatching actions): `tab-click`, `edit`, `submit`.
+    * Panel visibility and tab selection can be controlled from outside.
+    * Internal edit buffer.
+
 **0.10** -- Feb 3, 2018
 
 * Access Control
@@ -50,4 +59,4 @@
 
 ------------
 Jörg Richter  
-Feb 3, 2018
+Feb 21, 2018
