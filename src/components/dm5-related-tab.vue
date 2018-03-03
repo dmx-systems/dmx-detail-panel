@@ -67,7 +67,7 @@ export default {
   },
 
   components: {
-    'dm5-topic-list': require('./dm5-topic-list')
+    'dm5-topic-list': require('./dm5-topic-list').default
   }
 }
 </script>

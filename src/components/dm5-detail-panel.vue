@@ -64,8 +64,8 @@ export default {
   },
 
   components: {
-    'dm5-info-tab':    require('./dm5-info-tab'),
-    'dm5-related-tab': require('./dm5-related-tab')
+    'dm5-info-tab':    require('./dm5-info-tab').default,
+    'dm5-related-tab': require('./dm5-related-tab').default
   }
 }
 </script>

@@ -96,7 +96,7 @@ export default {
   },
 
   components: {
-    'dm5-topic': require('./dm5-topic')
+    'dm5-topic': require('./dm5-topic').default
   }
 }
 
