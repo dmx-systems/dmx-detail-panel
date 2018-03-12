@@ -72,6 +72,10 @@ export default {
 
     setInlineId (id) {
       this.inlineId = id
+      if (!id) {
+        // TODO: introduce edit buffer also for inline editing
+        this.$emit('submit-inline', this.object)
+      }
     }
   },
 
