@@ -2,7 +2,7 @@
   <div class="dm5-info-tab">
     <h3>{{object.value}}</h3>
     <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="objectRenderers"
-      @inline="setInlineId">
+      :quill-config="quillConfig" @inline="setInlineId">
     </dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
   </div>
@@ -29,6 +29,10 @@ export default {
     require('./mixins/object-renderers').default
   ],
 
+  props: {
+    quillConfig: Object
+  },
+
   data () {
     return {
       objectToEdit: undefined,
@@ -42,7 +46,7 @@ export default {
       if (this.infoMode) {
         return this.object
       } else {
-        console.log('Preparing', this.object.id)
+        // console.log('Preparing', this.object.id)
         // if (!this.objectToEdit) {      // TODO: needed?
         // console.log('fillChilds')
         this.objectToEdit = this.object.clone().fillChilds()

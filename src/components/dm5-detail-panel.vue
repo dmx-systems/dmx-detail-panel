@@ -3,7 +3,7 @@
     <el-tabs v-if="object" :value="tab" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object.typeName" name="info">
         <dm5-info-tab :object="object" :writable="writable" :mode="mode" :object-renderers="objectRenderers"
-          @edit="edit" @submit="submit" @submit-inline="submitInline">
+          :quill-config="quillConfig" @edit="edit" @submit="submit" @submit-inline="submitInline">
         </dm5-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
@@ -39,7 +39,8 @@ export default {
     tab: {                          // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
       type: String,
       default: 'info'
-    }
+    },
+    quillConfig: Object
   },
 
   mixins: [
