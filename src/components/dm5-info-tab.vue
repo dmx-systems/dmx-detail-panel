@@ -2,7 +2,7 @@
   <div class="dm5-info-tab">
     <h3>{{object.value}}</h3>
     <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="objectRenderers"
-      :quill-config="quillConfig" @inline="setInlineId">
+      :quill-config="_quillConfig" @inline="setInlineId">
     </dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
   </div>
@@ -61,6 +61,12 @@ export default {
 
     buttonVisibility () {
       return this.writable && !this.inlineId
+    },
+
+    _quillConfig () {
+      const _quillConfig = dm5.utils.clone(this.quillConfig)
+      _quillConfig.options.bounds = '.dm5-detail-panel'
+      return _quillConfig
     }
   },
 

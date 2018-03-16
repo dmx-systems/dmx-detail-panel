@@ -4,7 +4,7 @@
 
 **0.11** -- Feb 21, 2018
 
-* Better composability:
+* Improved composability:
     * Component relies on explicit props (instead of context injection).
     * Props have reasonable defaults.
     * Emits events (instead of dispatching actions): `tab-click`, `edit`, `submit`.
