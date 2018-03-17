@@ -63,6 +63,7 @@ export default {
       return this.writable && !this.inlineId
     },
 
+    // principle copy in dm5-detail.vue (dm5-topicmap-panel)
     _quillConfig () {
       const _quillConfig = dm5.utils.clone(this.quillConfig)
       _quillConfig.options.bounds = '.dm5-detail-panel'
