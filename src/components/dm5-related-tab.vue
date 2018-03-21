@@ -59,10 +59,7 @@ export default {
 
     // TODO: component reusability => emit events instead of dispatching actions
     revealTopic (relTopic) {
-      this.$store.dispatch('revealRelatedTopic', {
-        relTopic,
-        pos: {x: 100, y: 100}   // TODO
-      })
+      this.$store.dispatch('revealRelatedTopic', relTopic)
     }
   },
 
