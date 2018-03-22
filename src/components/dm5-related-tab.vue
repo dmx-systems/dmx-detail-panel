@@ -1,5 +1,5 @@
 <template>
-  <dm5-topic-list :topics="relTopics" @click-topic="revealTopic"></dm5-topic-list>
+  <dm5-topic-list :topics="relTopics" @topic-click="topicClick"></dm5-topic-list>
 </template>
 
 <script>
@@ -57,9 +57,8 @@ export default {
       }
     },
 
-    // TODO: component reusability => emit events instead of dispatching actions
-    revealTopic (relTopic) {
-      this.$store.dispatch('revealRelatedTopic', relTopic)
+    topicClick (relTopic) {
+      this.$emit('related-topic-click', relTopic)
     }
   },
 

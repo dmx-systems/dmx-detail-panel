@@ -3,11 +3,12 @@
     <el-tabs v-if="object" :value="tab" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object.typeName" name="info">
         <dm5-info-tab :object="object" :writable="writable" :mode="mode" :object-renderers="objectRenderers"
-          :quill-config="quillConfig" @edit="edit" @submit="submit" @submit-inline="submitInline">
+          :quill-config="quillConfig" @edit="edit" @submit="submit" @submit-inline="submitInline"
+          @child-topic-reveal="revealChildTopic">
         </dm5-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
-        <dm5-related-tab :object="object" :tab="tab"></dm5-related-tab>
+        <dm5-related-tab :object="object" :tab="tab" @related-topic-click="relatedTopicClick"></dm5-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
       </el-tab-pane>
@@ -65,6 +66,14 @@ export default {
 
     submitInline (object) {
       this.$emit('submit-inline', object)
+    },
+
+    revealChildTopic (relTopic) {
+      this.$emit('child-topic-reveal', relTopic)
+    },
+
+    relatedTopicClick (relTopic) {
+      this.$emit('related-topic-click', relTopic)
     }
   },
 

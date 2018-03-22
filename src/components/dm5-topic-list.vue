@@ -91,7 +91,7 @@ export default {
     },
 
     click (topic) {
-      this.$emit('click-topic', topic)
+      this.$emit('topic-click', topic)
     }
   },
 

@@ -2,7 +2,7 @@
   <div class="dm5-info-tab">
     <h3>{{object.value}}</h3>
     <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="objectRenderers"
-      :quill-config="_quillConfig" @inline="setInlineId">
+      :quill-config="_quillConfig" @inline="setInlineId" @child-topic-reveal="revealChildTopic">
     </dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
   </div>
@@ -87,6 +87,10 @@ export default {
         // TODO: introduce edit buffer also for inline editing
         this.$emit('submit-inline', this.object)
       }
+    },
+
+    revealChildTopic (relTopic) {
+      this.$emit('child-topic-reveal', relTopic)
     }
   },
 
