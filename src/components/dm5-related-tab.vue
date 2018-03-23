@@ -1,5 +1,7 @@
 <template>
-  <dm5-topic-list :topics="relTopics" @topic-click="topicClick"></dm5-topic-list>
+  <div class="dm5-related-tab">
+    <dm5-topic-list :topics="relTopics" @topic-click="topicClick"></dm5-topic-list>
+  </div>
 </template>
 
 <script>
@@ -27,7 +29,7 @@ export default {
 
   data () {
     return {
-      relTopics: undefined
+      relTopics: []
     }
   },
 
@@ -67,3 +69,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.dm5-related-tab .dm5-topic-list {
+  margin-top: 1em;
+}
+</style>
