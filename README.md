@@ -2,19 +2,29 @@
 
 ## Version History
 
+**0.12** -- Mar 25, 2018
+
+* Improved auto-positioning of new topics
+* Improved composability:
+    * New `quill-config` property allows parent comp to customize the Quill editor
+    * Emit `submit-inline` event to signalize "inline editing completed" (info-tab)
+    * Emit `child-topic-reveal` to signalize "user clicked 'Reveal' button" (info-tab)
+    * Emit `related-topic-click` to signalize "user clicked related topic" (related-tab)
+* Packaging: component `dm5-topic-list` is a (reusable) standalone node-module
+
 **0.11** -- Feb 21, 2018
 
 * Improved composability:
     * Component relies on explicit props (instead of context injection).
     * Props have reasonable defaults.
-    * Emits events (instead of dispatching actions): `tab-click`, `edit`, `submit`.
+    * Emit events (instead of dispatching into the host app): `tab-click`, `edit`, `submit`.
     * Panel visibility and tab selection can be controlled from outside.
-    * Internal edit buffer.
+* Internal edit buffer.
 
 **0.10** -- Feb 3, 2018
 
 * Access Control
-* Composability: access injected context instead of store state
+* Composability: access injected context instead of host app's store
 
 **0.9** -- Jan 13, 2018
 
@@ -59,4 +69,4 @@
 
 ------------
 Jörg Richter  
-Feb 21, 2018
+Mar 25, 2018
