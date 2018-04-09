@@ -6,11 +6,11 @@
 
 * Improved auto-positioning of new topics
 * Improved composability:
-    * New `quill-config` property allows parent comp to customize the Quill editor
+    * New `quill-config` property allows parent component to customize the Quill editor in both ways, setting options, and providing extensions (e.g. formats)
     * Emit `submit-inline` event to signalize "inline editing completed" (info-tab)
     * Emit `child-topic-reveal` to signalize "user clicked 'Reveal' button" (info-tab)
     * Emit `related-topic-click` to signalize "user clicked related topic" (related-tab)
-* Packaging: component `dm5-topic-list` is a (reusable) standalone node-module
+* Packaging: `dm5-topic-list` is now a reusable component, a standalone node-module
 
 **0.11** -- Feb 21, 2018
 

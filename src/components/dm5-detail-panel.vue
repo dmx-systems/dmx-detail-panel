@@ -85,4 +85,16 @@ export default {
 </script>
 
 <style>
+.dm5-detail-panel .el-tabs__item {
+  font-size: var(--label-font-size);    /* was 14px */
+  color: var(--label-color);            /* was #303133 (Element UI --color-text-primary) */
+  height: 36px;                         /* was 40px */
+  line-height: 36px;                    /* was 40px */
+  padding: 0 12px;                      /* was 0 20px */
+}
+
+.dm5-detail-panel .el-tabs__item.is-active {
+  color: var(--highlight-color);        /* restore original Element UI active color as accidentally */
+                                        /* overridden by previous rule due to higher specificity    */
+}
 </style>
