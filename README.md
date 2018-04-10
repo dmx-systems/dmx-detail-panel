@@ -2,6 +2,10 @@
 
 ## Version History
 
+**0.13** -- Apr 10, 2018
+
+* Custom style for Element UI tabs
+
 **0.12** -- Mar 25, 2018
 
 * Improved auto-positioning of new topics
@@ -69,4 +73,4 @@
 
 ------------
 Jörg Richter  
-Mar 25, 2018
+Apr 10, 2018
