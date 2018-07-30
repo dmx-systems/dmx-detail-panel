@@ -31,6 +31,12 @@ export default {
     // console.log('dm5-detail-panel destroyed')
   },
 
+  mixins: [
+    require('./mixins/writable').default,
+    require('./mixins/mode-default').default,
+    require('./mixins/object-renderers').default
+  ],
+
   props: {
     visible: {                      // Trueish if the detail panel is visible. Optional. Default is true.
       type: Boolean,
@@ -43,12 +49,6 @@ export default {
     },
     quillConfig: Object
   },
-
-  mixins: [
-    require('./mixins/writable').default,
-    require('./mixins/mode-default').default,
-    require('./mixins/object-renderers').default
-  ],
 
   methods: {
 
