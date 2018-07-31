@@ -2,6 +2,10 @@
 
 ## Version History
 
+**0.14** -- Jul 31, 2018
+
+* Add GitLab CI/CD
+
 **0.13** -- Apr 10, 2018
 
 * Custom style for Element UI tabs
@@ -73,4 +77,4 @@
 
 ------------
 Jörg Richter  
-Apr 10, 2018
+Jul 31, 2018
