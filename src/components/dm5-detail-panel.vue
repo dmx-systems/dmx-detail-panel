@@ -1,14 +1,14 @@
 <template>
-  <div class="dm5-detail-panel" v-if="visible"><!-- background is already shown for the sake of feedback -->
-    <el-tabs v-if="object" :value="tab" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
-      <el-tab-pane :label="object.typeName" name="info">
-        <dm5-info-tab :object="object" :writable="writable" :mode="mode" :object-renderers="objectRenderers"
+  <div class="dm5-detail-panel" v-if="visible_"><!-- background is already shown for the sake of feedback -->
+    <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
+      <el-tab-pane :label="object_.typeName" name="info">
+        <dm5-info-tab :object="object_" :writable="writable_" :mode="mode_" :object-renderers="objectRenderers"
           :quill-config="quillConfig" @edit="edit" @submit="submit" @submit-inline="submitInline"
           @child-topic-reveal="revealChildTopic">
         </dm5-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
-        <dm5-related-tab :object="object" :tab="tab" @related-topic-click="relatedTopicClick"></dm5-related-tab>
+        <dm5-related-tab :object="object_" :tab="tab_" @related-topic-click="relatedTopicClick"></dm5-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
       </el-tab-pane>
@@ -24,7 +24,7 @@ import dm5 from 'dm5'
 export default {
 
   created () {
-    // console.log('dm5-detail-panel created', this.visible)
+    // console.log('dm5-detail-panel created', this.visible_)
   },
 
   destroyed () {
@@ -42,12 +42,23 @@ export default {
       type: Boolean,
       default: true
     },
-    object: dm5.DeepaMehtaObject,   // The topic/assoc to display. Undefined if data not yet arrived.
     tab: {                          // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
       type: String,
       default: 'info'
     },
+    object: dm5.DeepaMehtaObject,   // The topic/assoc to display. Undefined if data not yet arrived.
     quillConfig: Object
+  },
+
+  data () {
+    return {
+      // mirror props ### FIXME: add remaining props?
+      visible_:  this.visible,
+      tab_:      this.tab,
+      object_:   this.object,
+      writable_: this.writable,
+      mode_:     this.mode
+    }
   },
 
   methods: {
