@@ -1,6 +1,6 @@
 <template>
   <div class="dm5-related-tab">
-    <dm5-topic-list :topics="relTopics" @topic-click="topicClick"></dm5-topic-list>
+    <dm5-topic-list :topics="relTopics" :marker-ids="markerIds" @topic-click="topicClick"></dm5-topic-list>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
 
   created () {
-    // console.log('dm5-related-tab created')
+    // console.log('dm5-related-tab created', this.markerIds)
     this.fetchRelatedTopics()
   },
 
@@ -21,10 +21,8 @@ export default {
   ],
 
   props: {
-    tab: {    // The selected tab: 'info', 'related', ...
-      type: String,
-      required: true
-    }
+    tab: {type: String, required: true},    // The selected tab: 'info', 'related', ...
+    markerIds: Array                        // IDs of topics to render as "marked"
   },
 
   data () {

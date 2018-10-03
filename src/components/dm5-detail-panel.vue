@@ -8,7 +8,9 @@
         </dm5-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
-        <dm5-related-tab :object="object_" :tab="tab_" @related-topic-click="relatedTopicClick"></dm5-related-tab>
+        <dm5-related-tab :object="object_" :tab="tab_" :marker-ids="markerIds_"
+          @related-topic-click="relatedTopicClick">
+        </dm5-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
       </el-tab-pane>
@@ -24,7 +26,7 @@ import dm5 from 'dm5'
 export default {
 
   created () {
-    // console.log('dm5-detail-panel created', this.visible_)
+    // console.log('dm5-detail-panel created', this.visible_, this.markerIds_)
   },
 
   destroyed () {
@@ -38,26 +40,22 @@ export default {
   ],
 
   props: {
-    visible: {                      // Trueish if the detail panel is visible. Optional. Default is true.
-      type: Boolean,
-      default: true
-    },
-    tab: {                          // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
-      type: String,
-      default: 'info'
-    },
-    object: dm5.DeepaMehtaObject,   // The topic/assoc to display. Undefined if data not yet arrived.
+    visible: {type: Boolean, default: true},    // Trueish if the detail panel is visible. Optional. Default is true.
+    tab: {type: String, default: 'info'},       // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
+    object: dm5.DeepaMehtaObject,               // The topic/assoc to display. Undefined if data not yet arrived.
+    markerIds: Array,                           // Optional: IDs of topics to render as "marked" in related-tab.
     quillConfig: Object
   },
 
   data () {
     return {
       // mirror props ### FIXME: add remaining props?
-      visible_:  this.visible,
-      tab_:      this.tab,
-      object_:   this.object,
-      writable_: this.writable,
-      mode_:     this.mode
+      visible_:   this.visible,
+      tab_:       this.tab,
+      object_:    this.object,
+      writable_:  this.writable,
+      mode_:      this.mode,
+      markerIds_: this.markerIds
     }
   },
 
