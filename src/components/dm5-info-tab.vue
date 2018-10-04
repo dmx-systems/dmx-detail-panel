@@ -1,6 +1,5 @@
 <template>
   <div class="dm5-info-tab">
-    <h3>{{object.value}}</h3>
     <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="objectRenderers"
       :quill-config="_quillConfig" @inline="setInlineId" @child-topic-reveal="revealChildTopic">
     </dm5-object-renderer>
