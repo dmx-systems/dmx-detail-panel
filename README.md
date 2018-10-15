@@ -4,8 +4,8 @@
 
 **0.15** -- Oct 6, 2018
 
-* New component property `markerIds` allows rendering certain topics as "marked" in the related-tab
 * Info-tab component does not render title. The underlying object renderer has full rendering control.
+* New component property `markerIds` allows rendering certain topics as "marked" in the related-tab
 * Component supports manual mounting in conjunction with manual data update ("props" are mirrored as "data")
 
 **0.14** -- Jul 31, 2018

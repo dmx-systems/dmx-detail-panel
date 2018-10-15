@@ -100,6 +100,10 @@ export default {
 </script>
 
 <style>
+.dm5-info-tab .dm5-object-renderer {
+  margin-top: 1em;
+}
+
 .dm5-info-tab .button {
   margin-top: 1.2em;
 }
