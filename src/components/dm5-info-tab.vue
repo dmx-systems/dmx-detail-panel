@@ -1,6 +1,6 @@
 <template>
   <div class="dm5-info-tab">
-    <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="objectRenderers"
+    <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="detailRenderers"
       :quill-config="_quillConfig" @inline="setInlineId" @child-topic-reveal="revealChildTopic">
     </dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
@@ -25,7 +25,7 @@ export default {
     require('./mixins/writable').default,
     require('./mixins/mode').default,
     require('./mixins/info-mode').default,
-    require('./mixins/object-renderers').default
+    require('./mixins/detail-renderers').default
   ],
 
   props: {

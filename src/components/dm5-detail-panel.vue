@@ -2,7 +2,7 @@
   <div class="dm5-detail-panel" v-if="visible_"><!-- background is already shown for the sake of feedback -->
     <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object_.typeName" name="info">
-        <dm5-info-tab :object="object_" :writable="writable_" :mode="mode_" :object-renderers="objectRenderers"
+        <dm5-info-tab :object="object_" :writable="writable_" :mode="mode_" :detail-renderers="detailRenderers"
           :quill-config="quillConfig" @edit="edit" @submit="submit" @submit-inline="submitInline"
           @child-topic-reveal="revealChildTopic">
         </dm5-info-tab>
@@ -36,7 +36,7 @@ export default {
   mixins: [
     require('./mixins/writable').default,
     require('./mixins/mode-default').default,
-    require('./mixins/object-renderers').default
+    require('./mixins/detail-renderers').default
   ],
 
   props: {
