@@ -2,6 +2,10 @@
 
 ## Version History
 
+**0.16** -- Oct 21, 2018
+
+* Rename component prop `object-renderers` to `detail-renderers`. It contains both, `object` and `value` renderers.
+
 **0.15** -- Oct 6, 2018
 
 * Info-tab component does not render title. The underlying object renderer has full rendering control.
@@ -83,4 +87,4 @@
 
 ------------
 Jörg Richter  
-Oct 6, 2018
+Oct 21, 2018
