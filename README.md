@@ -2,9 +2,13 @@
 
 ## Version History
 
+**0.17** -- Nov 7, 2018
+
+* Enter key submits form
+
 **0.16** -- Oct 21, 2018
 
-* Rename component prop `object-renderers` to `detail-renderers`. It contains both, `object` and `value` renderers.
+* Rename component prop `object-renderers` to `detail-renderers`. It contains both, *Object Renderers* and *Value Renderers*.
 
 **0.15** -- Oct 6, 2018
 
@@ -87,4 +91,4 @@
 
 ------------
 Jörg Richter  
-Oct 21, 2018
+Nov 7, 2018
