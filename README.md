@@ -8,7 +8,7 @@
 
 **0.16** -- Oct 21, 2018
 
-* Rename component prop `object-renderers` to `detail-renderers`. It contains both, *Object Renderers* and *Value Renderers*.
+* Rename component prop `object-renderers` to `detail-renderers`. It contains both, `object` renderers and `value` renderers.
 
 **0.15** -- Oct 6, 2018
 

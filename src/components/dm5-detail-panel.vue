@@ -3,7 +3,7 @@
     <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object_.typeName" name="info">
         <dm5-info-tab :object="object_" :writable="writable_" :mode="mode_" :detail-renderers="detailRenderers"
-          :quill-config="quillConfig" @edit="edit" @submit="submit" @submit-inline="submitInline"
+          :types="types_" :quill-config="quillConfig" @edit="edit" @submit="submit" @submit-inline="submitInline"
           @child-topic-reveal="revealChildTopic">
         </dm5-info-tab>
       </el-tab-pane>
@@ -26,7 +26,7 @@ import dm5 from 'dm5'
 export default {
 
   created () {
-    // console.log('dm5-detail-panel created', this.visible_, this.markerIds_)
+    // console.log('dm5-detail-panel created', this.types)
   },
 
   destroyed () {
@@ -44,6 +44,7 @@ export default {
     tab: {type: String, default: 'info'},       // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
     object: dm5.DeepaMehtaObject,               // The topic/assoc to display. Undefined if data not yet arrived.
     markerIds: Array,                           // Optional: IDs of topics to render as "marked" in related-tab.
+    types: Object,                              // Optional: "assocTypes" and "roleTypes" (arrays)
     quillConfig: Object
   },
 
@@ -55,7 +56,8 @@ export default {
       object_:    this.object,
       writable_:  this.writable,
       mode_:      this.mode,
-      markerIds_: this.markerIds
+      markerIds_: this.markerIds,
+      types_:     this.types
     }
   },
 

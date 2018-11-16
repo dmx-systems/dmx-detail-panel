@@ -1,7 +1,8 @@
 <template>
   <div class="dm5-info-tab">
-    <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="detailRenderers"
-      :quill-config="_quillConfig" @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
+    <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode"
+      :renderers="detailRenderers" :types="types" :quill-config="_quillConfig"
+      @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
     </dm5-object-renderer>
     <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
   </div>
@@ -29,6 +30,7 @@ export default {
   ],
 
   props: {
+    types: Object,              // Optional: "assocTypes" and "roleTypes" (arrays)
     quillConfig: Object
   },
 
