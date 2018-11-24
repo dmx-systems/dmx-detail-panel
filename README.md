@@ -2,6 +2,10 @@
 
 ## Version History
 
+**0.18** -- Nov 24, 2018
+
+Composability: new component property `types` (component does not access app state)
+
 **0.17** -- Nov 7, 2018
 
 * Enter key submits form
@@ -91,4 +95,4 @@
 
 ------------
 Jörg Richter  
-Nov 7, 2018
+Nov 24, 2018
