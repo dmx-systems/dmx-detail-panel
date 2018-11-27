@@ -14,7 +14,8 @@
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
       </el-tab-pane>
-      <el-tab-pane label="View" name="view">
+      <el-tab-pane label="View" name="view" :disabled="!viewConfigTopic">
+        <dm5-view-tab :view-config-topic="viewConfigTopic" :writable="writable_" v-if="viewConfigTopic"></dm5-view-tab>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -61,6 +62,21 @@ export default {
     }
   },
 
+  computed: {
+    viewConfigTopic () {
+      console.log('viewConfigTopic', this.object_)
+      if (this.object_ && (this.object_.isType() || this.object_.isAssocDef())) {
+        // FIXME: access cached assoc def when selecting an assoc
+        const viewConfig = this.object_.viewConfig
+        if (!viewConfig) {
+          console.warn('Type or assoc def has no view config', this.object_)
+          return
+        }
+        return viewConfig['dmx.webclient.view_config']
+      }
+    }
+  },
+
   methods: {
 
     tabClick (tabPane) {
@@ -90,7 +106,8 @@ export default {
 
   components: {
     'dm5-info-tab':    require('./dm5-info-tab').default,
-    'dm5-related-tab': require('./dm5-related-tab').default
+    'dm5-related-tab': require('./dm5-related-tab').default,
+    'dm5-view-tab':    require('./dm5-view-tab').default
   }
 }
 </script>
@@ -106,6 +123,11 @@ export default {
 
 .dm5-detail-panel .el-tabs__item.is-active {
   color: var(--highlight-color);        /* restore original Element UI active color as accidentally */
+                                        /* overridden by previous rule due to higher specificity    */
+}
+
+.dm5-detail-panel .el-tabs__item.is-disabled {
+  color: var(--label-color-disabled);   /* restore original Element UI disabled color as accidentally */
                                         /* overridden by previous rule due to higher specificity    */
 }
 </style>
