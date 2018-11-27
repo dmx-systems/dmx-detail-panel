@@ -15,7 +15,9 @@
       <el-tab-pane label="Meta" name="meta">
       </el-tab-pane>
       <el-tab-pane label="View" name="view" :disabled="!viewConfigTopic">
-        <dm5-view-tab :view-config-topic="viewConfigTopic" :writable="writable_" v-if="viewConfigTopic"></dm5-view-tab>
+        <dm5-view-tab :view-config-topic="viewConfigTopic" :writable="writable_" :detail-renderers="detailRenderers"
+          v-if="viewConfigTopic" @submit-view-config="submitViewConfig">
+        </dm5-view-tab>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -93,6 +95,10 @@ export default {
 
     submitInline (object) {
       this.$emit('submit-inline', object)
+    },
+
+    submitViewConfig (viewConfigTopic) {
+      this.$emit('submit-view-config', viewConfigTopic)
     },
 
     revealChildTopic (relTopic) {
