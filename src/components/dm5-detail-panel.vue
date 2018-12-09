@@ -45,7 +45,7 @@ export default {
   props: {
     visible: {type: Boolean, default: true},    // Trueish if the detail panel is visible. Optional. Default is true.
     tab: {type: String, default: 'info'},       // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
-    object: dm5.DeepaMehtaObject,               // The topic/assoc to display. Undefined if data not yet arrived.
+    object: dm5.DeepaMehtaObject,               // The topic/assoc to display. Undefined if data not yet available.
     markerIds: Array,                           // Optional: IDs of topics to render as "marked" in related-tab.
     types: Object,                              // Optional: "assocTypes" and "roleTypes" (arrays)
     quillConfig: Object
@@ -68,13 +68,17 @@ export default {
     viewConfigTopic () {
       console.log('viewConfigTopic', this.object_)
       if (this.object_ && (this.object_.isType() || this.object_.isAssocDef())) {
-        // FIXME: access cached assoc def when selecting an assoc
         const viewConfig = this.object_.viewConfig
         if (!viewConfig) {
           console.warn('Type or assoc def has no view config', this.object_)
           return
         }
-        return viewConfig['dmx.webclient.view_config']
+        const viewConfigTopic = viewConfig['dmx.webclient.view_config']
+        if (!viewConfigTopic) {
+          console.warn('Type or assoc def has no view config topic', this.object_)
+          return
+        }
+        return viewConfigTopic
       }
     }
   },
