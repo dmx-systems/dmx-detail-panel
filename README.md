@@ -2,6 +2,11 @@
 
 ## Version History
 
+**0.19** -- Dec 21, 2018
+
+* Show view config in "View" tab
+* Emit `submit-view-config` event
+
 **0.18** -- Nov 24, 2018
 
 * Composability: new component property `types` (component does not access app state)
@@ -95,4 +100,4 @@
 
 ------------
 Jörg Richter  
-Nov 24, 2018
+Dec 21, 2018

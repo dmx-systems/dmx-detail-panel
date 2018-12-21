@@ -66,7 +66,7 @@ export default {
 
   computed: {
     viewConfigTopic () {
-      console.log('viewConfigTopic', this.object_)
+      // console.log('viewConfigTopic', this.object_)
       if (this.object_ && (this.object_.isType() || this.object_.isAssocDef())) {
         const viewConfig = this.object_.viewConfig
         if (!viewConfig) {
