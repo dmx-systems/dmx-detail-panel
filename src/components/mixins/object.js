@@ -5,7 +5,7 @@ export default {
     // The topic/assoc to display.
     // May be an "empty" object, without ID, with just type set.
     object: {
-      type: dm5.DeepaMehtaObject,
+      type: dm5.DMXObject,
       required: true
     }
   }

@@ -45,7 +45,7 @@ export default {
   props: {
     visible: {type: Boolean, default: true},    // Trueish if the detail panel is visible. Optional. Default is true.
     tab: {type: String, default: 'info'},       // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
-    object: dm5.DeepaMehtaObject,               // The topic/assoc to display. Undefined if data not yet available.
+    object: dm5.DMXObject,                      // The topic/assoc to display. Undefined if data not yet available.
     markerIds: Array,                           // Optional: IDs of topics to render as "marked" in related-tab.
     types: Object,                              // Optional: "assocTypes" and "roleTypes" (arrays)
     quillConfig: Object
