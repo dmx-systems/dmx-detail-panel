@@ -2,6 +2,10 @@
 
 ## Version History
 
+**0.20** -- Jan 5, 2019
+
+* Adapt to `dm5` library (class `DMXObject`)
+
 **0.19** -- Dec 21, 2018
 
 * Show view config in "View" tab
@@ -100,4 +104,4 @@
 
 ------------
 Jörg Richter  
-Dec 21, 2018
+Jan 5, 2019
