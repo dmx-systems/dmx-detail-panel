@@ -4,7 +4,9 @@
       :renderers="detailRenderers" :types="types" :quill-config="_quillConfig"
       @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
     </dm5-object-renderer>
-    <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
+    <el-button class="button" v-if="buttonVisibility" :disabled="buttonDisabled" :title="buttonTitle"
+      @click="buttonAction">{{buttonLabel}}
+    </el-button>
   </div>
 </template>
 
@@ -62,6 +64,17 @@ export default {
 
     buttonVisibility () {
       return this.writable && !this.inlineId
+    },
+
+    buttonDisabled () {
+      // only identities are enabled; assocs and types are always enabled
+      return this.infoMode && this.object.isTopic() && !this.object.isType() && !this.object.getType().isIdentity()
+    },
+
+    buttonTitle () {
+      const typeName = this.object.typeName
+      return this.buttonDisabled && `A ${typeName} is immutable as "${typeName}" is a value type. ` +
+        'Edit the parent context instead.'
     },
 
     // principle copy in dm5-detail.vue (dm5-topicmap-panel)
