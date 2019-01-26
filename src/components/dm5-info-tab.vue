@@ -68,7 +68,7 @@ export default {
 
     buttonDisabled () {
       // only identities are enabled; assocs and types are always enabled
-      return this.infoMode && this.object.isTopic() && !this.object.isType() && !this.object.getType().isIdentity()
+      return this.object.isTopic() && !this.object.isType() && !this.object.getType().isIdentity()
     },
 
     buttonTitle () {
