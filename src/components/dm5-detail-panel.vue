@@ -140,4 +140,8 @@ export default {
   color: var(--label-color-disabled);   /* restore original Element UI disabled color as accidentally */
                                         /* overridden by previous rule due to higher specificity    */
 }
+
+.dm5-detail-panel .el-tabs__content {
+  overflow: visible;                    /* don't crop quill toolbar (was "hidden") */
+}
 </style>
