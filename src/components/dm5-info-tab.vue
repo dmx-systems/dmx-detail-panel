@@ -66,6 +66,7 @@ export default {
       return this.writable && !this.inlineId
     },
 
+    // copy in dm5-object-renderer.vue (as editDisabled())
     buttonDisabled () {
       // only identity topics are enabled; assocs and types are always enabled
       return this.object.isTopic() && !this.object.isType() && !this.object.getType().isIdentity()
