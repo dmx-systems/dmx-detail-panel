@@ -13,6 +13,8 @@
         </dm5-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
+        <dm5-meta-tab :object="object_" :tab="tab_">
+        </dm5-meta-tab>
       </el-tab-pane>
       <el-tab-pane label="View" name="view" :disabled="!viewConfigTopic">
         <dm5-view-tab :view-config-topic="viewConfigTopic" :writable="writable_" :detail-renderers="detailRenderers"
@@ -117,6 +119,7 @@ export default {
   components: {
     'dm5-info-tab':    require('./dm5-info-tab').default,
     'dm5-related-tab': require('./dm5-related-tab').default,
+    'dm5-meta-tab':    require('./dm5-meta-tab').default,
     'dm5-view-tab':    require('./dm5-view-tab').default
   }
 }

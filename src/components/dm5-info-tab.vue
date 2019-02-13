@@ -125,6 +125,6 @@ export default {
 }
 
 .dm5-info-tab .button {
-  margin-top: 1.2em;
+  margin-top: var(--field-spacing);
 }
 </style>

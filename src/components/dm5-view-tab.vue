@@ -101,6 +101,6 @@ export default {
 
 <style>
 .dm5-view-tab .button {
-  margin-top: 1.2em;
+  margin-top: var(--field-spacing);
 }
 </style>
