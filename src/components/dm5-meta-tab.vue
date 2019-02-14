@@ -1,9 +1,9 @@
 <template>
   <div class="dm5-meta-tab">
     <div class="field-label">Created</div>
-    <div>{{created}}</div>
+    <div>{{created}} <span class="secondary-text">by</span> {{creator}}</div>
     <div class="field-label">Modified</div>
-    <div>{{modified}}</div>
+    <div>{{modified}} <span class="secondary-text">by</span> {{modifier}}</div>
   </div>
 </template>
 
@@ -30,9 +30,9 @@ export default {
 
   data () {
     return {
-      created: undefined,
+      created:  undefined,
       modified: undefined,
-      creator: undefined,
+      creator:  undefined,
       modifier: undefined
     }
   },
@@ -63,6 +63,12 @@ export default {
         this.object.getModificationTime().then(modified => {
           this.modified = new Date(modified).toLocaleString()
         })
+        this.object.getCreator().then(creator => {
+          this.creator = creator
+        })
+        this.object.getModifier().then(modifier => {
+          this.modifier = modifier
+        })
       }
     }
   },
@@ -76,5 +82,9 @@ export default {
 <style>
 .dm5-meta-tab .field-label {
   margin-top: var(--field-spacing);
+}
+
+.dm5-meta-tab .secondary-text {
+  color: var(--label-color)
 }
 </style>
