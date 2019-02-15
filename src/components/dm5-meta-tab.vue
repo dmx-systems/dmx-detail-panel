@@ -4,6 +4,9 @@
     <div>{{created}} <span class="secondary-text">by</span> {{creator}}</div>
     <div class="field-label">Modified</div>
     <div>{{modified}} <span class="secondary-text">by</span> {{modifier}}</div>
+    <!-- Topicmaps -->
+    <dm5-topic-list :topics="topicmapTopics" no-sort-menu :marker-ids="markerIds" @topic-click="topicClick">
+    </dm5-topic-list>
   </div>
 </template>
 
@@ -11,7 +14,7 @@
 export default {
 
   created () {
-    // console.log('dm5-meta-tab created', this.markerIds)
+    // console.log('dm5-meta-tab created')
     this.fetchMetaData()
   },
 
@@ -33,20 +36,21 @@ export default {
       created:  undefined,
       modified: undefined,
       creator:  undefined,
-      modifier: undefined
+      modifier: undefined,
+      topicmapTopics: []
     }
   },
 
   watch: {
 
     object () {
-      // console.log('Object watcher', this.object.id)
+      // console.log('object watcher', this.object.id)
       this.fetchMetaData()
     },
 
     tab () {
       // TODO: suppress unnecessary refetching when browsing between tabs and revisit the "Meta" tab
-      // console.log('Detail watcher', this.tab)
+      // console.log('tab watcher', this.tab)
       this.fetchMetaData()
     }
   },
@@ -55,21 +59,29 @@ export default {
 
     fetchMetaData () {
       // console.log('fetchMetaData', this.object.id, this.tab === 'meta')
-      // fetch only if the "Meta" tab is selected
-      if (this.tab === 'meta') {
-        this.object.getCreationTime().then(created => {
-          this.created = new Date(created).toLocaleString()
-        })
-        this.object.getModificationTime().then(modified => {
-          this.modified = new Date(modified).toLocaleString()
-        })
-        this.object.getCreator().then(creator => {
-          this.creator = creator
-        })
-        this.object.getModifier().then(modifier => {
-          this.modifier = modifier
-        })
+      // don't fetch if "Meta" tab is not selected
+      if (this.tab !== 'meta') {
+        return
       }
+      this.object.getCreationTime().then(created => {
+        this.created = new Date(created).toLocaleString()
+      })
+      this.object.getModificationTime().then(modified => {
+        this.modified = new Date(modified).toLocaleString()
+      })
+      this.object.getCreator().then(creator => {
+        this.creator = creator
+      })
+      this.object.getModifier().then(modifier => {
+        this.modifier = modifier
+      })
+      this.object.getTopicmapTopics().then(topicmapTopics => {
+        this.topicmapTopics = topicmapTopics
+      })
+    },
+
+    topicClick (relTopic) {
+      this.$emit('related-topic-click', relTopic)
     }
   },
 

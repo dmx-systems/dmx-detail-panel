@@ -34,13 +34,13 @@ export default {
   watch: {
 
     object () {
-      // console.log('Object watcher', this.object.id)
+      // console.log('object watcher', this.object.id)
       this.fetchRelatedTopics()
     },
 
     tab () {
       // TODO: suppress unnecessary refetching when browsing between tabs and revisit the "Related" tab
-      // console.log('Detail watcher', this.tab)
+      // console.log('tab watcher', this.tab)
       this.fetchRelatedTopics()
     }
   },

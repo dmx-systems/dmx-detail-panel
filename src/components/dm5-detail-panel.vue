@@ -13,7 +13,8 @@
         </dm5-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
-        <dm5-meta-tab :object="object_" :tab="tab_">
+        <dm5-meta-tab :object="object_" :tab="tab_" :marker-ids="markerIds_"
+          @related-topic-click="relatedTopicClick">
         </dm5-meta-tab>
       </el-tab-pane>
       <el-tab-pane label="View" name="view" :disabled="!viewConfigTopic">
