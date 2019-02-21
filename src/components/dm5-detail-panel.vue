@@ -133,6 +133,10 @@ export default {
 </script>
 
 <style>
+.dm5-detail-panel {
+  position: relative;                   /* avoid close button overlap scrollbar */
+}
+
 .dm5-detail-panel .close-button {
   position: absolute;
   right: 0;
@@ -155,7 +159,7 @@ export default {
 
 .dm5-detail-panel .el-tabs__item.is-disabled {
   color: var(--label-color-disabled);   /* restore original Element UI disabled color as accidentally */
-                                        /* overridden by previous rule due to higher specificity    */
+                                        /* overridden by previous rule due to higher specificity      */
 }
 
 .dm5-detail-panel .el-tabs__content {
