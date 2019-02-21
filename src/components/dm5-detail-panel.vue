@@ -1,5 +1,7 @@
 <template>
   <div class="dm5-detail-panel" v-if="visible_"><!-- background is already shown for the sake of feedback -->
+    <el-button class="close-button" type="text" icon="el-icon-close" title="Close Detail Panel" @click="close">
+    </el-button>
     <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object_.typeName" name="info">
         <dm5-info-tab :object="object_" :writable="writable_" :mode="mode_" :detail-renderers="detailRenderers"
@@ -114,6 +116,10 @@ export default {
 
     relatedTopicClick (relTopic) {
       this.$emit('related-topic-click', relTopic)
+    },
+
+    close () {
+      this.$emit('close')
     }
   },
 
@@ -127,6 +133,13 @@ export default {
 </script>
 
 <style>
+.dm5-detail-panel .close-button {
+  position: absolute;
+  right: 0;
+  padding: 5px !important;
+  z-index: 1;
+}
+
 .dm5-detail-panel .el-tabs__item {
   font-size: var(--label-font-size);    /* was 14px */
   color: var(--label-color);            /* was #303133 (Element UI --color-text-primary) */
