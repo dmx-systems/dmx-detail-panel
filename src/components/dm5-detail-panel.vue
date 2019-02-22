@@ -133,18 +133,18 @@ export default {
 </script>
 
 <style>
-.dm5-detail-panel {
-  position: relative;                   /* avoid close button overlap scrollbar */
+.dm5-detail-panel .el-tabs {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.dm5-detail-panel .close-button {
-  position: absolute;
-  right: 0;
-  padding: 5px !important;
-  z-index: 1;
+.dm5-detail-panel .el-tabs__header {
+  margin: 0;                            /* was 0 0 15px */
+  padding-left:  12px;
 }
 
-.dm5-detail-panel .el-tabs__item {
+.dm5-detail-panel .el-tabs__header .el-tabs__item {
   font-size: var(--label-font-size);    /* was 14px */
   color: var(--label-color);            /* was #303133 (Element UI --color-text-primary) */
   height: 36px;                         /* was 40px */
@@ -152,17 +152,34 @@ export default {
   padding: 0 12px;                      /* was 0 20px */
 }
 
-.dm5-detail-panel .el-tabs__item.is-active {
+.dm5-detail-panel .el-tabs__header .el-tabs__item:hover {
   color: var(--highlight-color);        /* restore original Element UI active color as accidentally */
-                                        /* overridden by previous rule due to higher specificity    */
-}
+}                                       /* overridden by previous rule due to higher specificity    */
 
-.dm5-detail-panel .el-tabs__item.is-disabled {
+.dm5-detail-panel .el-tabs__header .el-tabs__item.is-active {
+  color: var(--highlight-color);        /* restore original Element UI active color as accidentally */
+}                                       /* overridden by previous rule due to higher specificity    */
+
+.dm5-detail-panel .el-tabs__header .el-tabs__item.is-disabled {
   color: var(--label-color-disabled);   /* restore original Element UI disabled color as accidentally */
-                                        /* overridden by previous rule due to higher specificity      */
-}
+}                                       /* overridden by previous rule due to higher specificity      */
 
 .dm5-detail-panel .el-tabs__content {
-  overflow: visible;                    /* don't crop quill toolbar (was "hidden") */
+  flex: 1;
+}
+
+.dm5-detail-panel .el-tabs__content .el-tab-pane {
+  height: 100%;
+  overflow: auto;
+  position: relative;                   /* absolute positioned "+" buttons scroll along */
+  padding: var(--detail-panel-padding);
+  box-sizing: border-box;
+}
+
+.dm5-detail-panel .close-button {
+  position: absolute;
+  right: 0;
+  padding: 5px !important;
+  z-index: 3;                           /* stack above el-tabs__nav */
 }
 </style>
