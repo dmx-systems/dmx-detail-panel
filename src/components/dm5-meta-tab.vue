@@ -4,6 +4,9 @@
     <div>{{created}} <span class="secondary-text">by</span> {{creator}}</div>
     <div class="field-label">Modified</div>
     <div>{{modified}} <span class="secondary-text">by</span> {{modifier}}</div>
+    <!-- Workspace -->
+    <dm5-topic-list :topics="workspaces" no-sort-menu :marker-ids="markerIds" @topic-click="topicClick">
+    </dm5-topic-list>
     <!-- Topicmaps -->
     <dm5-topic-list :topics="topicmapTopics" no-sort-menu :marker-ids="markerIds" @topic-click="topicClick">
     </dm5-topic-list>
@@ -37,6 +40,7 @@ export default {
       modified: undefined,
       creator:  undefined,
       modifier: undefined,
+      workspaces: [],
       topicmapTopics: []
     }
   },
@@ -63,21 +67,12 @@ export default {
       if (this.tab !== 'meta') {
         return
       }
-      this.object.getCreationTime().then(created => {
-        this.created = new Date(created).toLocaleString()
-      })
-      this.object.getModificationTime().then(modified => {
-        this.modified = new Date(modified).toLocaleString()
-      })
-      this.object.getCreator().then(creator => {
-        this.creator = creator
-      })
-      this.object.getModifier().then(modifier => {
-        this.modifier = modifier
-      })
-      this.object.getTopicmapTopics().then(topicmapTopics => {
-        this.topicmapTopics = topicmapTopics
-      })
+      this.object.getCreationTime().then(created          => this.created = new Date(created).toLocaleString())
+      this.object.getModificationTime().then(modified     => this.modified = new Date(modified).toLocaleString())
+      this.object.getCreator().then(creator               => this.creator = creator)
+      this.object.getModifier().then(modifier             => this.modifier = modifier)
+      this.object.getWorkspace().then(workspace           => this.workspaces = [workspace])
+      this.object.getTopicmapTopics().then(topicmapTopics => this.topicmapTopics = topicmapTopics)
     },
 
     topicClick (relTopic) {
