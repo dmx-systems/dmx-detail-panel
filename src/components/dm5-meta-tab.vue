@@ -4,6 +4,9 @@
     <div>{{created}} <span class="secondary-text">by</span> {{creator}}</div>
     <div class="field-label">Modified</div>
     <div>{{modified}} <span class="secondary-text">by</span> {{modifier}}</div>
+    <!-- Type -->
+    <dm5-topic-list :topics="types" no-sort-menu :marker-ids="markerIds" @topic-click="topicClick">
+    </dm5-topic-list>
     <!-- Workspace -->
     <dm5-topic-list :topics="workspaces" no-sort-menu :marker-ids="markerIds" @topic-click="topicClick">
     </dm5-topic-list>
@@ -40,6 +43,7 @@ export default {
       modified: undefined,
       creator:  undefined,
       modifier: undefined,
+      types: [],
       workspaces: [],
       topicmapTopics: []
     }
@@ -71,6 +75,11 @@ export default {
       this.object.getModificationTime().then(modified     => this.modified = new Date(modified).toLocaleString())
       this.object.getCreator().then(creator               => this.creator = creator)
       this.object.getModifier().then(modifier             => this.modifier = modifier)
+      this.object.getRelatedTopics({
+        assocTypeUri: 'dmx.core.instantiation',
+        myRoleTypeUri: 'dmx.core.instance',
+        othersRoleTypeUri: 'dmx.core.type'
+      }).then(types                                       => this.types = types)
       this.object.getWorkspace().then(workspace           => this.workspaces = [workspace])
       this.object.getTopicmapTopics().then(topicmapTopics => this.topicmapTopics = topicmapTopics)
     },
