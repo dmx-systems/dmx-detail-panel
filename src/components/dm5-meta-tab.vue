@@ -1,5 +1,15 @@
 <template>
   <div class="dm5-meta-tab">
+    <div id="id">
+      <div>
+        <div class="field-label">ID</div>
+        <div>{{object.id}}</div>
+      </div>
+      <div>
+        <div class="field-label">URI</div>
+        <div>{{object.uri || 'n/a'}}</div>
+      </div>
+    </div>
     <div class="field-label">Created</div>
     <div>{{created}} <span class="secondary-text">by</span> {{creator}}</div>
     <div class="field-label">Modified</div>
@@ -75,12 +85,12 @@ export default {
       this.object.getModificationTime().then(modified     => this.modified = new Date(modified).toLocaleString())
       this.object.getCreator().then(creator               => this.creator = creator)
       this.object.getModifier().then(modifier             => this.modifier = modifier)
+      this.object.getWorkspace().then(workspace           => this.workspace = workspace)
       this.object.getRelatedTopics({
         assocTypeUri: 'dmx.core.instantiation',
         myRoleTypeUri: 'dmx.core.instance',
         othersRoleTypeUri: 'dmx.core.type'
       }).then(types                                       => this.types = types)
-      this.object.getWorkspace().then(workspace           => this.workspace = workspace)
       this.object.getTopicmapTopics().then(topicmapTopics => this.topicmapTopics = topicmapTopics)
     },
 
@@ -96,6 +106,14 @@ export default {
 </script>
 
 <style>
+.dm5-meta-tab #id {
+  display: flex;
+}
+
+.dm5-meta-tab #id > div:first-child {
+  margin-right: 2.5em;
+}
+
 .dm5-meta-tab .field-label {
   margin-top: var(--field-spacing);
 }
