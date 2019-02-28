@@ -95,8 +95,8 @@ export default {
       this.object.getCreationTime().then(created      => this.created = new Date(created).toLocaleString())
       this.object.getModificationTime().then(modified => this.modified = new Date(modified).toLocaleString())
       this.object.getCreator().then(creator           => this.creator = creator)
-      this.object.getModifier().then(modifier         => this.modifier = modifier)
-      this.object.getWorkspace()
+      this.object.getModifier().then(modifier         => this.modifier = modifier);
+      (this.object.typeUri === 'dmx.workspaces.workspace' ? Promise.resolve(this.object) : this.object.getWorkspace())
         .then(workspace => this.workspace = workspace)
         .then(workspace => {
           if (workspace) {
