@@ -92,17 +92,24 @@ export default {
       if (this.tab !== 'meta') {
         return
       }
-      this.object.getCreationTime().then(created          => this.created = new Date(created).toLocaleString())
-      this.object.getModificationTime().then(modified     => this.modified = new Date(modified).toLocaleString())
-      this.object.getCreator().then(creator               => this.creator = creator)
-      this.object.getModifier().then(modifier             => this.modifier = modifier)
-      this.object.getWorkspace().then(workspace           => this.workspace = workspace)
-      this.workspace && dm5.restClient.getWorkspaceOwner(this.workspace.id).then(owner => this.owner = owner)
+      this.object.getCreationTime().then(created      => this.created = new Date(created).toLocaleString())
+      this.object.getModificationTime().then(modified => this.modified = new Date(modified).toLocaleString())
+      this.object.getCreator().then(creator           => this.creator = creator)
+      this.object.getModifier().then(modifier         => this.modifier = modifier)
+      this.object.getWorkspace()
+        .then(workspace => this.workspace = workspace)
+        .then(workspace => {
+          if (workspace) {
+            dm5.restClient.getWorkspaceOwner(workspace.id).then(owner => this.owner = owner)
+          } else {
+            this.owner = undefined
+          }
+        })
       this.object.getRelatedTopics({
         assocTypeUri: 'dmx.core.instantiation',
         myRoleTypeUri: 'dmx.core.instance',
         othersRoleTypeUri: 'dmx.core.type'
-      }).then(types                                       => this.types = types)
+      }).then(types => this.types = types)
       this.object.getTopicmapTopics().then(topicmapTopics => this.topicmapTopics = topicmapTopics)
     },
 
