@@ -15,8 +15,16 @@
     <div class="field-label">Modified</div>
     <div>{{modified}} <span class="secondary-text">by</span> {{modifier}}</div>
     <!-- Workspace -->
-    <div class="field-label">Workspace</div>
-    <div>{{workspace && workspace.value || 'n/a'}}</div>
+    <div id="workspace">
+      <div>
+        <div class="field-label">Workspace</div>
+        <div>{{workspace && workspace.value || 'n/a'}}</div>
+      </div>
+      <div>
+        <div class="field-label">Owner</div>
+        <div>{{owner || 'n/a'}}</div>
+      </div>
+    </div>
     <!-- Type -->
     <dm5-topic-list :topics="types" no-sort-menu :marker-ids="markerIds" @topic-click="topicClick">
     </dm5-topic-list>
@@ -27,6 +35,8 @@
 </template>
 
 <script>
+import dm5 from 'dm5'
+
 export default {
 
   created () {
@@ -54,6 +64,7 @@ export default {
       creator:   undefined,
       modifier:  undefined,
       workspace: undefined,
+      owner:     undefined,
       types: [],
       topicmapTopics: []
     }
@@ -86,6 +97,7 @@ export default {
       this.object.getCreator().then(creator               => this.creator = creator)
       this.object.getModifier().then(modifier             => this.modifier = modifier)
       this.object.getWorkspace().then(workspace           => this.workspace = workspace)
+      this.workspace && dm5.restClient.getWorkspaceOwner(this.workspace.id).then(owner => this.owner = owner)
       this.object.getRelatedTopics({
         assocTypeUri: 'dmx.core.instantiation',
         myRoleTypeUri: 'dmx.core.instance',
@@ -106,12 +118,14 @@ export default {
 </script>
 
 <style>
-.dm5-meta-tab #id {
+.dm5-meta-tab #id,
+.dm5-meta-tab #workspace {
   display: flex;
 }
 
-.dm5-meta-tab #id > div:first-child {
-  margin-right: 2.5em;
+.dm5-meta-tab #id        > div + div,
+.dm5-meta-tab #workspace > div + div {
+  margin-left: 2.5em;
 }
 
 .dm5-meta-tab .field-label {
