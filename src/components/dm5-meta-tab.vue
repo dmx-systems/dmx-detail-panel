@@ -126,7 +126,7 @@ export default {
             this.owner = undefined
           }
         })
-      // manual traversal gives us a RelatedTopic (needed for revelation)
+      // manual traversal gives us a RelatedTopic as needed for revelation
       this.object.getRelatedTopics({
         assocTypeUri: 'dmx.core.instantiation',
         myRoleTypeUri: 'dmx.core.instance',

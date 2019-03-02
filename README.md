@@ -2,6 +2,13 @@
 
 ## Version History
 
+**0.22** -- Mar 2, 2019
+
+* Features:
+    * Populate the `Meta` tab with topic/assoc meta data (timestamps, creator/modifier, workspace assignment, ...)
+    * Tabs stay fixed when scrolling
+    * Add a Close button
+
 **0.21** -- Jan 29, 2019
 
 * Fix: disable "Edit" button for DMX value topics; add tooltip
@@ -110,4 +117,4 @@
 
 ------------
 Jörg Richter  
-Jan 29, 2019
+Mar 2, 2019
