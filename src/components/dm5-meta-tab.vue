@@ -1,6 +1,6 @@
 <template>
   <div class="dm5-meta-tab">
-    <div id="id">
+    <div class="flex">
       <div>
         <div class="field-label">ID</div>
         <div>{{object.id}}</div>
@@ -10,12 +10,28 @@
         <div>{{object.uri || 'n/a'}}</div>
       </div>
     </div>
-    <div class="field-label">Created</div>
-    <div>{{created}} <span class="secondary-text">by</span> {{creator}}</div>
-    <div class="field-label">Modified</div>
-    <div>{{modified}} <span class="secondary-text">by</span> {{modifier}}</div>
+    <div class="flex">
+      <div>
+        <div class="field-label">Created</div>
+        <div>{{created || 'n/a'}}</div>
+      </div>
+      <div>
+        <div class="field-label">User</div>
+        <div>{{creator || 'n/a'}}</div>
+      </div>
+    </div>
+    <div class="flex">
+      <div>
+        <div class="field-label">Modified</div>
+        <div>{{modified || 'n/a'}}</div>
+      </div>
+      <div>
+        <div class="field-label">User</div>
+        <div>{{modifier || 'n/a'}}</div>
+      </div>
+    </div>
     <!-- Workspace -->
-    <div id="workspace">
+    <div class="flex">
       <div>
         <div class="field-label">Workspace</div>
         <div>{{workspace && workspace.value || 'n/a'}}</div>
@@ -92,10 +108,15 @@ export default {
       if (this.tab !== 'meta') {
         return
       }
-      this.object.getCreationTime().then(created      => this.created = new Date(created).toLocaleString())
-      this.object.getModificationTime().then(modified => this.modified = new Date(modified).toLocaleString())
-      this.object.getCreator().then(creator           => this.creator = creator)
-      this.object.getModifier().then(modifier         => this.modifier = modifier);
+      this.object.getCreationTime()
+        .then(created => this.created = created && new Date(created).toLocaleString())
+      this.object.getModificationTime()
+        .then(modified => this.modified = modified && new Date(modified).toLocaleString())
+      this.object.getCreator()
+        .then(creator => this.creator = creator)
+      this.object.getModifier()
+        .then(modifier => this.modifier = modifier);
+      // if the selected object is a workspace the workspace is the object itself
       (this.object.typeUri === 'dmx.workspaces.workspace' ? Promise.resolve(this.object) : this.object.getWorkspace())
         .then(workspace => this.workspace = workspace)
         .then(workspace => {
@@ -105,6 +126,7 @@ export default {
             this.owner = undefined
           }
         })
+      // manual traversal gives us a RelatedTopic (needed for revelation)
       this.object.getRelatedTopics({
         assocTypeUri: 'dmx.core.instantiation',
         myRoleTypeUri: 'dmx.core.instance',
@@ -125,21 +147,15 @@ export default {
 </script>
 
 <style>
-.dm5-meta-tab #id,
-.dm5-meta-tab #workspace {
+.dm5-meta-tab .flex {
   display: flex;
 }
 
-.dm5-meta-tab #id        > div + div,
-.dm5-meta-tab #workspace > div + div {
+.dm5-meta-tab .flex > div + div {
   margin-left: 2.5em;
 }
 
 .dm5-meta-tab .field-label {
   margin-top: var(--field-spacing);
-}
-
-.dm5-meta-tab .secondary-text {
-  color: var(--label-color)
 }
 </style>
