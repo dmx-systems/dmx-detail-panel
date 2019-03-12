@@ -42,10 +42,12 @@
       </div>
     </div>
     <!-- Type -->
-    <dm5-topic-list :topics="types" no-sort-menu :marker-ids="markerIds" @topic-click="topicClick">
+    <dm5-topic-list :topics="types" no-sort-menu :marker-ids="markerIds"
+      @topic-click="topicClick" @icon-click="iconClick">
     </dm5-topic-list>
     <!-- Topicmaps -->
-    <dm5-topic-list :topics="topicmapTopics" no-sort-menu :marker-ids="markerIds" @topic-click="topicClick">
+    <dm5-topic-list :topics="topicmapTopics" no-sort-menu :marker-ids="markerIds"
+      @topic-click="topicClick" @icon-click="iconClick">
     </dm5-topic-list>
   </div>
 </template>
@@ -137,6 +139,10 @@ export default {
 
     topicClick (relTopic) {
       this.$emit('related-topic-click', relTopic)
+    },
+
+    iconClick (relTopic) {
+      this.$emit('related-icon-click', relTopic)
     }
   },
 

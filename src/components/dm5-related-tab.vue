@@ -1,6 +1,7 @@
 <template>
   <div class="dm5-related-tab">
-    <dm5-topic-list :topics="relTopics" :marker-ids="markerIds" @topic-click="topicClick"></dm5-topic-list>
+    <dm5-topic-list :topics="relTopics" :marker-ids="markerIds" @topic-click="topicClick" @icon-click="iconClick">
+    </dm5-topic-list>
   </div>
 </template>
 
@@ -59,6 +60,10 @@ export default {
 
     topicClick (relTopic) {
       this.$emit('related-topic-click', relTopic)
+    },
+
+    iconClick (relTopic) {
+      this.$emit('related-icon-click', relTopic)
     }
   },
 

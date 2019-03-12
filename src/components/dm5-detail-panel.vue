@@ -11,12 +11,12 @@
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
         <dm5-related-tab :object="object_" :tab="tab_" :marker-ids="markerIds_"
-          @related-topic-click="relatedTopicClick">
+          @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick">
         </dm5-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
         <dm5-meta-tab :object="object_" :tab="tab_" :marker-ids="markerIds_"
-          @related-topic-click="relatedTopicClick">
+          @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick">
         </dm5-meta-tab>
       </el-tab-pane>
       <el-tab-pane label="View" name="view" :disabled="!viewConfigTopic">
@@ -116,6 +116,10 @@ export default {
 
     relatedTopicClick (relTopic) {
       this.$emit('related-topic-click', relTopic)
+    },
+
+    relatedIconClick (relTopic) {
+      this.$emit('related-icon-click', relTopic)
     },
 
     close () {
