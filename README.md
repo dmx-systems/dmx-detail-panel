@@ -2,6 +2,10 @@
 
 ## Version History
 
+**0.23** -- Apr 1, 2019
+
+* Emit `related-icon-click` event
+
 **0.22** -- Mar 2, 2019
 
 * Features:
@@ -117,4 +121,4 @@
 
 ------------
 Jörg Richter  
-Mar 2, 2019
+Apr 1, 2019
