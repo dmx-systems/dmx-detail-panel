@@ -2,6 +2,10 @@
 
 ## Version History
 
+**0.24** -- Apr 22, 2019
+
+* Chore: lock `dm5` dependencies (for DMX-5.0-beta.2)
+
 **0.23** -- Apr 1, 2019
 
 * Emit `related-icon-click` event
@@ -121,4 +125,4 @@
 
 ------------
 Jörg Richter  
-Apr 1, 2019
+Apr 22, 2019
