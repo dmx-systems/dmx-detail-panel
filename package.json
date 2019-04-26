@@ -10,7 +10,7 @@
     "url": "https://github.com/jri/dm5-detail-panel.git"
   },
   "dependencies": {
-    "dm5-object-renderer": "0.15.0",
+    "dm5-object-renderer": "https://github.com/jri/dm5-object-renderer.git",
     "dm5-topic-list": "0.11.0"
   }
 }
