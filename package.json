@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "dm5-object-renderer": "https://github.com/jri/dm5-object-renderer.git",
-    "dm5-topic-list": "0.11.0"
+    "dm5-topic-list": "https://github.com/jri/dm5-topic-list.git"
   }
 }
