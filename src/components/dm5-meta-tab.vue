@@ -153,6 +153,11 @@ export default {
 </script>
 
 <style>
+.dm5-meta-tab {
+  overflow: auto;
+  padding: var(--detail-panel-padding);
+}
+
 .dm5-meta-tab .flex {
   display: flex;
 }

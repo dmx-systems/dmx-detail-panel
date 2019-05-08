@@ -3,7 +3,10 @@
     <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="detailRenderers"
       @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
     </dm5-object-renderer>
-    <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
+    <div>
+      <!-- Wrapper div fixes button height. Somehow an el-button does not like to be a flex item. -->
+      <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
+    </div>
   </div>
 </template>
 
@@ -100,7 +103,17 @@ export default {
 </script>
 
 <style>
+.dm5-view-tab {
+  display: flex;
+  flex-direction: column;
+}
+
+.dm5-view-tab .dm5-object-renderer {
+  overflow: auto;
+  padding: var(--detail-panel-padding);
+}
+
 .dm5-view-tab .button {
-  margin-top: var(--field-spacing);
+  margin: var(--detail-panel-padding);
 }
 </style>

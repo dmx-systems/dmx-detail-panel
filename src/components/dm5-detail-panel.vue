@@ -168,16 +168,10 @@ export default {
   color: var(--label-color-disabled);   /* restore original Element UI disabled color as accidentally */
 }                                       /* overridden by previous rule due to higher specificity      */
 
-.dm5-detail-panel .el-tabs__content {
-  flex: 1;
-}
-
+.dm5-detail-panel .el-tabs__content,
 .dm5-detail-panel .el-tabs__content .el-tab-pane {
-  height: 100%;
-  overflow: auto;
-  position: relative;                   /* absolute positioned "+" buttons scroll along */
-  padding: var(--detail-panel-padding);
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .dm5-detail-panel .close-button {
