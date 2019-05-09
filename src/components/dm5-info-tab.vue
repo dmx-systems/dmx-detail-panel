@@ -130,7 +130,7 @@ export default {
 
 .dm5-info-tab .dm5-object-renderer {
   overflow: auto;
-  padding: var(--detail-panel-padding);
+  padding: var(--detail-panel-padding-all);
 }
 
 .dm5-info-tab .button {

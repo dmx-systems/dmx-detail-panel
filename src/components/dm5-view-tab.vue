@@ -110,7 +110,7 @@ export default {
 
 .dm5-view-tab .dm5-object-renderer {
   overflow: auto;
-  padding: var(--detail-panel-padding);
+  padding: var(--detail-panel-padding-all);
 }
 
 .dm5-view-tab .button {

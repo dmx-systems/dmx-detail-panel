@@ -76,10 +76,6 @@ export default {
 <style>
 .dm5-related-tab {
   overflow: auto;
-  padding: var(--detail-panel-padding);
-}
-
-.dm5-related-tab .dm5-topic-list {
-  margin-top: 1em;
+  padding: var(--detail-panel-padding-all);
 }
 </style>

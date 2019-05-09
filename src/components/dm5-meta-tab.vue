@@ -155,7 +155,7 @@ export default {
 <style>
 .dm5-meta-tab {
   overflow: auto;
-  padding: var(--detail-panel-padding);
+  padding: var(--detail-panel-padding-all);
 }
 
 .dm5-meta-tab .flex {
@@ -166,7 +166,8 @@ export default {
   margin-left: 2.5em;
 }
 
-.dm5-meta-tab .field-label {
+.dm5-meta-tab .flex + .flex,
+.dm5-meta-tab .dm5-topic-list {
   margin-top: var(--field-spacing);
 }
 </style>
