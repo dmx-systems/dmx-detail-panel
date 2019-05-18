@@ -126,6 +126,9 @@ export default {
 .dm5-info-tab {
   display: flex;
   flex-direction: column;
+  min-height: 0;  /* Needed for childs of a column-oriented flex container. Otherwise dm5-info-tab exceeds viewport. */
+                  /* http://stackoverflow.com/questions/26895349/how-can-i-get-ff-33-x-flexbox-behavior-in-ff-34-x   */
+                  /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                              */
 }
 
 .dm5-info-tab .dm5-object-renderer {

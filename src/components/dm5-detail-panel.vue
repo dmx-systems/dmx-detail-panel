@@ -174,6 +174,12 @@ export default {
   flex-direction: column;
 }
 
+.dm5-detail-panel .el-tabs__content .el-tab-pane {
+  min-height: 0;  /* Needed for childs of a column-oriented flex container. Otherwise el-tab-pane exceeds viewport. */
+                  /* http://stackoverflow.com/questions/26895349/how-can-i-get-ff-33-x-flexbox-behavior-in-ff-34-x  */
+                  /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                             */
+}
+
 .dm5-detail-panel .close-button {
   position: absolute;
   right: 0;
