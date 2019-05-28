@@ -2,6 +2,10 @@
 
 ## Version History
 
+**0.25** -- May 28, 2019
+
+* Pin Edit/Save button to lower end of Detail Panel
+
 **0.24** -- Apr 22, 2019
 
 * Chore: lock `dm5` dependencies (for releasing DMX-5.0-beta.2)
@@ -125,4 +129,4 @@
 
 ------------
 Jörg Richter  
-Apr 22, 2019
+May 28, 2019
