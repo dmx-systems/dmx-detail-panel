@@ -4,11 +4,11 @@
 
 **0.25** -- May 28, 2019
 
-* Pin Edit/Save button to lower end of Detail Panel
+* Improvement: pin Edit/Save button to lower end of Detail Panel; it does not scroll away
 
 **0.24** -- Apr 22, 2019
 
-* Chore: lock `dm5` dependencies (for releasing DMX-5.0-beta.2)
+* Chore: lock `dm5-` dependencies (for releasing DMX-5.0-beta.2)
 
 **0.23** -- Apr 1, 2019
 

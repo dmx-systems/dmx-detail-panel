@@ -72,7 +72,7 @@ export default {
   computed: {
     viewConfigTopic () {
       // console.log('viewConfigTopic', this.object_)
-      if (this.object_ && (this.object_.isType() || this.object_.isAssocDef())) {
+      if (this.object_ && (this.object_.isType() || this.object_.isCompDef())) {
         const viewConfig = this.object_.viewConfig
         if (!viewConfig) {
           console.warn('Type or assoc def has no view config', this.object_)
