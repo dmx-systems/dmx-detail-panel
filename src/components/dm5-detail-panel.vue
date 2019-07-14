@@ -1,6 +1,8 @@
 <template>
   <div class="dm5-detail-panel" v-if="visible_"><!-- background is already shown for the sake of feedback -->
-    <el-button class="close-button" type="text" icon="el-icon-close" title="Close Detail Panel" @click="close">
+    <el-button class="close" type="text" icon="el-icon-close" title="Close Detail Panel" @click="close"></el-button>
+    <el-button :class="['pin', {unpinned: !pinned_}, 'fa', 'fa-thumb-tack']" type="text" :title="pinTitle"
+      @click="togglePinned">
     </el-button>
     <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object_.typeName" name="info">
@@ -49,6 +51,7 @@ export default {
 
   props: {
     visible: {type: Boolean, default: true},    // Trueish if the detail panel is visible. Optional. Default is true.
+    pinned: {type: Boolean, default: false},    // Pin toggle state
     tab: {type: String, default: 'info'},       // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
     object: dm5.DMXObject,                      // The topic/assoc to display. Undefined if data not yet available.
     markerIds: Array,                           // Optional: IDs of topics to render as "marked" in related-tab.
@@ -60,6 +63,7 @@ export default {
     return {
       // mirror props ### FIXME: add remaining props?
       visible_:   this.visible,
+      pinned_:    this.pinned,
       tab_:       this.tab,
       object_:    this.object,
       writable_:  this.writable,
@@ -70,6 +74,12 @@ export default {
   },
 
   computed: {
+
+    pinTitle () {
+      return this.pinned_ ? 'Unpin Detail Panel\n\nIf unpinned, the detail panel closes if nothing is selected' :
+        'Pin Detail Panel\n\nIf pinned, the detail panel remains open even if nothing is selected'
+    },
+
     viewConfigTopic () {
       // console.log('viewConfigTopic', this.object_)
       if (this.object_ && (this.object_.isType() || this.object_.isCompDef())) {
@@ -120,6 +130,10 @@ export default {
 
     relatedIconClick (relTopic) {
       this.$emit('related-icon-click', relTopic)
+    },
+
+    togglePinned () {
+      this.$emit('pin', !this.pinned_)
     },
 
     close () {
@@ -180,10 +194,25 @@ export default {
                   /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                               */
 }
 
-.dm5-detail-panel .close-button {
+.dm5-detail-panel button.close {
   position: absolute;
   right: 0;
   padding: 5px !important;
   z-index: 3;                           /* stack above el-tabs__nav */
+}
+
+.dm5-detail-panel button.pin {
+  position: absolute;
+  top: 3px;
+  right: 25px;
+  font-size: 16px !important;
+  padding: 0 !important;
+  z-index: 3;                           /* stack above el-tabs__nav */
+}
+
+.dm5-detail-panel button.pin.unpinned {
+  color: transparent;
+  font-size: 15px !important;
+  -webkit-text-stroke: 1px var(--highlight-color);
 }
 </style>
