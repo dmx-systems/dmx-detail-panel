@@ -1,6 +1,5 @@
 <template>
   <div class="dm5-detail-panel" v-if="visible_"><!-- background is already shown for the sake of feedback -->
-    <el-button class="close" type="text" icon="el-icon-close" title="Close Detail Panel" @click="close"></el-button>
     <el-button :class="['pin', {unpinned: !pinned_}, 'fa', 'fa-thumb-tack']" type="text" :title="pinTitle"
       @click="togglePinned">
     </el-button>
@@ -134,10 +133,6 @@ export default {
 
     togglePinned () {
       this.$emit('pin', !this.pinned_)
-    },
-
-    close () {
-      this.$emit('close')
     }
   },
 
@@ -194,17 +189,10 @@ export default {
                   /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                               */
 }
 
-.dm5-detail-panel button.close {
-  position: absolute;
-  right: 0;
-  padding: 5px !important;
-  z-index: 3;                           /* stack above el-tabs__nav */
-}
-
 .dm5-detail-panel button.pin {
   position: absolute;
-  top: 3px;
-  right: 25px;
+  top: 10px;
+  right: 6px;
   font-size: 16px !important;
   padding: 0 !important;
   z-index: 3;                           /* stack above el-tabs__nav */
