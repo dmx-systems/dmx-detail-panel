@@ -2,6 +2,14 @@
 
 ## Version History
 
+**0.26** -- Jul 22, 2019
+
+* Features:
+    * New "Pin" button ("Close" button is dropped)
+* Chore:
+    * Adapt to `dm5` library ("comp def", "children" renamings)
+    * Change license to `AGPL-3.0`
+
 **0.25** -- May 28, 2019
 
 * Improvement: pin Edit/Save button to lower end of Detail Panel; it does not scroll away
@@ -129,4 +137,4 @@
 
 ------------
 Jörg Richter  
-May 28, 2019
+Jul 22, 2019
