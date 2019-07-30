@@ -52,7 +52,7 @@ export default {
       // console.log('fetchRelatedTopics', this.object.id, this.tab === 'related')
       // fetch only if the "Related" tab is selected
       if (this.tab === 'related') {
-        this.object.getRelatedTopics().then(relTopics => {
+        this.object.getRelatedTopicsWithoutChilds().then(relTopics => {
           this.relTopics = relTopics
         })
       }
