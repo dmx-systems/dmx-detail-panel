@@ -2,6 +2,11 @@
 
 ## Version History
 
+**0.27** -- Aug 16, 2019
+
+* Improvements:
+    * Related tab: don't show directly related child topics
+
 **0.26** -- Jul 22, 2019
 
 * Features:
@@ -137,4 +142,4 @@
 
 ------------
 Jörg Richter  
-Jul 22, 2019
+Aug 16, 2019
