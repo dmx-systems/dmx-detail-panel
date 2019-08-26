@@ -1,6 +1,6 @@
 {
   "name": "dm5-detail-panel",
-  "version": "0.27.0",
+  "version": "0.28.0",
   "description": "The DeepaMehta 5 detail panel as a composable GUI component",
   "author": "Jörg Richter <jri@dmx.berlin>",
   "license": "AGPL-3.0",
@@ -10,7 +10,7 @@
     "url": "https://github.com/jri/dm5-detail-panel.git"
   },
   "dependencies": {
-    "dm5-object-renderer": "0.18.0",
+    "dm5-object-renderer": "0.19.0",
     "dm5-topic-list": "0.13.0"
   }
 }

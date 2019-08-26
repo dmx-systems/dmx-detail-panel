@@ -2,6 +2,11 @@
 
 ## Version History
 
+**0.28** -- Aug 26, 2019
+
+* Chore:
+    * Bump `dm5-object-renderer` dependency
+
 **0.27** -- Aug 16, 2019
 
 * Improvements:
@@ -142,4 +147,4 @@
 
 ------------
 Jörg Richter  
-Aug 16, 2019
+Aug 26, 2019
