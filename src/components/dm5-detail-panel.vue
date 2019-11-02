@@ -7,7 +7,7 @@
       <el-tab-pane :label="object_.typeName" name="info">
         <dm5-info-tab :object="object_" :writable="writable_" :mode="mode_" :detail-renderers="detailRenderers"
           :types="types_" :quill-config="quillConfig" @edit="edit" @submit="submit" @submit-inline="submitInline"
-          @child-topic-reveal="revealChildTopic">
+          @child-topic-reveal="revealChildTopic" ref="infoTab">
         </dm5-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
@@ -133,6 +133,11 @@ export default {
 
     togglePinned () {
       this.$emit('pin', !this.pinned_)
+    },
+
+    // Public API
+    isDirty () {
+      return this.$refs.infoTab.isDirty()
     }
   },
 

@@ -41,8 +41,9 @@ export default {
 
   data () {
     return {
-      objectToEdit: undefined,
-      inlineId: undefined       // trueish if inline edit is active in this object or in *any* child topic (recursively)
+      objectToEdit: undefined,      // the edit buffer
+      objectToCompare: undefined,   // used for dirty check
+      inlineId: undefined   // trueish if inline edit is active in this object or in *any* child topic (recursively)
     }
   },
 
@@ -55,7 +56,8 @@ export default {
         // console.log('Preparing', this.object.id)
         // if (!this.objectToEdit) {      // TODO: needed?
         // console.log('fillChildren')
-        this.objectToEdit = this.object.clone().fillChildren()
+        this.objectToCompare = this.object.clone().fillChildren()
+        this.objectToEdit = this.objectToCompare.clone()
         // }
         return this.objectToEdit
       }
@@ -113,6 +115,11 @@ export default {
 
     revealChildTopic (relTopic) {
       this.$emit('child-topic-reveal', relTopic)
+    },
+
+    // Public API
+    isDirty () {
+      return !this.objectToEdit.equals(this.objectToCompare)
     }
   },
 
