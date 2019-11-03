@@ -136,8 +136,13 @@ export default {
     },
 
     // Public API
+
     isDirty () {
       return this.$refs.infoTab.isDirty()
+    },
+
+    save () {
+      this.$refs.infoTab.submit()
     }
   },
 
