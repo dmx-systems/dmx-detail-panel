@@ -50,15 +50,12 @@ export default {
   computed: {
 
     objectToRender () {
+      // console.log('objectToRender', this.object.id, this.mode)
       if (this.infoMode) {
         return this.object
       } else {
-        // console.log('Preparing', this.object.id)
-        // if (!this.objectToEdit) {      // TODO: needed?
-        // console.log('fillChildren')
         this.objectToCompare = this.object.clone().fillChildren()
         this.objectToEdit = this.objectToCompare.clone()
-        // }
         return this.objectToEdit
       }
     },
@@ -104,13 +101,17 @@ export default {
     setInlineId (id) {
       this.inlineId = id
       if (!id) {
-        // TODO: introduce edit buffer also for inline editing
+        // TODO: introduce edit buffer also for inline editing?
         this.$emit('submit-inline', this.object)
       }
     },
 
     submit () {
       this.$emit('submit', this.objectToEdit)
+    },
+
+    submitInline () {
+      this.$emit('submit-inline', this.objectToEdit)
     },
 
     revealChildTopic (relTopic) {

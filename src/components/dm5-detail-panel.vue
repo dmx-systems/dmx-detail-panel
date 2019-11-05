@@ -142,7 +142,7 @@ export default {
     },
 
     save () {
-      this.$refs.infoTab.submit()
+      this.$refs.infoTab.submitInline()
     }
   },
 
