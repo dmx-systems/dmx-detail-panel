@@ -11,8 +11,8 @@
         </dm5-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
-        <dm5-related-tab :object="object_" :tab="tab_" :marker-ids="markerIds_"
-          @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick">
+        <dm5-related-tab :object="object_" :tab="tab_" :sort-mode="sortMode" :marker-ids="markerIds_"
+          @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick" @sort-change="sortChange">
         </dm5-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
@@ -35,11 +35,11 @@ import dm5 from 'dm5'
 export default {
 
   created () {
-    // console.log('dm5-detail-panel created', this.types)
+    console.log('dm5-detail-panel created', this.types)
   },
 
   destroyed () {
-    // console.log('dm5-detail-panel destroyed')
+    console.log('dm5-detail-panel destroyed')
   },
 
   mixins: [
@@ -60,6 +60,7 @@ export default {
 
   data () {
     return {
+      sortMode: 'type',                         // Related tab sort mode: 'topic', 'type', 'assoc'
       // mirror props ### FIXME: add remaining props?
       visible_:   this.visible,
       pinned_:    this.pinned,
@@ -133,6 +134,10 @@ export default {
 
     togglePinned () {
       this.$emit('pin', !this.pinned_)
+    },
+
+    sortChange (sortMode) {
+      this.sortMode = sortMode
     },
 
     // Public API

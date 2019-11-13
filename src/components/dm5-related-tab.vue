@@ -1,6 +1,7 @@
 <template>
   <div class="dm5-related-tab">
-    <dm5-topic-list :topics="relTopics" :marker-ids="markerIds" @topic-click="topicClick" @icon-click="iconClick">
+    <dm5-topic-list :topics="relTopics" :sort-mode="sortMode" :marker-ids="markerIds"
+      @topic-click="topicClick" @icon-click="iconClick" @sort-change="sortChange">
     </dm5-topic-list>
   </div>
 </template>
@@ -9,12 +10,12 @@
 export default {
 
   created () {
-    // console.log('dm5-related-tab created', this.markerIds)
+    console.log('dm5-related-tab created', this.markerIds)
     this.fetchRelatedTopics()
   },
 
   destroyed () {
-    // console.log('dm5-related-tab destroyed')
+    console.log('dm5-related-tab destroyed')
   },
 
   mixins: [
@@ -23,6 +24,8 @@ export default {
 
   props: {
     tab: {type: String, required: true},    // The selected tab: 'info', 'related', ...
+                                            // ### TODO: drop prop; use a lazy tab pane instead
+    sortMode: String,                       // topic list sort mode: 'topic', 'type', 'assoc'
     markerIds: Array                        // IDs of topics to render as "marked"
   },
 
@@ -64,6 +67,10 @@ export default {
 
     iconClick (relTopic) {
       this.$emit('related-icon-click', relTopic)
+    },
+
+    sortChange (sortMode) {
+      this.$emit('sort-change', sortMode)
     }
   },
 

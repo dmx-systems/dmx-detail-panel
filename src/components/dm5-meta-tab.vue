@@ -72,6 +72,7 @@ export default {
 
   props: {
     tab: {type: String, required: true},    // The selected tab: 'info', 'related', ...
+                                            // ### TODO: drop prop; use a lazy tab pane instead
     markerIds: Array                        // IDs of topics to render as "marked"
   },
 
