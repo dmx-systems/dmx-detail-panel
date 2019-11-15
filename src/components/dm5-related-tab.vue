@@ -10,12 +10,12 @@
 export default {
 
   created () {
-    console.log('dm5-related-tab created', this.markerIds)
+    // console.log('dm5-related-tab created', this.markerIds)
     this.fetchRelatedTopics()
   },
 
   destroyed () {
-    console.log('dm5-related-tab destroyed')
+    // console.log('dm5-related-tab destroyed')
   },
 
   mixins: [
@@ -24,7 +24,6 @@ export default {
 
   props: {
     tab: {type: String, required: true},    // The selected tab: 'info', 'related', ...
-                                            // ### TODO: drop prop; use a lazy tab pane instead
     sortMode: String,                       // topic list sort mode: 'topic', 'type', 'assoc'
     markerIds: Array                        // IDs of topics to render as "marked"
   },
