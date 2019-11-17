@@ -98,6 +98,12 @@ export default {
     }
   },
 
+  watch: {
+    // needed when instantiated via template
+    object () {this.object_ = this.object}
+    // FIXME: add watchers for the remaining props?
+  },
+
   methods: {
 
     tabClick (tabPane) {
