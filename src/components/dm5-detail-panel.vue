@@ -102,7 +102,9 @@ export default {
   watch: {
     // needed when instantiated via template
     object   () {this.object_   = this.object},
-    writable () {this.writable_ = this.writable}
+    writable () {this.writable_ = this.writable},
+    tab      () {this.tab_      = this.tab},
+    mode     () {this.mode_     = this.mode}
     // FIXME: add watchers for the remaining props?
   },
 
