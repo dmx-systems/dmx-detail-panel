@@ -35,11 +35,11 @@ import dm5 from 'dm5'
 export default {
 
   created () {
-    console.log('dm5-detail-panel created', this.types)
+    // console.log('dm5-detail-panel created', this.types)
   },
 
   destroyed () {
-    console.log('dm5-detail-panel destroyed')
+    // console.log('dm5-detail-panel destroyed')
   },
 
   mixins: [
@@ -101,7 +101,8 @@ export default {
 
   watch: {
     // needed when instantiated via template
-    object () {this.object_ = this.object}
+    object   () {this.object_   = this.object},
+    writable () {this.writable_ = this.writable}
     // FIXME: add watchers for the remaining props?
   },
 
