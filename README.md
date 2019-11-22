@@ -2,6 +2,12 @@
 
 ## Version History
 
+**0.29** -- Nov 22, 2019
+
+* Improvements:
+    * Add `isDirty()` and `save()` component methods
+    * Related tab: remember sort mode beyond tab component destroy
+
 **0.28** -- Aug 26, 2019
 
 * Chore:
@@ -147,4 +153,4 @@
 
 ------------
 Jörg Richter  
-Aug 26, 2019
+Nov 22, 2019
