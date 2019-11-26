@@ -1,7 +1,7 @@
 <template>
   <div class="dm5-detail-panel" v-if="visible_"><!-- background is already shown for the sake of feedback -->
-    <el-button :class="['pin', {unpinned: !pinned_}, 'fa', 'fa-thumb-tack']" type="text" :title="pinTitle"
-      @click="togglePinned">
+    <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned_}, 'fa', 'fa-thumb-tack']" type="text"
+      :title="pinTitle" @click="togglePinned">
     </el-button>
     <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object_.typeName" name="info">
@@ -35,11 +35,11 @@ import dm5 from 'dm5'
 export default {
 
   created () {
-    console.log('dm5-detail-panel created', this.types)
+    // console.log('dm5-detail-panel created', this.types)
   },
 
   destroyed () {
-    console.log('dm5-detail-panel destroyed')
+    // console.log('dm5-detail-panel destroyed')
   },
 
   mixins: [
@@ -55,7 +55,8 @@ export default {
     object: dm5.DMXObject,                      // The topic/assoc to display. Undefined if data not yet available.
     markerIds: Array,                           // Optional: IDs of topics to render as "marked" in related-tab.
     types: Object,                              // Optional: "assocTypes" and "roleTypes" (arrays)
-    quillConfig: Object
+    quillConfig: Object,
+    noPinButton: Boolean
   },
 
   data () {
@@ -96,6 +97,15 @@ export default {
         return viewConfigTopic
       }
     }
+  },
+
+  watch: {
+    // needed when instantiated via template
+    object   () {this.object_   = this.object},
+    writable () {this.writable_ = this.writable},
+    tab      () {this.tab_      = this.tab},
+    mode     () {this.mode_     = this.mode}
+    // FIXME: add watchers for the remaining props?
   },
 
   methods: {
