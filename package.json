@@ -10,6 +10,7 @@
     "url": "https://github.com/jri/dm5-detail-panel.git"
   },
   "dependencies": {
+    "dm5-inline-edit": "https://github.com/jri/dm5-inline-edit.git",
     "dm5-object-renderer": "0.20.0",
     "dm5-topic-list": "0.14.0"
   }
