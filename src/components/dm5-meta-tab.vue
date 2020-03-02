@@ -34,7 +34,14 @@
     <div class="flex">
       <div>
         <div class="field-label">Workspace</div>
-        <div>{{workspace && workspace.value || 'n/a'}}</div>
+        <dm5-inline-edit>
+          <template #info>
+            <div>{{workspace && workspace.value || 'n/a'}}</div>
+          </template>
+          <template #form>
+            <dm5-workspace-select :workspaceId="workspace.id"></dm5-workspace-select>
+          </template>
+        </dm5-inline-edit>
       </div>
       <div>
         <div class="field-label">Owner</div>
@@ -147,7 +154,9 @@ export default {
   },
 
   components: {
-    'dm5-topic-list': require('dm5-topic-list').default
+    'dm5-topic-list':       require('dm5-topic-list').default,
+    'dm5-inline-edit':      require('dm5-inline-edit').default,
+    'dm5-workspace-select': require('./dm5-workspace-select').default
   }
 }
 </script>
