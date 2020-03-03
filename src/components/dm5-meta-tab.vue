@@ -34,7 +34,7 @@
     <div class="flex">
       <div>
         <div class="field-label">Workspace</div>
-        <dm5-inline-edit @save="assignToWorkspace">
+        <dm5-inline-edit :disabled="!writable" @save="assignToWorkspace">
           <template #info>
             <div>{{workspace && workspace.value || 'n/a'}}</div>
           </template>
@@ -84,6 +84,7 @@ export default {
 
   data () {
     return {
+      writable:  false,         // is object writable?
       created:   undefined,
       modified:  undefined,
       creator:   undefined,
@@ -104,6 +105,7 @@ export default {
 
     tab () {
       // TODO: suppress unnecessary refetching when browsing between tabs and revisit the "Meta" tab
+      // TODO: why is tab watcher needed at all?
       // console.log('tab watcher', this.tab)
       this.fetchMetaData()
     }
@@ -117,6 +119,8 @@ export default {
       if (this.tab !== 'meta') {
         return
       }
+      this.object.isWritable()
+        .then(writable => this.writable = writable)
       this.object.getCreationTime()
         .then(created => this.created = created && new Date(created).toLocaleString())
       this.object.getModificationTime()
@@ -137,8 +141,8 @@ export default {
         })
       // manual traversal gives us a RelatedTopic as needed for revelation
       this.object.getRelatedTopics({
-        assocTypeUri: 'dmx.core.instantiation',
-        myRoleTypeUri: 'dmx.core.instance',
+        assocTypeUri:      'dmx.core.instantiation',
+        myRoleTypeUri:     'dmx.core.instance',
         othersRoleTypeUri: 'dmx.core.type'
       }).then(types => this.types = types)
       this.object.getTopicmapTopics().then(topicmapTopics => this.topicmapTopics = topicmapTopics)
