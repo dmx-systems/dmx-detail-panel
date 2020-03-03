@@ -1,6 +1,6 @@
 <template>
-  <el-select class="dm5-workspace-select" v-model="workspaceId_">
-    <el-option v-for="workspace in workspaces" :label="workspace.value" :value="workspace.id" :key="workspace.id">
+  <el-select class="dm5-workspace-select" v-model="workspace_">
+    <el-option v-for="workspace in workspaces" :label="workspace.value" :value="workspace" :key="workspace.id">
     </el-option>
   </el-select>
 </template>
@@ -17,13 +17,13 @@ export default {
   },
 
   props: {
-    workspaceId: {type: Number, required: true}
+    workspace: {type: Object, required: true}
   },
 
   data () {
     return {
       workspaces: [],
-      workspaceId_: this.workspaceId
+      workspace_: this.workspace
     }
   }
 }

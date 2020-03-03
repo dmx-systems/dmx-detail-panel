@@ -34,12 +34,12 @@
     <div class="flex">
       <div>
         <div class="field-label">Workspace</div>
-        <dm5-inline-edit>
+        <dm5-inline-edit @save="assignToWorkspace">
           <template #info>
             <div>{{workspace && workspace.value || 'n/a'}}</div>
           </template>
           <template #form>
-            <dm5-workspace-select :workspaceId="workspace.id"></dm5-workspace-select>
+            <dm5-workspace-select :workspace="workspace" ref="workspaceSelect"></dm5-workspace-select>
           </template>
         </dm5-inline-edit>
       </div>
@@ -142,6 +142,13 @@ export default {
         othersRoleTypeUri: 'dmx.core.type'
       }).then(types => this.types = types)
       this.object.getTopicmapTopics().then(topicmapTopics => this.topicmapTopics = topicmapTopics)
+    },
+
+    assignToWorkspace () {
+      this.workspace = this.$refs.workspaceSelect.workspace_    // update client state
+      console.log('assignToWorkspace', this.workspace.id)
+      this.object.assignToWorkspace(this.workspace.id)          // update server
+      // TODO: process directives
     },
 
     topicClick (relTopic) {
