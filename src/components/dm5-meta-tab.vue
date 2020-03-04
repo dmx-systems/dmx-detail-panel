@@ -74,7 +74,8 @@ export default {
   },
 
   mixins: [
-    require('./mixins/object').default
+    require('./mixins/object').default,
+    require('./mixins/writable').default
   ],
 
   props: {
@@ -84,7 +85,6 @@ export default {
 
   data () {
     return {
-      writable:  false,         // is object writable?
       created:   undefined,
       modified:  undefined,
       creator:   undefined,
@@ -119,8 +119,6 @@ export default {
       if (this.tab !== 'meta') {
         return
       }
-      this.object.isWritable()
-        .then(writable => this.writable = writable)
       this.object.getCreationTime()
         .then(created => this.created = created && new Date(created).toLocaleString())
       this.object.getModificationTime()
