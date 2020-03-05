@@ -30,7 +30,7 @@ export default {
   methods: {
     initWorkspaces () {
       dm5.restClient.getTopicsByType('dmx.workspaces.workspace').then(workspaces => {
-        this.workspaces = workspaces
+        this.workspaces = workspaces.sort((w1, w2) => w1.value.localeCompare(w2.value))
         // set writable flags
         workspaces.forEach(workspace => {
           workspace.isWritable().then(writable => {
