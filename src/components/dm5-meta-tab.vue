@@ -3,7 +3,7 @@
     <div class="flex">
       <div>
         <div class="field-label">ID</div>
-        <div>{{object.id}}</div>
+        <el-link :href="`/core/topic/${object.id}`" type="primary" :underline="false">{{object.id}}</el-link>
       </div>
       <div>
         <div class="field-label">URI</div>
