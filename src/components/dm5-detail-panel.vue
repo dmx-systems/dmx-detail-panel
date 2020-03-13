@@ -17,7 +17,8 @@
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
         <dm5-meta-tab :object="object_" :writable="writable_" :tab="tab_" :marker-ids="markerIds_"
-          @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick">
+          @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick"
+          @object-id-click="objectIdClick">
         </dm5-meta-tab>
       </el-tab-pane>
       <el-tab-pane label="View" name="view" :disabled="!viewConfigTopic">
@@ -140,6 +141,10 @@ export default {
 
     relatedIconClick (relTopic) {
       this.$emit('related-icon-click', relTopic)
+    },
+
+    objectIdClick (object) {
+      this.$emit('object-id-click', object)
     },
 
     togglePinned () {

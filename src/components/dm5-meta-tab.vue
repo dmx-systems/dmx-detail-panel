@@ -3,7 +3,7 @@
     <div class="flex">
       <div>
         <div class="field-label">ID</div>
-        <el-link :href="`/core/topic/${object.id}`" type="primary" :underline="false">{{object.id}}</el-link>
+        <el-link type="primary" :underline="false" @click="idClick">{{object.id}}</el-link>
       </div>
       <div>
         <div class="field-label">URI</div>
@@ -159,6 +159,10 @@ export default {
 
     iconClick (relTopic) {
       this.$emit('related-icon-click', relTopic)
+    },
+
+    idClick () {
+      this.$emit('object-id-click', this.object)
     }
   },
 
