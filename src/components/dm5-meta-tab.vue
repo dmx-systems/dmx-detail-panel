@@ -3,7 +3,7 @@
     <div class="flex">
       <div>
         <div class="field-label">ID</div>
-        <el-link type="primary" :underline="false" @click="idClick">{{object.id}}</el-link>
+        <el-link type="primary" :underline="false" title="Show JSON" @click="idClick">{{object.id}}</el-link>
       </div>
       <div>
         <div class="field-label">URI</div>
