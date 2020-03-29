@@ -12,7 +12,7 @@ export default {
 
   created () {
     // console.log('dm5-related-tab created', this.markerIds)
-    this.fetchRelatedTopics()
+    this.fetchTopics()
   },
 
   destroyed () {
@@ -39,23 +39,21 @@ export default {
   watch: {
 
     object () {
-      // console.log('object watcher', this.object.id)
-      this.fetchRelatedTopics()
+      this.topics = []        // enforce refetch
+      this.fetchTopics()
     },
 
     tab () {
-      // TODO: suppress unnecessary refetching when browsing between tabs and revisit the "Related" tab
-      // console.log('tab watcher', this.tab)
-      this.fetchRelatedTopics()
+      this.fetchTopics()
     }
   },
 
   methods: {
 
-    fetchRelatedTopics () {
-      // console.log('fetchRelatedTopics', this.object.id, this.tab === 'related')
-      // fetch only if the "Related" tab is selected
-      if (this.tab === 'related') {
+    fetchTopics () {
+      // console.log('fetchTopics', this.object.id, this.tab === 'related', !this.topics.length)
+      // fetch only if "Related" tab is selected AND not fetched already
+      if (this.tab === 'related' && !this.topics.length) {
         this.loading = true
         this.object.getRelatedTopicsWithoutChilds().then(topics => {
           this.topics = topics
