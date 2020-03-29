@@ -1,8 +1,9 @@
 <template>
   <div class="dm5-related-tab">
-    <dm5-topic-list :topics="relTopics" :sort-mode="sortMode" :marker-ids="markerIds"
+    <dm5-topic-list v-if="!loading" :topics="topics" :sort-mode="sortMode" :marker-ids="markerIds"
       @topic-click="topicClick" @icon-click="iconClick" @sort-change="sortChange">
     </dm5-topic-list>
+    <div v-else v-loading="true" class="dm5-spinner"></div>
   </div>
 </template>
 
@@ -30,7 +31,8 @@ export default {
 
   data () {
     return {
-      relTopics: []
+      topics: [],
+      loading: false
     }
   },
 
@@ -54,8 +56,10 @@ export default {
       // console.log('fetchRelatedTopics', this.object.id, this.tab === 'related')
       // fetch only if the "Related" tab is selected
       if (this.tab === 'related') {
-        this.object.getRelatedTopicsWithoutChilds().then(relTopics => {
-          this.relTopics = relTopics
+        this.loading = true
+        this.object.getRelatedTopicsWithoutChilds().then(topics => {
+          this.topics = topics
+          this.loading = false
         })
       }
     },
@@ -83,5 +87,13 @@ export default {
 .dm5-related-tab {
   overflow: auto;
   padding: var(--detail-panel-padding-all);
+}
+
+.dm5-related-tab .dm5-spinner {
+  height: 42px;               /* see --loading-spinner-size in element-ui/packages/theme-chalk/src/common/var.scss */
+}
+
+.dm5-related-tab .dm5-spinner .el-loading-mask{
+  background-color: unset;    /* no white mask */
 }
 </style>
