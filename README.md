@@ -2,6 +2,17 @@
 
 ## Version History
 
+**0.30** -- Mar 30, 2020
+
+* Improvements:
+    * Related tab:
+        * Show load spinner
+    * Meta tab:
+        * Add inline edit for "Workspace"
+        * "ID" links to JSON view
+    * Add `no-pin-button` attr to suppress pin button
+    * Supports declarative component instantiation
+
 **0.29** -- Nov 22, 2019
 
 * Improvements:
@@ -153,4 +164,4 @@
 
 ------------
 Jörg Richter  
-Nov 22, 2019
+Mar 30, 2020
