@@ -1,7 +1,8 @@
 <template>
   <el-select class="dm5-workspace-select" v-model="workspace_">
     <el-option v-for="workspace in workspaces" :label="workspace.value" :value="workspace"
-      :disabled="!workspace.writable" :key="workspace.id">
+        :disabled="!workspace.writable" :key="workspace.id">
+      <span class="fa icon">{{workspace.icon}}</span><span>{{workspace.value}}</span>
     </el-option>
   </el-select>
 </template>
