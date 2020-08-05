@@ -1,6 +1,13 @@
-# DeepaMehta 5 Detail Panel
+# DMX 5 Detail Panel
 
 ## Version History
+
+**1.0** -- Aug 5, 2020
+
+* Improvements:
+    * Meta tab: add icons to workspace selector
+* Chore:
+    * Rename this package `dm5-detail-panel` -> `dmx-detail-panel`
 
 **0.30** -- Mar 30, 2020
 
@@ -164,4 +171,4 @@
 
 ------------
 Jörg Richter  
-Mar 30, 2020
+Aug 5, 2020

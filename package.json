@@ -1,7 +1,7 @@
 {
-  "name": "dm5-detail-panel",
-  "version": "0.30.0",
-  "description": "The DeepaMehta 5 detail panel as a composable GUI component",
+  "name": "dmx-detail-panel",
+  "version": "1.0.0",
+  "description": "The DMX 5 detail panel as a composable GUI component",
   "author": "Jörg Richter <jri@dmx.berlin>",
   "license": "AGPL-3.0",
   "main": "src/components/dm5-detail-panel.vue",
@@ -10,8 +10,8 @@
     "url": "https://github.com/jri/dm5-detail-panel.git"
   },
   "dependencies": {
-    "dm5-inline-edit": "0.1.0",
-    "dm5-object-renderer": "0.21.0",
-    "dm5-topic-list": "0.14.0"
+    "dmx-inline-edit": "1.0.0",
+    "dmx-object-renderer": "1.0.0",
+    "dmx-topic-list": "1.0.0"
   }
 }
