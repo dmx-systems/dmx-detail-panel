@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import dm5 from 'dm5'
+import dm5 from 'dmx-api'
 
 export default {
 
@@ -127,7 +127,7 @@ export default {
   },
 
   components: {
-    'dm5-object-renderer': require('dm5-object-renderer').default
+    'dm5-object-renderer': require('dmx-object-renderer').default
   }
 }
 </script>

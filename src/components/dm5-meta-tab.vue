@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import dm5 from 'dm5'
+import dm5 from 'dmx-api'
 
 export default {
 
@@ -167,8 +167,8 @@ export default {
   },
 
   components: {
-    'dm5-topic-list':       require('dm5-topic-list').default,
-    'dm5-inline-edit':      require('dm5-inline-edit').default,
+    'dm5-topic-list':       require('dmx-topic-list').default,
+    'dm5-inline-edit':      require('dmx-inline-edit').default,
     'dm5-workspace-select': require('./dm5-workspace-select').default
   }
 }
