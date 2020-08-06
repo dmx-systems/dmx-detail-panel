@@ -70,6 +70,7 @@ export default {
     },
 
     // copy in dm5-object-renderer.vue (as editDisabled())
+    // copy in plugin.js of platform's topicmaps module (in isEditDisabled())
     buttonDisabled () {
       // only entity topics are enabled; assocs and types are always enabled
       return this.object.isTopic() && !this.object.isType() && !this.object.type.isEntity()

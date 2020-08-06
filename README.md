@@ -2,11 +2,14 @@
 
 ## Version History
 
+**1.0.2** -- Aug 6, 2020
+
+* Chore: bump `dmx-object-renderer` dependency
+
 **1.0.1** -- Aug 5, 2020
 
 * Fix imports
-* Chore:
-    * Bump dependencies
+* Chore: bump dependencies
 
 **1.0** -- Aug 5, 2020
 
@@ -177,4 +180,4 @@
 
 ------------
 Jörg Richter  
-Aug 5, 2020
+Aug 6, 2020
