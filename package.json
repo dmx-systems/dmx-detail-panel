@@ -12,6 +12,6 @@
   "dependencies": {
     "dmx-inline-edit": "1.0.0",
     "dmx-object-renderer": "1.0.2",
-    "dmx-topic-list": "1.0.1"
+    "dmx-topic-list": "https://github.com/jri/dm5-topic-list.git"
   }
 }
