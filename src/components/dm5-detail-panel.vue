@@ -11,12 +11,12 @@
         </dm5-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
-        <dm5-related-tab :object="object_" :tab="tab_" :sort-mode="sortMode" :marker-ids="markerIds_"
+        <dm5-related-tab :object="object_" :tab="tab_" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds_"
           @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick" @sort-change="sortChange">
         </dm5-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
-        <dm5-meta-tab :object="object_" :writable="writable_" :tab="tab_" :marker-ids="markerIds_"
+        <dm5-meta-tab :object="object_" :writable="writable_" :tab="tab_" :marker-topic-ids="markerTopicIds_"
           @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick"
           @object-id-click="objectIdClick">
         </dm5-meta-tab>
@@ -54,7 +54,7 @@ export default {
     pinned: {type: Boolean, default: false},    // Pin toggle state
     tab: {type: String, default: 'info'},       // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
     object: dm5.DMXObject,                      // The topic/assoc to display. Undefined if data not yet available.
-    markerIds: Array,                           // Optional: IDs of topics to render as "marked" in related-tab.
+    markerTopicIds: Array,                      // Optional: IDs of topics to render as "marked" in related-tab.
     types: Object,                              // Optional: "assocTypes" and "roleTypes" (arrays)
     quillConfig: Object,
     noPinButton: Boolean
@@ -64,14 +64,14 @@ export default {
     return {
       sortMode: 'type',                         // Related tab sort mode: 'topic', 'type', 'assoc'
       // mirror props ### FIXME: add remaining props?
-      visible_:   this.visible,
-      pinned_:    this.pinned,
-      tab_:       this.tab,
-      object_:    this.object,
-      writable_:  this.writable,
-      mode_:      this.mode,
-      markerIds_: this.markerIds,
-      types_:     this.types
+      visible_:        this.visible,
+      pinned_:         this.pinned,
+      tab_:            this.tab,
+      object_:         this.object,
+      writable_:       this.writable,
+      mode_:           this.mode,
+      markerTopicIds_: this.markerTopicIds,
+      types_:          this.types
     }
   },
 

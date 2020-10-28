@@ -1,6 +1,6 @@
 <template>
   <div class="dm5-related-tab">
-    <dm5-topic-list v-if="!loading" :topics="topics" :sort-mode="sortMode" :marker-ids="markerIds"
+    <dm5-topic-list v-if="!loading" :topics="topics" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds"
       @topic-click="topicClick" @icon-click="iconClick" @sort-change="sortChange">
     </dm5-topic-list>
     <div v-else v-loading="true" class="dm5-spinner"></div>
@@ -11,7 +11,7 @@
 export default {
 
   created () {
-    // console.log('dm5-related-tab created', this.markerIds)
+    // console.log('dm5-related-tab created', this.markerTopicIds)
     this.fetchTopics()
   },
 
@@ -26,7 +26,7 @@ export default {
   props: {
     tab: {type: String, required: true},    // The selected tab: 'info', 'related', ...
     sortMode: String,                       // topic list sort mode: 'topic', 'type', 'assoc'
-    markerIds: Array                        // IDs of topics to render as "marked"
+    markerTopicIds: Array                   // IDs of topics to render as "marked"
   },
 
   data () {

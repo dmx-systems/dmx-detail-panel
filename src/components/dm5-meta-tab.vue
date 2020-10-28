@@ -49,11 +49,11 @@
       </div>
     </div>
     <!-- Type -->
-    <dm5-topic-list :topics="types" no-sort-menu :marker-ids="markerIds"
+    <dm5-topic-list :topics="types" no-sort-menu :marker-topic-ids="markerTopicIds"
       @topic-click="topicClick" @icon-click="iconClick">
     </dm5-topic-list>
     <!-- Topicmaps -->
-    <dm5-topic-list :topics="topicmapTopics" no-sort-menu :marker-ids="markerIds"
+    <dm5-topic-list :topics="topicmapTopics" no-sort-menu :marker-topic-ids="markerTopicIds"
       @topic-click="topicClick" @icon-click="iconClick">
     </dm5-topic-list>
   </div>
@@ -80,7 +80,7 @@ export default {
 
   props: {
     tab: {type: String, required: true},    // The selected tab: 'info', 'related', ...
-    markerIds: Array                        // IDs of topics to render as "marked"
+    markerTopicIds: Array                   // IDs of topics to render as "marked"
   },
 
   data () {
