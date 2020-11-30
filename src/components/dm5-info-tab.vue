@@ -49,13 +49,17 @@ export default {
 
   computed: {
 
+    type () {
+      return this.object.type
+    },
+
     objectToRender () {
       // console.log('objectToRender', this.object.id, this.mode)
       if (this.infoMode) {
         this.objectToEdit = undefined     // reset dirty state, see isDirty()
         return this.object
       } else {
-        this.objectToCompare = this.object.clone().fillChildren()
+        this.objectToCompare = this.type.newFormModel(this.object)
         this.objectToEdit = this.objectToCompare.clone()
         return this.objectToEdit
       }
