@@ -54,7 +54,6 @@ export default {
     },
 
     objectToRender () {
-      // console.log('objectToRender', this.object.id, this.mode)
       if (this.infoMode) {
         this.objectToEdit = undefined     // reset dirty state, see isDirty()
         return this.object

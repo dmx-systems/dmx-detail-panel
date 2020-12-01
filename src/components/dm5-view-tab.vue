@@ -38,7 +38,7 @@ export default {
 
   data () {
     return {
-      objectToEdit: undefined,
+      objectToEdit: undefined,  // TODO: unsaved changes check (`objectToCompare`). Compare to dm5-info-tab.vue
       inlineId: undefined,      // trueish if inline edit is active in this object or in *any* child topic (recursively)
       mode: 'info'
     }
@@ -46,15 +46,15 @@ export default {
 
   computed: {
 
+    type () {
+      return this.viewConfigTopic.type
+    },
+
     objectToRender () {
       if (this.infoMode) {
         return this.viewConfigTopic
       } else {
-        // console.log('Preparing', this.object.id)
-        // if (!this.objectToEdit) {      // TODO: needed?
-        // console.log('fillChildren')
-        this.objectToEdit = this.viewConfigTopic.clone().fillChildren()
-        // }
+        this.objectToEdit = this.type.newFormModel(this.viewConfigTopic)
         return this.objectToEdit
       }
     },
