@@ -84,7 +84,7 @@ export default {
 
     viewConfigTopic () {
       // console.log('viewConfigTopic', this.object_)
-      if (this.object_ && (this.object_.isType() || this.object_.isCompDef())) {
+      if (this.object_ && (this.object_.isType || this.object_.isCompDef)) {
         const viewConfig = this.object_.viewConfig
         if (!viewConfig) {
           console.warn('Type or comp def has no view config', this.object_)
