@@ -132,7 +132,7 @@ export default {
         .then(workspace => this.workspace = workspace)
         .then(workspace => {
           if (workspace) {
-            dm5.restClient.getWorkspaceOwner(workspace.id).then(owner => this.owner = owner)
+            dm5.rpc.getWorkspaceOwner(workspace.id).then(owner => this.owner = owner)
           } else {
             this.owner = undefined
           }
