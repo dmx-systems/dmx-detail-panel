@@ -58,7 +58,7 @@ export default {
         this.objectToEdit = undefined     // reset dirty state, see isDirty()
         return this.object
       } else {
-        this.objectToCompare = this.type.newFormModel(this.object)
+        this.objectToCompare = this.type.newFormModel(this.object.clone())
         this.objectToEdit = this.objectToCompare.clone()
         return this.objectToEdit
       }
