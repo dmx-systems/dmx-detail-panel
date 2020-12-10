@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import dm5 from 'dmx-api'
+import dmx from 'dmx-api'
 
 export default {
 
@@ -31,7 +31,7 @@ export default {
 
   props: {
     viewConfigTopic: {          // The view config topic to display
-      type: dm5.Topic,
+      type: dmx.Topic,
       required: true
     }
   },

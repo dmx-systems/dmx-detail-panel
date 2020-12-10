@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import dm5 from 'dmx-api'
+import dmx from 'dmx-api'
 
 export default {
 
@@ -53,7 +53,7 @@ export default {
     visible: {type: Boolean, default: true},    // Trueish if the detail panel is visible. Optional. Default is true.
     pinned: {type: Boolean, default: false},    // Pin toggle state
     tab: {type: String, default: 'info'},       // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
-    object: dm5.DMXObject,                      // The topic/assoc to display. Undefined if data not yet available.
+    object: dmx.DMXObject,                      // The topic/assoc to display. Undefined if data not yet available.
     markerTopicIds: Array,                      // Optional: IDs of topics to render as "marked" in related-tab.
     types: Object,                              // Optional: "assocTypes" and "roleTypes" (arrays)
     quillConfig: Object,

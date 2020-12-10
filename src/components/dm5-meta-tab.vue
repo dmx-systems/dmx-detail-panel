@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import dm5 from 'dmx-api'
+import dmx from 'dmx-api'
 
 export default {
 
@@ -132,7 +132,7 @@ export default {
         .then(workspace => this.workspace = workspace)
         .then(workspace => {
           if (workspace) {
-            dm5.rpc.getWorkspaceOwner(workspace.id).then(owner => this.owner = owner)
+            dmx.rpc.getWorkspaceOwner(workspace.id).then(owner => this.owner = owner)
           } else {
             this.owner = undefined
           }

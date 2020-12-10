@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import dm5 from 'dmx-api'
+import dmx from 'dmx-api'
 import Vue from 'vue'
 
 export default {
@@ -23,14 +23,14 @@ export default {
 
   data () {
     return {
-      workspaces: [],               // all workspaces (array of dm5.Topic)
-      workspace_: this.workspace    // selected workspace (dm5.Topic)
+      workspaces: [],               // all workspaces (array of dmx.Topic)
+      workspace_: this.workspace    // selected workspace (dmx.Topic)
     }
   },
 
   methods: {
     initWorkspaces () {
-      dm5.rpc.getTopicsByType('dmx.workspaces.workspace').then(workspaces => {
+      dmx.rpc.getTopicsByType('dmx.workspaces.workspace').then(workspaces => {
         this.workspaces = workspaces.sort((w1, w2) => w1.value.localeCompare(w2.value))
         // set writable flags
         workspaces.forEach(workspace => {
