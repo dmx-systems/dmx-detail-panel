@@ -5,26 +5,26 @@
     </el-button>
     <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object_.typeName" name="info">
-        <dm5-info-tab :object="object_" :writable="writable_" :mode="mode_" :detail-renderers="detailRenderers"
+        <dmx-info-tab :object="object_" :writable="writable_" :mode="mode_" :detail-renderers="detailRenderers"
           :types="types_" :quill-config="quillConfig" @edit="edit" @submit="submit" @submit-inline="submitInline"
           @child-topic-reveal="revealChildTopic" ref="infoTab">
-        </dm5-info-tab>
+        </dmx-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
-        <dm5-related-tab :object="object_" :tab="tab_" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds_"
+        <dmx-related-tab :object="object_" :tab="tab_" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds_"
           @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick" @sort-change="sortChange">
-        </dm5-related-tab>
+        </dmx-related-tab>
       </el-tab-pane>
       <el-tab-pane label="Meta" name="meta">
-        <dm5-meta-tab :object="object_" :writable="writable_" :tab="tab_" :marker-topic-ids="markerTopicIds_"
+        <dmx-meta-tab :object="object_" :writable="writable_" :tab="tab_" :marker-topic-ids="markerTopicIds_"
           @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick"
           @object-id-click="objectIdClick">
-        </dm5-meta-tab>
+        </dmx-meta-tab>
       </el-tab-pane>
       <el-tab-pane label="View" name="view" :disabled="!viewConfigTopic">
-        <dm5-view-tab :view-config-topic="viewConfigTopic" :writable="writable_" :detail-renderers="detailRenderers"
+        <dmx-view-tab :view-config-topic="viewConfigTopic" :writable="writable_" :detail-renderers="detailRenderers"
           v-if="viewConfigTopic" @submit-view-config="submitViewConfig">
-        </dm5-view-tab>
+        </dmx-view-tab>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -167,10 +167,10 @@ export default {
   },
 
   components: {
-    'dm5-info-tab':    require('./dm5-info-tab').default,
-    'dm5-related-tab': require('./dm5-related-tab').default,
-    'dm5-meta-tab':    require('./dm5-meta-tab').default,
-    'dm5-view-tab':    require('./dm5-view-tab').default
+    'dmx-info-tab':    require('./dmx-info-tab').default,
+    'dmx-related-tab': require('./dmx-related-tab').default,
+    'dmx-meta-tab':    require('./dmx-meta-tab').default,
+    'dmx-view-tab':    require('./dmx-view-tab').default
   }
 }
 </script>

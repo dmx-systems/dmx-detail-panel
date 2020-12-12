@@ -4,7 +4,7 @@
   "description": "The DMX 5 detail panel as a composable GUI component",
   "author": "Jörg Richter <jri@dmx.berlin>",
   "license": "AGPL-3.0",
-  "main": "src/components/dm5-detail-panel.vue",
+  "main": "src/components/dmx-detail-panel.vue",
   "repository": {
     "type": "git",
     "url": "https://github.com/jri/dm5-detail-panel.git"

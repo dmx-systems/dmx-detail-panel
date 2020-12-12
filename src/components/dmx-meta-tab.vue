@@ -34,14 +34,14 @@
     <div class="flex">
       <div>
         <div class="field-label">Workspace</div>
-        <dm5-inline-edit :disabled="!writable" @save="assignToWorkspace">
+        <dmx-inline-edit :disabled="!writable" @save="assignToWorkspace">
           <template #info>
             <div>{{workspace && workspace.value || 'n/a'}}</div>
           </template>
           <template #form>
-            <dm5-workspace-select :workspace="workspace" ref="workspaceSelect"></dm5-workspace-select>
+            <dmx-workspace-select :workspace="workspace" ref="workspaceSelect"></dmx-workspace-select>
           </template>
-        </dm5-inline-edit>
+        </dmx-inline-edit>
       </div>
       <div>
         <div class="field-label">Owner</div>
@@ -49,13 +49,13 @@
       </div>
     </div>
     <!-- Type -->
-    <dm5-topic-list :topics="types" no-sort-menu :marker-topic-ids="markerTopicIds"
+    <dmx-topic-list :topics="types" no-sort-menu :marker-topic-ids="markerTopicIds"
       @topic-click="topicClick" @icon-click="iconClick">
-    </dm5-topic-list>
+    </dmx-topic-list>
     <!-- Topicmaps -->
-    <dm5-topic-list :topics="topicmapTopics" no-sort-menu :marker-topic-ids="markerTopicIds"
+    <dmx-topic-list :topics="topicmapTopics" no-sort-menu :marker-topic-ids="markerTopicIds"
       @topic-click="topicClick" @icon-click="iconClick">
-    </dm5-topic-list>
+    </dmx-topic-list>
   </div>
 </template>
 
@@ -167,9 +167,9 @@ export default {
   },
 
   components: {
-    'dm5-topic-list':       require('dmx-topic-list').default,
-    'dm5-inline-edit':      require('dmx-inline-edit').default,
-    'dm5-workspace-select': require('./dm5-workspace-select').default
+    'dmx-topic-list':       require('dmx-topic-list').default,
+    'dmx-inline-edit':      require('dmx-inline-edit').default,
+    'dmx-workspace-select': require('./dmx-workspace-select').default
   }
 }
 </script>
