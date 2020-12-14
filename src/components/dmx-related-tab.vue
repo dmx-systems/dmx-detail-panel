@@ -1,5 +1,5 @@
 <template>
-  <div class="dm5-related-tab">
+  <div class="dmx-related-tab">
     <dm5-topic-list v-if="!loading" :topics="topics" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds"
       @topic-click="topicClick" @icon-click="iconClick" @sort-change="sortChange">
     </dm5-topic-list>
@@ -82,16 +82,16 @@ export default {
 </script>
 
 <style>
-.dm5-related-tab {
+.dmx-related-tab {
   overflow: auto;
   padding: var(--detail-panel-padding-all);
 }
 
-.dm5-related-tab .dm5-spinner {
+.dmx-related-tab .dmx-spinner {
   height: 42px;               /* see --loading-spinner-size in element-ui/packages/theme-chalk/src/common/var.scss */
 }
 
-.dm5-related-tab .dm5-spinner .el-loading-mask{
+.dmx-related-tab .dmx-spinner .el-loading-mask{
   background-color: unset;    /* no white mask */
 }
 </style>

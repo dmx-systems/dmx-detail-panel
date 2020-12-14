@@ -1,5 +1,5 @@
 <template>
-  <div class="dm5-info-tab">
+  <div class="dmx-info-tab">
     <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode"
       :renderers="detailRenderers" :types="types" :quill-config="_quillConfig"
       @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
@@ -88,7 +88,7 @@ export default {
     // principle copy in dm5-detail.vue (dm5-topicmap-panel)
     _quillConfig () {
       const _quillConfig = dmx.utils.clone(this.quillConfig)
-      _quillConfig.options.bounds = '.dm5-detail-panel'
+      _quillConfig.options.bounds = '.dmx-detail-panel'
       return _quillConfig
     }
   },
@@ -137,7 +137,7 @@ export default {
 </script>
 
 <style>
-.dm5-info-tab {
+.dmx-info-tab {
   display: flex;
   flex-direction: column;
   min-height: 0; /* Needed for children of a column-oriented flex container. Otherwise dm5-info-tab exceeds viewport. */
@@ -145,12 +145,12 @@ export default {
                  /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                                */
 }
 
-.dm5-info-tab .dm5-object-renderer {
+.dmx-info-tab .dmx-object-renderer {
   overflow: auto;
   padding: var(--detail-panel-padding-all);
 }
 
-.dm5-info-tab .button {
+.dmx-info-tab .button {
   margin: var(--detail-panel-padding);
 }
 </style>

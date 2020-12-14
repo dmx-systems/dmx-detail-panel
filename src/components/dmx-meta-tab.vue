@@ -1,5 +1,5 @@
 <template>
-  <div class="dm5-meta-tab">
+  <div class="dmx-meta-tab">
     <div class="flex">
       <div>
         <div class="field-label">ID</div>
@@ -175,21 +175,21 @@ export default {
 </script>
 
 <style>
-.dm5-meta-tab {
+.dmx-meta-tab {
   overflow: auto;
   padding: var(--detail-panel-padding-all);
 }
 
-.dm5-meta-tab .flex {
+.dmx-meta-tab .flex {
   display: flex;
 }
 
-.dm5-meta-tab .flex > div + div {
+.dmx-meta-tab .flex > div + div {
   margin-left: 2.5em;
 }
 
-.dm5-meta-tab .flex + .flex,
-.dm5-meta-tab .dm5-topic-list {
+.dmx-meta-tab .flex + .flex,
+.dmx-meta-tab .dmx-topic-list {
   margin-top: var(--field-spacing);
 }
 </style>

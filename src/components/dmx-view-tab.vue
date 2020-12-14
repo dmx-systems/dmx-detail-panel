@@ -1,5 +1,5 @@
 <template>
-  <div class="dm5-view-tab">
+  <div class="dmx-view-tab">
     <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="detailRenderers"
       @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
     </dm5-object-renderer>
@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style>
-.dm5-view-tab {
+.dmx-view-tab {
   display: flex;
   flex-direction: column;
   min-height: 0; /* Needed for children of a column-oriented flex container. Otherwise dm5-view-tab exceeds viewport. */
@@ -111,12 +111,12 @@ export default {
                  /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                                */
 }
 
-.dm5-view-tab .dm5-object-renderer {
+.dmx-view-tab .dmx-object-renderer {
   overflow: auto;
   padding: var(--detail-panel-padding-all);
 }
 
-.dm5-view-tab .button {
+.dmx-view-tab .button {
   margin: var(--detail-panel-padding);
 }
 </style>

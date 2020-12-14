@@ -1,5 +1,5 @@
 <template>
-  <div class="dm5-detail-panel" v-if="visible_"><!-- background is already shown for the sake of feedback -->
+  <div class="dmx-detail-panel" v-if="visible_"><!-- background is already shown for the sake of feedback -->
     <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned_}, 'fa', 'fa-thumb-tack']" type="text"
       :title="pinTitle" @click="togglePinned">
     </el-button>
@@ -176,18 +176,18 @@ export default {
 </script>
 
 <style>
-.dm5-detail-panel .el-tabs {
+.dmx-detail-panel .el-tabs {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.dm5-detail-panel .el-tabs__header {
+.dmx-detail-panel .el-tabs__header {
   margin: 0;                            /* was 0 0 15px */
   padding-left:  12px;
 }
 
-.dm5-detail-panel .el-tabs__header .el-tabs__item {
+.dmx-detail-panel .el-tabs__header .el-tabs__item {
   font-size: var(--label-font-size);    /* was 14px */
   color: var(--label-color);            /* was #303133 (Element UI --color-text-primary) */
   height: 36px;                         /* was 40px */
@@ -195,31 +195,31 @@ export default {
   padding: 0 12px;                      /* was 0 20px */
 }
 
-.dm5-detail-panel .el-tabs__header .el-tabs__item:hover {
+.dmx-detail-panel .el-tabs__header .el-tabs__item:hover {
   color: var(--highlight-color);        /* restore original Element UI active color as accidentally */
 }                                       /* overridden by previous rule due to higher specificity    */
 
-.dm5-detail-panel .el-tabs__header .el-tabs__item.is-active {
+.dmx-detail-panel .el-tabs__header .el-tabs__item.is-active {
   color: var(--highlight-color);        /* restore original Element UI active color as accidentally */
 }                                       /* overridden by previous rule due to higher specificity    */
 
-.dm5-detail-panel .el-tabs__header .el-tabs__item.is-disabled {
+.dmx-detail-panel .el-tabs__header .el-tabs__item.is-disabled {
   color: var(--label-color-disabled);   /* restore original Element UI disabled color as accidentally */
 }                                       /* overridden by previous rule due to higher specificity      */
 
-.dm5-detail-panel .el-tabs__content,
-.dm5-detail-panel .el-tabs__content .el-tab-pane {
+.dmx-detail-panel .el-tabs__content,
+.dmx-detail-panel .el-tabs__content .el-tab-pane {
   display: flex;
   flex-direction: column;
 }
 
-.dm5-detail-panel .el-tabs__content .el-tab-pane {
+.dmx-detail-panel .el-tabs__content .el-tab-pane {
   min-height: 0;  /* Needed for children of a column-oriented flex container. Otherwise el-tab-pane exceeds viewport. */
                   /* http://stackoverflow.com/questions/26895349/how-can-i-get-ff-33-x-flexbox-behavior-in-ff-34-x    */
                   /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                               */
 }
 
-.dm5-detail-panel button.pin {
+.dmx-detail-panel button.pin {
   position: absolute;
   top: 10px;
   right: 6px;
@@ -228,7 +228,7 @@ export default {
   z-index: 3;                           /* stack above el-tabs__nav */
 }
 
-.dm5-detail-panel button.pin.unpinned {
+.dmx-detail-panel button.pin.unpinned {
   color: transparent;
   font-size: 15px !important;
   -webkit-text-stroke: 1px var(--highlight-color);
