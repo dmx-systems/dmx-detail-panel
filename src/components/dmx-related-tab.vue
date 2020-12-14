@@ -3,7 +3,7 @@
     <dm5-topic-list v-if="!loading" :topics="topics" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds"
       @topic-click="topicClick" @icon-click="iconClick" @sort-change="sortChange">
     </dm5-topic-list>
-    <div v-else v-loading="true" class="dm5-spinner"></div>
+    <div v-else v-loading="true" class="dmx-spinner"></div>
   </div>
 </template>
 
@@ -11,12 +11,12 @@
 export default {
 
   created () {
-    // console.log('dm5-related-tab created', this.markerTopicIds)
+    // console.log('dmx-related-tab created', this.markerTopicIds)
     this.fetchTopics()
   },
 
   destroyed () {
-    // console.log('dm5-related-tab destroyed')
+    // console.log('dmx-related-tab destroyed')
   },
 
   mixins: [
@@ -76,7 +76,7 @@ export default {
   },
 
   components: {
-    'dm5-topic-list': require('dmx-topic-list').default
+    'dm5-topic-list': require('dmx-topic-list').default   // TODO: use globally registered topic-list?
   }
 }
 </script>

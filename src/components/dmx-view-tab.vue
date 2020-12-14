@@ -16,11 +16,11 @@ import dmx from 'dmx-api'
 export default {
 
   created () {
-    // console.log('dm5-view-tab created', this.viewConfigTopic)
+    // console.log('dmx-view-tab created', this.viewConfigTopic)
   },
 
   destroyed () {
-    // console.log('dm5-view-tab destroyed')
+    // console.log('dmx-view-tab destroyed')
   },
 
   mixins: [
@@ -38,7 +38,7 @@ export default {
 
   data () {
     return {
-      objectToEdit: undefined,  // TODO: unsaved changes check (`objectToCompare`). Compare to dm5-info-tab.vue
+      objectToEdit: undefined,  // TODO: unsaved changes check (`objectToCompare`). Compare to dmx-info-tab.vue
       inlineId: undefined,      // trueish if inline edit is active in this object or in *any* child topic (recursively)
       mode: 'info'
     }
@@ -106,7 +106,7 @@ export default {
 .dmx-view-tab {
   display: flex;
   flex-direction: column;
-  min-height: 0; /* Needed for children of a column-oriented flex container. Otherwise dm5-view-tab exceeds viewport. */
+  min-height: 0; /* Needed for children of a column-oriented flex container. Otherwise dmx-view-tab exceeds viewport. */
                  /* http://stackoverflow.com/questions/26895349/how-can-i-get-ff-33-x-flexbox-behavior-in-ff-34-x     */
                  /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                                */
 }

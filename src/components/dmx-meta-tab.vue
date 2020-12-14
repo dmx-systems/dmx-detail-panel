@@ -65,12 +65,12 @@ import dmx from 'dmx-api'
 export default {
 
   created () {
-    // console.log('dm5-meta-tab created')
+    // console.log('dmx-meta-tab created')
     this.fetchMetaData()
   },
 
   destroyed () {
-    // console.log('dm5-meta-tab destroyed')
+    // console.log('dmx-meta-tab destroyed')
   },
 
   mixins: [

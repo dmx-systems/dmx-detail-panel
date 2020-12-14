@@ -36,11 +36,11 @@ import dmx from 'dmx-api'
 export default {
 
   created () {
-    // console.log('dm5-detail-panel created', this.types)
+    // console.log('dmx-detail-panel created', this.types)
   },
 
   destroyed () {
-    // console.log('dm5-detail-panel destroyed')
+    // console.log('dmx-detail-panel destroyed')
   },
 
   mixins: [

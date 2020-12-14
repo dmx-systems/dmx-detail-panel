@@ -19,11 +19,11 @@ import dmx from 'dmx-api'
 export default {
 
   created () {
-    // console.log('dm5-info-tab created')
+    // console.log('dmx-info-tab created')
   },
 
   destroyed () {
-    // console.log('dm5-info-tab destroyed')
+    // console.log('dmx-info-tab destroyed')
   },
 
   mixins: [
@@ -72,7 +72,7 @@ export default {
       return this.writable && !this.inlineId
     },
 
-    // copy in dm5-object-renderer.vue (as editDisabled())
+    // copy in dmx-object-renderer.vue (as editDisabled())
     // copy in plugin.js of platform's topicmaps module (in isEditDisabled())
     buttonDisabled () {
       // only entity topics are enabled; assocs and types are always enabled
@@ -85,7 +85,7 @@ export default {
         'Edit the parent context instead.'
     },
 
-    // principle copy in dm5-detail.vue (dm5-topicmap-panel)
+    // principle copy in dmx-detail.vue (dmx-topicmap-panel)
     _quillConfig () {
       const _quillConfig = dmx.utils.clone(this.quillConfig)
       _quillConfig.options.bounds = '.dmx-detail-panel'
@@ -131,7 +131,7 @@ export default {
   },
 
   components: {
-    'dm5-object-renderer': require('dmx-object-renderer').default
+    'dm5-object-renderer': require('dmx-object-renderer').default  // TODO: use globally registered dmx-object-renderer?
   }
 }
 </script>
@@ -140,7 +140,7 @@ export default {
 .dmx-info-tab {
   display: flex;
   flex-direction: column;
-  min-height: 0; /* Needed for children of a column-oriented flex container. Otherwise dm5-info-tab exceeds viewport. */
+  min-height: 0; /* Needed for children of a column-oriented flex container. Otherwise dmx-info-tab exceeds viewport. */
                  /* http://stackoverflow.com/questions/26895349/how-can-i-get-ff-33-x-flexbox-behavior-in-ff-34-x     */
                  /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                                */
 }
