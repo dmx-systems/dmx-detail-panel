@@ -1,9 +1,9 @@
 <template>
   <div class="dmx-info-tab">
-    <dm5-object-renderer :object="objectToRender" :writable="writable" :mode="mode"
+    <dmx-object-renderer :object="objectToRender" :writable="writable" :mode="mode"
       :renderers="detailRenderers" :types="types" :quill-config="_quillConfig"
       @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
-    </dm5-object-renderer>
+    </dmx-object-renderer>
     <div>
       <!-- Wrapper div fixes button height. Somehow an el-button does not like to be a flex item. -->
       <el-button class="button" v-if="buttonVisibility" :disabled="buttonDisabled" :title="buttonTitle"
@@ -131,7 +131,7 @@ export default {
   },
 
   components: {
-    'dm5-object-renderer': require('dmx-object-renderer').default  // TODO: use globally registered dmx-object-renderer?
+    'dmx-object-renderer': require('dmx-object-renderer').default
   }
 }
 </script>

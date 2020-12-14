@@ -1,8 +1,8 @@
 <template>
   <div class="dmx-related-tab">
-    <dm5-topic-list v-if="!loading" :topics="topics" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds"
+    <dmx-topic-list v-if="!loading" :topics="topics" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds"
       @topic-click="topicClick" @icon-click="iconClick" @sort-change="sortChange">
-    </dm5-topic-list>
+    </dmx-topic-list>
     <div v-else v-loading="true" class="dmx-spinner"></div>
   </div>
 </template>
@@ -76,7 +76,7 @@ export default {
   },
 
   components: {
-    'dm5-topic-list': require('dmx-topic-list').default   // TODO: use globally registered topic-list?
+    'dmx-topic-list': require('dmx-topic-list').default
   }
 }
 </script>
