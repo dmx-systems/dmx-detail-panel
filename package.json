@@ -7,11 +7,11 @@
   "main": "src/components/dmx-detail-panel.vue",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jri/dm5-detail-panel.git"
+    "url": "https://github.com/dmx-systems/dmx-detail-panel.git"
   },
   "dependencies": {
     "dmx-inline-edit": "1.0.0",
-    "dmx-object-renderer": "https://github.com/jri/dm5-object-renderer.git",
-    "dmx-topic-list": "https://github.com/jri/dm5-topic-list.git"
+    "dmx-object-renderer": "https://github.com/dmx-systems/dmx-object-renderer.git",
+    "dmx-topic-list": "https://github.com/dmx-systems/dmx-topic-list.git"
   }
 }
