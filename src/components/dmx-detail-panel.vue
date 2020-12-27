@@ -102,7 +102,7 @@ export default {
 
   watch: {
     // needed when instantiated via template
-    object   () {this.object_   = this.object},
+    object   () {this.object_   = this.object},                                        /* eslint block-spacing: "off" */
     writable () {this.writable_ = this.writable},
     tab      () {this.tab_      = this.tab},
     mode     () {this.mode_     = this.mode}

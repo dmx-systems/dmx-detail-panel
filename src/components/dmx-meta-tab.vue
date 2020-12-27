@@ -120,19 +120,31 @@ export default {
         return
       }
       this.object.getCreationTime()
-        .then(created => this.created = created && new Date(created).toLocaleString())
+        .then(created => {
+          this.created = created && new Date(created).toLocaleString()
+        })
       this.object.getModificationTime()
-        .then(modified => this.modified = modified && new Date(modified).toLocaleString())
+        .then(modified => {
+          this.modified = modified && new Date(modified).toLocaleString()
+        })
       this.object.getCreator()
-        .then(creator => this.creator = creator)
+        .then(creator => {
+          this.creator = creator
+        })
       this.object.getModifier()
-        .then(modifier => this.modifier = modifier);
+        .then(modifier => {
+          this.modifier = modifier
+        });
       // if the selected object is a workspace the workspace is the object itself
       (this.object.typeUri === 'dmx.workspaces.workspace' ? Promise.resolve(this.object) : this.object.getWorkspace())
-        .then(workspace => this.workspace = workspace)
+        .then(workspace => {
+          this.workspace = workspace
+        })
         .then(workspace => {
           if (workspace) {
-            dmx.rpc.getWorkspaceOwner(workspace.id).then(owner => this.owner = owner)
+            dmx.rpc.getWorkspaceOwner(workspace.id).then(owner => {
+              this.owner = owner
+            })
           } else {
             this.owner = undefined
           }
@@ -142,8 +154,12 @@ export default {
         assocTypeUri:      'dmx.core.instantiation',
         myRoleTypeUri:     'dmx.core.instance',
         othersRoleTypeUri: 'dmx.core.type'
-      }).then(types => this.types = types)
-      this.object.getTopicmapTopics().then(topicmapTopics => this.topicmapTopics = topicmapTopics)
+      }).then(types => {
+        this.types = types
+      })
+      this.object.getTopicmapTopics().then(topicmapTopics => {
+        this.topicmapTopics = topicmapTopics
+      })
     },
 
     assignToWorkspace () {
