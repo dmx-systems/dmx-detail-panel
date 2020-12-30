@@ -1,6 +1,6 @@
 {
   "name": "dmx-detail-panel",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "The DMX 5 detail panel as a composable GUI component",
   "author": "Jörg Richter <jri@dmx.berlin>",
   "license": "AGPL-3.0",
@@ -10,8 +10,8 @@
     "url": "https://github.com/dmx-systems/dmx-detail-panel.git"
   },
   "dependencies": {
-    "dmx-inline-edit": "1.0.0",
-    "dmx-object-renderer": "https://github.com/dmx-systems/dmx-object-renderer.git",
-    "dmx-topic-list": "https://github.com/dmx-systems/dmx-topic-list.git"
+    "dmx-inline-edit": "2.0.0",
+    "dmx-object-renderer": "2.0.0",
+    "dmx-topic-list": "2.0.0"
   }
 }
