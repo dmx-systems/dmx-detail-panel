@@ -4,11 +4,9 @@
       :renderers="detailRenderers" :types="types" :quill-config="_quillConfig"
       @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
     </dmx-object-renderer>
-    <div>
-      <!-- Wrapper div fixes button height. Somehow an el-button does not like to be a flex item. -->
-      <el-button class="button" v-if="buttonVisibility" :disabled="buttonDisabled" :title="buttonTitle"
-        @click="buttonAction">{{buttonLabel}}
-      </el-button>
+    <div class="button-panel" v-if="buttonVisibility">
+      <el-button :disabled="buttonDisabled" :title="buttonTitle" @click="buttonAction">{{buttonLabel}}</el-button>
+      <el-button v-if="extraButton" @click="extraButton.handler">{{extraButton.label}}</el-button>
     </div>
   </div>
 </template>
@@ -17,14 +15,6 @@
 import dmx from 'dmx-api'
 
 export default {
-
-  created () {
-    // console.log('dmx-info-tab created')
-  },
-
-  destroyed () {
-    // console.log('dmx-info-tab destroyed')
-  },
 
   mixins: [
     require('./mixins/object').default,
@@ -83,6 +73,10 @@ export default {
       const typeName = this.object.typeName
       return this.buttonDisabled && `A ${typeName} is immutable as "${typeName}" is a value type. ` +
         'Edit the parent context instead.'
+    },
+
+    extraButton () {
+      return this.$store.state.detailPanelButtons[this.object.typeUri]
     },
 
     // principle copy in dmx-detail.vue (dmx-topicmap-panel)
@@ -150,7 +144,7 @@ export default {
   padding: var(--detail-panel-padding-all);
 }
 
-.dmx-info-tab .button {
-  margin: var(--detail-panel-padding);
+.dmx-info-tab .button-panel {
+  padding: var(--detail-panel-padding);
 }
 </style>
