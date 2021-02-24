@@ -5,8 +5,10 @@
       @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
     </dmx-object-renderer>
     <div class="button-panel" v-if="buttonVisibility">
-      <el-button :disabled="buttonDisabled" :title="buttonTitle" @click="buttonAction">{{buttonLabel}}</el-button>
-      <el-button v-if="extraButton" @click="extraButton.handler">{{extraButton.label}}</el-button>
+      <el-button :disabled="buttonDisabled" :title="buttonTitle" @click="buttonHandler">{{buttonLabel}}</el-button>
+      <el-button v-for="button in _extraButtons" :key="button.label" @click="button.handler">
+        {{button.label}}
+      </el-button>
     </div>
   </div>
 </template>
@@ -76,7 +78,7 @@ export default {
         'Edit the parent context instead.'
     },
 
-    extraButton () {
+    _extraButtons () {
       return this.extraButtons[this.object.typeUri]
     },
 
@@ -90,7 +92,7 @@ export default {
 
   methods: {
 
-    buttonAction () {
+    buttonHandler () {
       if (this.infoMode) {
         this.$emit('edit')
       } else {
