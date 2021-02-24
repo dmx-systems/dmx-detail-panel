@@ -21,7 +21,8 @@ export default {
     require('./mixins/writable').default,
     require('./mixins/mode').default,
     require('./mixins/info-mode').default,
-    require('./mixins/detail-renderers').default
+    require('./mixins/detail-renderers').default,
+    require('./mixins/extra-buttons').default
   ],
 
   props: {
@@ -76,7 +77,7 @@ export default {
     },
 
     extraButton () {
-      return this.$store.state.detailPanelButtons[this.object.typeUri]
+      return this.extraButtons[this.object.typeUri]
     },
 
     // principle copy in dmx-detail.vue (dmx-topicmap-panel)

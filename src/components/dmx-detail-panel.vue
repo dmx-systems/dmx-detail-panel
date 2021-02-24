@@ -6,8 +6,8 @@
     <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
       <el-tab-pane :label="object_.typeName" name="info">
         <dmx-info-tab :object="object_" :writable="writable_" :mode="mode_" :detail-renderers="detailRenderers"
-          :types="types_" :quill-config="quillConfig" @edit="edit" @submit="submit" @submit-inline="submitInline"
-          @child-topic-reveal="revealChildTopic" ref="infoTab">
+          :extra-buttons="extraButtons" :types="types_" :quill-config="quillConfig" @edit="edit" @submit="submit"
+          @submit-inline="submitInline" @child-topic-reveal="revealChildTopic" ref="infoTab">
         </dmx-info-tab>
       </el-tab-pane>
       <el-tab-pane label="Related" name="related">
@@ -46,7 +46,8 @@ export default {
   mixins: [
     require('./mixins/writable').default,
     require('./mixins/mode-default').default,
-    require('./mixins/detail-renderers').default
+    require('./mixins/detail-renderers').default,
+    require('./mixins/extra-buttons').default
   ],
 
   props: {
