@@ -4,11 +4,13 @@
       :renderers="detailRenderers" :types="types" :quill-config="_quillConfig"
       @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
     </dmx-object-renderer>
-    <div class="button-panel" v-if="buttonVisibility">
+    <div class="button-panel" v-if="showButtons">
       <el-button :disabled="buttonDisabled" :title="buttonTitle" @click="buttonHandler">{{buttonLabel}}</el-button>
-      <el-button v-for="button in _extraButtons" :key="button.label" @click="button.handler">
-        {{button.label}}
-      </el-button>
+      <template v-if="infoMode">
+        <el-button v-for="button in _extraButtons" :key="button.label" @click="button.handler">
+          {{button.label}}
+        </el-button>
+      </template>
     </div>
   </div>
 </template>
@@ -61,7 +63,7 @@ export default {
       return this.infoMode ? 'Edit' : 'Save'
     },
 
-    buttonVisibility () {
+    showButtons () {
       return this.writable && !this.inlineId
     },
 
