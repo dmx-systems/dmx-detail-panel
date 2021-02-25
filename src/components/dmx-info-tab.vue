@@ -5,7 +5,9 @@
       @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
     </dmx-object-renderer>
     <div class="button-panel" v-if="showButtons">
-      <el-button :disabled="buttonDisabled" :title="buttonTitle" @click="buttonHandler">{{buttonLabel}}</el-button>
+      <el-button v-if="showButton" :disabled="buttonDisabled" :title="buttonTitle" @click="buttonHandler">
+        {{buttonLabel}}
+      </el-button>
       <template v-if="infoMode">
         <el-button v-for="button in _extraButtons" :key="button.label" @click="button.handler">
           {{button.label}}
@@ -65,6 +67,10 @@ export default {
 
     showButtons () {
       return this.writable && !this.inlineId
+    },
+
+    showButton () {
+      return !this.type.getViewConfig('dmx.webclient.noneditable')
     },
 
     // copy in dmx-object-renderer.vue (as editDisabled())
