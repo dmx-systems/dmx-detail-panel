@@ -70,14 +70,11 @@ export default {
     },
 
     showButton () {
-      return !this.type.getViewConfig('dmx.webclient.noneditable')
+      return !this.type.isNoneditable
     },
 
-    // copy in dmx-object-renderer.vue (as editDisabled())
-    // copy in plugin.js of platform's topicmaps module (in isEditDisabled())
     buttonDisabled () {
-      // only entity topics are enabled; assocs and types are always enabled
-      return this.object.isTopic && !this.object.isType && !this.object.type.isEntity
+      return !this.object.isEditable
     },
 
     buttonTitle () {
