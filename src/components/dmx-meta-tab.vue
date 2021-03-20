@@ -114,7 +114,6 @@ export default {
   methods: {
 
     fetchMetaData () {
-      // console.log('fetchMetaData', this.object.id, this.tab === 'meta')
       // don't fetch if "Meta" tab is not selected
       if (this.tab !== 'meta') {
         return
@@ -138,7 +137,7 @@ export default {
       // if the selected object is a workspace the workspace is the object itself
       (this.object.typeUri === 'dmx.workspaces.workspace' ? Promise.resolve(this.object) : this.object.getWorkspace())
         .then(workspace => {
-          this.workspace = workspace
+          return this.workspace = workspace
         })
         .then(workspace => {
           if (workspace) {
