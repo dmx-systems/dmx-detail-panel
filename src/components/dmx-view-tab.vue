@@ -1,11 +1,15 @@
 <template>
   <div class="dmx-view-tab">
-    <dmx-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="detailRenderers"
-      @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
-    </dmx-object-renderer>
-    <div>
-      <!-- Wrapper div fixes button height. Somehow an el-button does not like to be a flex item. -->
-      <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
+    <div v-if="viewConfigTopic">
+      <dmx-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="detailRenderers"
+        @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
+      </dmx-object-renderer>
+      <div><!-- Wrapper div fixes button height. Somehow an el-button does not like to be a flex item. -->
+        <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
+      </div>
+    </div>
+    <div class="config-topics">
+      {{configTypeUris}}
     </div>
   </div>
 </template>
@@ -30,10 +34,8 @@ export default {
   ],
 
   props: {
-    viewConfigTopic: {          // The view config topic to display
-      type: dmx.Topic,
-      required: true
-    }
+    viewConfigTopic: dmx.Topic,     // The view config topic to display. Undefined if not (yet) available.
+    configTypeUris: Array           // Undefined if not available for displayed object.
   },
 
   data () {
@@ -118,5 +120,9 @@ export default {
 
 .dmx-view-tab .button {
   margin: var(--detail-panel-padding);
+}
+
+.dmx-view-tab .config-topics {
+  padding: var(--detail-panel-padding-all);
 }
 </style>

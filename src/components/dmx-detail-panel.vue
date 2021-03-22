@@ -21,9 +21,9 @@
           @object-id-click="objectIdClick">
         </dmx-meta-tab>
       </el-tab-pane>
-      <el-tab-pane label="View" name="view" :disabled="!viewConfigTopic">
+      <el-tab-pane label="View" name="view" :disabled="viewTabDisabled">
         <dmx-view-tab :view-config-topic="viewConfigTopic" :writable="writable_" :detail-renderers="detailRenderers"
-          v-if="viewConfigTopic" @submit-view-config="submitViewConfig">
+          :config-type-uris="configTypeUris" @submit-view-config="submitViewConfig">
         </dmx-view-tab>
       </el-tab-pane>
     </el-tabs>
@@ -55,6 +55,7 @@ export default {
     pinned: {type: Boolean, default: false},    // Pin toggle state
     tab: {type: String, default: 'info'},       // The selected tab: 'info', 'related', ... Optional. Default is 'info'.
     object: dmx.DMXObject,                      // The topic/assoc to display. Undefined if data not yet available.
+    configDefs: Object,                         // As received from BE's ConfigService
     markerTopicIds: Array,                      // Optional: IDs of topics to render as "marked" in related-tab.
     types: Object,                              // Optional: "assocTypes" and "roleTypes" (arrays)
     quillConfig: Object,
@@ -71,6 +72,7 @@ export default {
       object_:         this.object,
       writable_:       this.writable,
       mode_:           this.mode,
+      configDefs_:     this.configDefs,
       markerTopicIds_: this.markerTopicIds,
       types_:          this.types
     }
@@ -98,6 +100,17 @@ export default {
         }
         return viewConfigTopic
       }
+    },
+
+    configTypeUris () {
+      const hashKey = Object.keys(this.configDefs_).find(hashKey => this.matches(hashKey))
+      if (hashKey) {
+        return this.configDefs_[hashKey]
+      }
+    },
+
+    viewTabDisabled () {
+      return !this.viewConfigTopic && !this.configTypeUris
     }
   },
 
@@ -111,6 +124,16 @@ export default {
   },
 
   methods: {
+
+    matches (hashKey) {
+      const s = hashKey.split(':')
+      if (s[0] === 'typeUri') {
+        return this.object_.typeUri === s[1]
+      } else if (s[0] === 'topicUri') {
+        return this.object_.uri === s[1]
+      }
+      throw Error(`Unexpected hash key: "${hashKey}"`)
+    },
 
     tabClick (tabPane) {
       this.$emit('tab-click', tabPane.name)
