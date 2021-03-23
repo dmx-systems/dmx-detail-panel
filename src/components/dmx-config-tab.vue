@@ -1,11 +1,11 @@
 <template>
-  <div class="dmx-view-tab">
+  <div class="dmx-config-tab">
     <div v-if="viewConfigTopic">
       <dmx-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="detailRenderers"
         @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
       </dmx-object-renderer>
-      <div><!-- Wrapper div fixes button height. Somehow an el-button does not like to be a flex item. -->
-        <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
+      <div class="button" v-if="buttonVisibility"><!-- Wrapper saves button height (el-button as flex item is error) -->
+        <el-button @click="buttonAction">{{buttonLabel}}</el-button>
       </div>
     </div>
     <div class="config-topics">
@@ -20,11 +20,11 @@ import dmx from 'dmx-api'
 export default {
 
   created () {
-    // console.log('dmx-view-tab created', this.viewConfigTopic)
+    // console.log('dmx-config-tab created', this.viewConfigTopic)
   },
 
   destroyed () {
-    // console.log('dmx-view-tab destroyed')
+    // console.log('dmx-config-tab destroyed')
   },
 
   mixins: [
@@ -35,7 +35,7 @@ export default {
 
   props: {
     viewConfigTopic: dmx.Topic,     // The view config topic to display. Undefined if not (yet) available.
-    configTypeUris: Array           // Undefined if not available for displayed object.
+    configTypeUris: Array           // Undefined if not available for current `object` (see parent component state).
   },
 
   data () {
@@ -105,24 +105,24 @@ export default {
 </script>
 
 <style>
-.dmx-view-tab {
+.dmx-config-tab {
   display: flex;
   flex-direction: column;
-  min-height: 0; /* Needed for children of a column-oriented flex container. Otherwise dmx-view-tab exceeds viewport. */
+  min-height: 0; /* Needed for children of column-oriented flex container. Otherwise dmx-config-tab exceeds viewport. */
                  /* http://stackoverflow.com/questions/26895349/how-can-i-get-ff-33-x-flexbox-behavior-in-ff-34-x     */
                  /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                                */
+  overflow: auto;
 }
 
-.dmx-view-tab .dmx-object-renderer {
-  overflow: auto;
+.dmx-config-tab .dmx-object-renderer {
   padding: var(--detail-panel-padding-all);
 }
 
-.dmx-view-tab .button {
-  margin: var(--detail-panel-padding);
+.dmx-config-tab .button {
+  padding: var(--detail-panel-padding);
 }
 
-.dmx-view-tab .config-topics {
+.dmx-config-tab .config-topics {
   padding: var(--detail-panel-padding-all);
 }
 </style>

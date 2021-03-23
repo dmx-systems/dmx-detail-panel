@@ -21,10 +21,10 @@
           @object-id-click="objectIdClick">
         </dmx-meta-tab>
       </el-tab-pane>
-      <el-tab-pane label="View" name="view" :disabled="viewTabDisabled">
-        <dmx-view-tab :view-config-topic="viewConfigTopic" :writable="writable_" :detail-renderers="detailRenderers"
+      <el-tab-pane label="Config" name="config" :disabled="configTabDisabled">
+        <dmx-config-tab :view-config-topic="viewConfigTopic" :writable="writable_" :detail-renderers="detailRenderers"
           :config-type-uris="configTypeUris" @submit-view-config="submitViewConfig">
-        </dmx-view-tab>
+        </dmx-config-tab>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -109,7 +109,7 @@ export default {
       }
     },
 
-    viewTabDisabled () {
+    configTabDisabled () {
       return !this.viewConfigTopic && !this.configTypeUris
     }
   },
@@ -194,7 +194,7 @@ export default {
     'dmx-info-tab':    require('./dmx-info-tab').default,
     'dmx-related-tab': require('./dmx-related-tab').default,
     'dmx-meta-tab':    require('./dmx-meta-tab').default,
-    'dmx-view-tab':    require('./dmx-view-tab').default
+    'dmx-config-tab':  require('./dmx-config-tab').default
   }
 }
 </script>
