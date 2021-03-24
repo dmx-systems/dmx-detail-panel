@@ -20,7 +20,8 @@ import dmx from 'dmx-api'
 export default {
 
   created () {
-    // console.log('dmx-config-tab created', this.viewConfigTopic)
+    // console.log('dmx-config-tab created', this.object, this.viewConfigTopic)
+    this.initConfigTopics()
   },
 
   destroyed () {
@@ -28,21 +29,26 @@ export default {
   },
 
   mixins: [
+    require('./mixins/object').default,
     require('./mixins/writable').default,
+    require('./mixins/tab').default,
     require('./mixins/info-mode').default,
     require('./mixins/detail-renderers').default
   ],
 
   props: {
     viewConfigTopic: dmx.Topic,     // The view config topic to display. Undefined if not (yet) available.
-    configTypeUris: Array           // Undefined if not available for current `object` (see parent component state).
+    configTypeUris: Array           // String array. Undefined if not available for current `object`.
   },
 
   data () {
     return {
+      // view config
       objectToEdit: undefined,  // TODO: unsaved changes check (`objectToCompare`). Compare to dmx-info-tab.vue
       inlineId: undefined,      // trueish if inline edit is active in this object or in *any* child topic (recursively)
-      mode: 'info'
+      mode: 'info',
+      // config service
+      configTopics: []          // inited by initConfigTopics() method
     }
   },
 
@@ -70,7 +76,22 @@ export default {
     }
   },
 
+  watch: {
+
+    object () {
+      // console.log('object watcher', this.object.id)
+      this.initConfigTopics()
+    },
+
+    tab () {
+      // console.log('tab watcher', this.tab)
+      this.initConfigTopics()
+    }
+  },
+
   methods: {
+
+    // View Config
 
     buttonAction () {
       if (this.infoMode) {
@@ -95,6 +116,24 @@ export default {
 
     revealChildTopic (relTopic) {
       this.$emit('child-topic-reveal', relTopic)
+    },
+
+    // Config Service
+
+    initConfigTopics () {
+      // Optimization: don't fetch if "Config" tab is not selected
+      if (this.tab !== 'config') {
+        return
+      }
+      // TODO: suppress unnecessary refetching when browsing between tabs and revisit the "Config" tab
+      //
+      // console.log('initConfigTopics')
+      this.configTopics = []
+      this.configTypeUris.forEach(uri => {
+        dmx.rpc.getConfigTopic(uri, this.object.id, true).then(topic => {
+          this.configTopics.push(topic)
+        })
+      })
     }
   },
 

@@ -22,8 +22,8 @@
         </dmx-meta-tab>
       </el-tab-pane>
       <el-tab-pane label="Config" name="config" :disabled="configTabDisabled">
-        <dmx-config-tab :view-config-topic="viewConfigTopic" :writable="writable_" :detail-renderers="detailRenderers"
-          :config-type-uris="configTypeUris" @submit-view-config="submitViewConfig">
+        <dmx-config-tab :object="object_" :writable="writable_" :tab="tab_" :view-config-topic="viewConfigTopic"
+          :config-type-uris="configTypeUris" :detail-renderers="detailRenderers" @submit-view-config="submitViewConfig">
         </dmx-config-tab>
       </el-tab-pane>
     </el-tabs>
@@ -106,6 +106,8 @@ export default {
       const hashKey = Object.keys(this.configDefs_).find(hashKey => this.matches(hashKey))
       if (hashKey) {
         return this.configDefs_[hashKey]
+      } else {
+        return []
       }
     },
 

@@ -20,11 +20,11 @@ export default {
   },
 
   mixins: [
-    require('./mixins/object').default
+    require('./mixins/object').default,
+    require('./mixins/tab').default
   ],
 
   props: {
-    tab: {type: String, required: true},    // The selected tab: 'info', 'related', ...
     sortMode: String,                       // topic list sort mode: 'topic', 'type', 'assoc'
     markerTopicIds: Array                   // IDs of topics to render as "marked"
   },

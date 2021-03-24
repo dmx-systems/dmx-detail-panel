@@ -75,12 +75,12 @@ export default {
 
   mixins: [
     require('./mixins/object').default,
-    require('./mixins/writable').default
+    require('./mixins/writable').default,
+    require('./mixins/tab').default
   ],
 
   props: {
-    tab: {type: String, required: true},    // The selected tab: 'info', 'related', ...
-    markerTopicIds: Array                   // IDs of topics to render as "marked"
+    markerTopicIds: Array     // IDs of topics to render as "marked"
   },
 
   data () {
@@ -104,8 +104,6 @@ export default {
     },
 
     tab () {
-      // TODO: suppress unnecessary refetching when browsing between tabs and revisit the "Meta" tab
-      // TODO: why is tab watcher needed at all?
       // console.log('tab watcher', this.tab)
       this.fetchMetaData()
     }
@@ -114,10 +112,12 @@ export default {
   methods: {
 
     fetchMetaData () {
-      // don't fetch if "Meta" tab is not selected
+      // Optimization: don't fetch if "Meta" tab is not selected
       if (this.tab !== 'meta') {
         return
       }
+      // TODO: suppress unnecessary refetching when browsing between tabs and revisit the "Meta" tab
+      //
       this.object.getCreationTime()
         .then(created => {
           this.created = created && new Date(created).toLocaleString()
