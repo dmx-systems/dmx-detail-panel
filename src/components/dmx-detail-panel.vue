@@ -102,12 +102,13 @@ export default {
       }
     },
 
+    /**
+     * @return  String array, never empty. Undefined if current `object` has no config.
+     */
     configTypeUris () {
       const hashKey = Object.keys(this.configDefs_).find(hashKey => this.matches(hashKey))
       if (hashKey) {
         return this.configDefs_[hashKey]
-      } else {
-        return []
       }
     },
 

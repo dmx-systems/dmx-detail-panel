@@ -8,7 +8,7 @@
         <el-button @click="buttonAction">{{buttonLabel}}</el-button>
       </div>
     </div>
-    <div class="config-topics">
+    <div v-if="configTypeUris" class="config-topics">
       <dmx-object-renderer v-for="topic in configTopics" :object="topic" :renderers="detailRenderers" :key="topic.id">
       </dmx-object-renderer>
     </div>
@@ -39,7 +39,7 @@ export default {
 
   props: {
     viewConfigTopic: dmx.Topic,     // The view config topic to display. Undefined if not (yet) available.
-    configTypeUris: Array           // String array. Empty if current `object` has no config.
+    configTypeUris: Array           // String array, never empty. Undefined if current `object` has no config.
   },
 
   data () {
@@ -123,7 +123,7 @@ export default {
 
     initConfigTopics () {
       // Optimization: don't fetch if "Config" tab is not selected
-      if (this.tab !== 'config') {
+      if (this.tab !== 'config' || !this.configTypeUris) {
         return
       }
       // TODO: suppress unnecessary refetching when browsing between tabs and revisit the "Config" tab
