@@ -9,7 +9,8 @@
       </div>
     </div>
     <div class="config-topics">
-      {{configTypeUris}}
+      <dmx-object-renderer v-for="topic in configTopics" :object="topic" :renderers="detailRenderers" :key="topic.id">
+      </dmx-object-renderer>
     </div>
   </div>
 </template>
@@ -38,7 +39,7 @@ export default {
 
   props: {
     viewConfigTopic: dmx.Topic,     // The view config topic to display. Undefined if not (yet) available.
-    configTypeUris: Array           // String array. Undefined if not available for current `object`.
+    configTypeUris: Array           // String array. Empty if current `object` has no config.
   },
 
   data () {
@@ -145,23 +146,15 @@ export default {
 
 <style>
 .dmx-config-tab {
-  display: flex;
-  flex-direction: column;
-  min-height: 0; /* Needed for children of column-oriented flex container. Otherwise dmx-config-tab exceeds viewport. */
-                 /* http://stackoverflow.com/questions/26895349/how-can-i-get-ff-33-x-flexbox-behavior-in-ff-34-x     */
-                 /* https://www.w3.org/TR/css-flexbox-1/#min-size-auto                                                */
   overflow: auto;
-}
-
-.dmx-config-tab .dmx-object-renderer {
   padding: var(--detail-panel-padding-all);
 }
 
 .dmx-config-tab .button {
-  padding: var(--detail-panel-padding);
+  margin-top: 24px;
 }
 
-.dmx-config-tab .config-topics {
-  padding: var(--detail-panel-padding-all);
+.dmx-config-tab .config-topics .dmx-object-renderer + .dmx-object-renderer {
+  margin-top: 24px;
 }
 </style>
