@@ -4,16 +4,12 @@
       <dmx-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="detailRenderers"
         @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
       </dmx-object-renderer>
-      <div class="button" v-if="buttonVisibility"><!-- Wrapper saves button height (el-button as flex item is error) -->
-        <el-button @click="buttonAction">{{buttonLabel}}</el-button>
-      </div>
+      <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
     </div>
     <div v-if="configTypeUris" class="config-topics">
       <template v-for="topic in configTopics">
         <dmx-object-renderer :object="topic" :renderers="detailRenderers" :key="topic.id"></dmx-object-renderer>
-        <div>
-          <el-button>Edit</el-button>
-        </div>
+        <el-button>Edit</el-button>
       </template>
     </div>
   </div>
@@ -162,5 +158,6 @@ export default {
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 24px;
+  align-items: start;
 }
 </style>
