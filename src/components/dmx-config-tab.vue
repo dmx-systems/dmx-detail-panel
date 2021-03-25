@@ -9,8 +9,12 @@
       </div>
     </div>
     <div v-if="configTypeUris" class="config-topics">
-      <dmx-object-renderer v-for="topic in configTopics" :object="topic" :renderers="detailRenderers" :key="topic.id">
-      </dmx-object-renderer>
+      <template v-for="topic in configTopics">
+        <dmx-object-renderer :object="topic" :renderers="detailRenderers" :key="topic.id"></dmx-object-renderer>
+        <div>
+          <el-button>Edit</el-button>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -154,7 +158,9 @@ export default {
   margin-top: 24px;
 }
 
-.dmx-config-tab .config-topics .dmx-object-renderer + .dmx-object-renderer {
-  margin-top: 24px;
+.dmx-config-tab .config-topics {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 24px;
 }
 </style>
