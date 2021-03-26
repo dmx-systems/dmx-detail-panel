@@ -7,9 +7,12 @@
       <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
     </div>
     <div v-if="configTypeUris" class="config-topics">
-      <template v-for="topic in configTopics">
-        <dmx-object-renderer :object="topic" :renderers="detailRenderers" :key="topic.id"></dmx-object-renderer>
-        <el-button>Edit</el-button>
+      <template v-for="(topic, i) in configTopics">
+        <dmx-object-renderer :object="topic" :mode="configTopicMode[i]" :renderers="detailRenderers" :key="topic.id">
+        </dmx-object-renderer>
+        <div>
+          <el-button v-if="configButtonVisibility[i]" @click="configButtonAction(topic)">{{configButtonLabel[i]}}</el-button>
+        </div>
       </template>
     </div>
   </div>
@@ -49,11 +52,14 @@ export default {
       inlineId: undefined,      // trueish if inline edit is active in this object or in *any* child topic (recursively)
       mode: 'info',
       // config service
-      configTopics: []          // inited by initConfigTopics() method
+      configTopics: [],               // inited by initConfigTopics() method
+      configTopicToEdit: undefined    // undefined if no config topic is in edit mode
     }
   },
 
   computed: {
+
+    // View Config
 
     type () {
       return this.viewConfigTopic.type
@@ -74,6 +80,20 @@ export default {
 
     buttonVisibility () {
       return this.writable && !this.inlineId
+    },
+
+    // Config Service
+
+    configTopicMode () {
+      return this.configTopics.map(topic => topic === this.configTopicToEdit ? 'form' : 'info')
+    },
+
+    configButtonLabel () {
+      return this.configTopics.map(topic => topic === this.configTopicToEdit ? 'Save' : 'Edit')
+    },
+
+    configButtonVisibility () {
+      return this.configTopics.map(topic => !this.configTopicToEdit || topic === this.configTopicToEdit)
     }
   },
 
@@ -122,7 +142,7 @@ export default {
     // Config Service
 
     initConfigTopics () {
-      // Optimization: don't fetch if "Config" tab is not selected
+      // Optimization: don't fetch if "Config" tab is not selected or current `object` has no config
       if (this.tab !== 'config' || !this.configTypeUris) {
         return
       }
@@ -135,6 +155,15 @@ export default {
           this.configTopics.push(topic)
         })
       })
+    },
+
+    configButtonAction (topic) {
+      if (!this.configTopicToEdit) {
+        this.configTopicToEdit = topic
+      } else {
+        this.configTopicToEdit = undefined
+        // TODO: backend call
+      }
     }
   },
 
