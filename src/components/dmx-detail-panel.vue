@@ -23,7 +23,8 @@
       </el-tab-pane>
       <el-tab-pane label="Config" name="config" :disabled="configTabDisabled">
         <dmx-config-tab :object="object_" :writable="writable_" :tab="tab_" :view-config-topic="viewConfigTopic"
-          :config-type-uris="configTypeUris" :detail-renderers="detailRenderers" @submit-view-config="submitViewConfig">
+          :config-type-uris="configTypeUris" :detail-renderers="detailRenderers"
+          @submit-view-config="submitViewConfig" @submit-config-topic="submitConfigTopic">
         </dmx-config-tab>
       </el-tab-pane>
     </el-tabs>
@@ -156,6 +157,10 @@ export default {
 
     submitViewConfig (viewConfigTopic) {
       this.$emit('submit-view-config', viewConfigTopic)
+    },
+
+    submitConfigTopic (configTopic) {
+      this.$emit('submit-config-topic', configTopic)
     },
 
     revealChildTopic (relTopic) {

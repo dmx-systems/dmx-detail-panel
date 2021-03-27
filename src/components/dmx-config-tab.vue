@@ -161,11 +161,17 @@ export default {
       if (!this.configTopicToEdit) {
         this.configTopicToEdit = topic
       } else {
+        this.submitConfigTopic()
         this.configTopicToEdit = undefined
-        // TODO: backend call
       }
+    },
+
+    submitConfigTopic () {
+      this.$emit('submit-config-topic', this.configTopicToEdit)
     }
   },
+
+  //
 
   components: {
     'dmx-object-renderer': require('dmx-object-renderer').default
