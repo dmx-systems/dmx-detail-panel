@@ -148,8 +148,8 @@ export default {
 }
 
 .dmx-info-tab .dmx-object-renderer {
+  padding: 29px 18px 12px 12px;
   overflow: auto;
-  padding: var(--detail-panel-padding-all);
 }
 
 .dmx-info-tab .button-panel {

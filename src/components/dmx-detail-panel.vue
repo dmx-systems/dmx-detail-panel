@@ -1,5 +1,5 @@
 <template>
-  <div class="dmx-detail-panel" v-if="visible_"><!-- background is already shown for the sake of feedback -->
+  <div class="dmx-detail-panel" v-if="visible_">
     <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned_}, 'fa', 'fa-thumb-tack']" type="text"
       :title="pinTitle" @click="togglePinned">
     </el-button>
