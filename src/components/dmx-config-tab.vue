@@ -1,6 +1,6 @@
 <template>
   <div class="dmx-config-tab">
-    <div v-if="viewConfigTopic">
+    <div v-if="viewConfigTopic" class="view-config">
       <dmx-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="detailRenderers"
         @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
       </dmx-object-renderer>
@@ -11,7 +11,9 @@
         <dmx-object-renderer :object="topic" :mode="configTopicMode[i]" :renderers="detailRenderers" :key="topic.id">
         </dmx-object-renderer>
         <div>
-          <el-button v-if="configButtonVisibility[i]" @click="configButtonAction(topic)">{{configButtonLabel[i]}}</el-button>
+          <el-button v-if="configButtonVisibility[i]" @click="configButtonAction(topic)">
+            {{configButtonLabel[i]}}
+          </el-button>
         </div>
       </template>
     </div>
@@ -183,6 +185,10 @@ export default {
 .dmx-config-tab {
   overflow: auto;
   padding: var(--detail-panel-padding-all);
+}
+
+.dmx-config-tab .view-config .dmx-object-renderer {
+  padding-right: 18px;
 }
 
 .dmx-config-tab .button {
