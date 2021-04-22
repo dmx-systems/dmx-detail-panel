@@ -10,7 +10,7 @@
     "url": "https://github.com/dmx-systems/dmx-detail-panel.git"
   },
   "dependencies": {
-    "dmx-inline-edit": "2.0.0",
+    "dmx-inline-edit": "https://github.com/dmx-systems/dmx-inline-edit.git",
     "dmx-object-renderer": "2.0.0",
     "dmx-topic-list": "2.0.0"
   }
