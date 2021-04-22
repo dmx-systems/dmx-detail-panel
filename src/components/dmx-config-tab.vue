@@ -4,7 +4,7 @@
       <dmx-object-renderer :object="objectToRender" :writable="writable" :mode="mode" :renderers="detailRenderers"
         @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
       </dmx-object-renderer>
-      <el-button class="button" v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
+      <el-button v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
     </div>
     <div v-if="configTypeUris" class="config-topics">
       <template v-for="(topic, i) in configTopics">
@@ -191,7 +191,7 @@ export default {
   padding-right: 18px;
 }
 
-.dmx-config-tab .button {
+.dmx-config-tab .view-config > .el-button {
   margin-top: 24px;
 }
 
