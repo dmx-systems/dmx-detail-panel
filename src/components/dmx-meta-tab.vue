@@ -163,7 +163,7 @@ export default {
 
     assignToWorkspace () {
       this.workspace = this.$refs.workspaceSelect.workspace_    // update client state
-      console.log('assignToWorkspace', this.workspace.id)
+      // console.log('assignToWorkspace', this.workspace.id)
       this.object.assignToWorkspace(this.workspace.id)          // update server
       // TODO: process directives
     },
