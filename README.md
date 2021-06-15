@@ -2,6 +2,20 @@
 
 ## Version History
 
+**2.1** -- Jun 15, 2021
+
+* Improvements:
+    * Extended "View" tab, now renamed "Config":
+        * Display *view configs* also for role types
+        * Allows interactive configuration, according to DMX ConfigService
+        * Emit `submit-config-topic` component event
+    * New component attribute `extra-buttons` allows the addition of custom buttons
+    * Give Reveal and Edit buttons more space
+* Fix:
+    * "Meta" tab displays workspace owner
+* Chore:
+    * Remove debug log
+
 **2.0** -- Dec 30, 2020
 
 * BREAKING CHANGES
@@ -189,7 +203,3 @@
 **0.2** -- Jun 14, 2017
 
 **0.1** -- Apr 28, 2017
-
-------------
-Jörg Richter  
-Dec 30, 2020
