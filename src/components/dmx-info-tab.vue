@@ -5,9 +5,11 @@
       @inline="setInlineId" @submit="submit" @child-topic-reveal="revealChildTopic">
     </dmx-object-renderer>
     <div class="button-panel" v-if="showButtons">
+      <!-- Edit/Save button -->
       <el-button v-if="showButton" :disabled="buttonDisabled" :title="buttonTitle" @click="buttonHandler">
         {{buttonLabel}}
       </el-button>
+      <!-- extra buttons -->
       <template v-if="infoMode">
         <el-button v-for="button in _extraButtons" :key="button.label" @click="button.handler">
           {{button.label}}
@@ -56,9 +58,16 @@ export default {
         return this.object
       } else {
         this.objectToCompare = this.type.newFormModel(this.object.clone())
+        this.modelCustomizer && this.modelCustomizer(this.objectToCompare, this.object)
         this.objectToEdit = this.objectToCompare.clone()
         return this.objectToEdit
       }
+    },
+
+    modelCustomizer () {
+      const objectRenderers = this.detailRenderers.object
+      const renderer = objectRenderers && objectRenderers[this.object.typeUri]
+      return renderer && renderer.model && renderer.model.customize
     },
 
     buttonLabel () {
