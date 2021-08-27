@@ -2,6 +2,11 @@
 
 ## Version History
 
+**2.2** -- Aug 27, 2021
+
+* Improvements:
+    * Custom renderers can provide model customizers
+
 **2.1** -- Jun 15, 2021
 
 * Improvements:
