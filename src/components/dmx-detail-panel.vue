@@ -1,5 +1,5 @@
 <template>
-  <transition name="detail-panel" @before-enter="beforeEnter" @after-enter="afterEnter" @before-leave="beforeLeave"
+  <transition @before-enter="beforeEnter" @after-enter="afterEnter" @before-leave="beforeLeave"
       @after-leave="afterLeave">
     <div class="dmx-detail-panel" v-if="visible_">
       <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned_}, 'fa', 'fa-thumb-tack']" type="text"
@@ -307,18 +307,18 @@ export default {
   --detail-panel-trans-x: 70vw;         /* updated dynamically; initial value must match "resizerPos" webclient state */
 }
 
-.dmx-detail-panel.detail-panel-enter-active,
-.dmx-detail-panel.detail-panel-leave-active {
+.dmx-detail-panel.v-enter-active,
+.dmx-detail-panel.v-leave-active {
   transition: left 0.3s;
 }
 
-.dmx-detail-panel.detail-panel-enter,
-.dmx-detail-panel.detail-panel-leave-to {
+.dmx-detail-panel.v-enter,
+.dmx-detail-panel.v-leave-to {
   left: 100%;
 }
 
-.dmx-detail-panel.detail-panel-enter-to,
-.dmx-detail-panel.detail-panel-leave {
+.dmx-detail-panel.v-enter-to,
+.dmx-detail-panel.v-leave {
   left: var(--detail-panel-trans-x);
 }
 </style>
