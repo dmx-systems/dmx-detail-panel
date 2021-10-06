@@ -1,34 +1,37 @@
 <template>
-  <div class="dmx-detail-panel" v-if="visible_">
-    <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned_}, 'fa', 'fa-thumb-tack']" type="text"
-      :title="pinTitle" @click="togglePinned">
-    </el-button>
-    <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
-      <el-tab-pane :label="object_.typeName" name="info">
-        <dmx-info-tab :object="object_" :writable="writable_" :mode="mode_" :detail-renderers="detailRenderers"
-          :extra-buttons="extraButtons" :types="types_" :quill-config="quillConfig" @edit="edit" @submit="submit"
-          @submit-inline="submitInline" @child-topic-reveal="revealChildTopic" ref="infoTab">
-        </dmx-info-tab>
-      </el-tab-pane>
-      <el-tab-pane label="Related" name="related">
-        <dmx-related-tab :object="object_" :tab="tab_" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds_"
-          @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick" @sort-change="sortChange">
-        </dmx-related-tab>
-      </el-tab-pane>
-      <el-tab-pane label="Meta" name="meta">
-        <dmx-meta-tab :object="object_" :writable="writable_" :tab="tab_" :marker-topic-ids="markerTopicIds_"
-          @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick"
-          @object-id-click="objectIdClick">
-        </dmx-meta-tab>
-      </el-tab-pane>
-      <el-tab-pane label="Config" name="config" :disabled="configTabDisabled">
-        <dmx-config-tab :object="object_" :writable="writable_" :tab="tab_" :view-config-topic="viewConfigTopic"
-          :config-type-uris="configTypeUris" :detail-renderers="detailRenderers"
-          @submit-view-config="submitViewConfig" @submit-config-topic="submitConfigTopic">
-        </dmx-config-tab>
-      </el-tab-pane>
-    </el-tabs>
-  </div>
+  <transition @before-enter="beforeEnter" @after-enter="afterEnter" @before-leave="beforeLeave"
+      @after-leave="afterLeave">
+    <div class="dmx-detail-panel" v-if="visible_">
+      <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned_}, 'fa', 'fa-thumb-tack']" type="text"
+        :title="pinTitle" @click="togglePinned">
+      </el-button>
+      <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
+        <el-tab-pane :label="object_.typeName" name="info">
+          <dmx-info-tab :object="object_" :writable="writable_" :mode="mode_" :detail-renderers="detailRenderers"
+            :extra-buttons="extraButtons" :types="types_" :quill-config="quillConfig" @edit="edit" @submit="submit"
+            @submit-inline="submitInline" @child-topic-reveal="revealChildTopic" ref="infoTab">
+          </dmx-info-tab>
+        </el-tab-pane>
+        <el-tab-pane label="Related" name="related">
+          <dmx-related-tab :object="object_" :tab="tab_" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds_"
+            @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick" @sort-change="sortChange">
+          </dmx-related-tab>
+        </el-tab-pane>
+        <el-tab-pane label="Meta" name="meta">
+          <dmx-meta-tab :object="object_" :writable="writable_" :tab="tab_" :marker-topic-ids="markerTopicIds_"
+            @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick"
+            @object-id-click="objectIdClick">
+          </dmx-meta-tab>
+        </el-tab-pane>
+        <el-tab-pane label="Config" name="config" :disabled="configTabDisabled">
+          <dmx-config-tab :object="object_" :writable="writable_" :tab="tab_" :view-config-topic="viewConfigTopic"
+            :config-type-uris="configTypeUris" :detail-renderers="detailRenderers"
+            @submit-view-config="submitViewConfig" @submit-config-topic="submitConfigTopic">
+          </dmx-config-tab>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -37,7 +40,7 @@ import dmx from 'dmx-api'
 export default {
 
   created () {
-    // console.log('dmx-detail-panel created', this.types)
+    // console.log('dmx-detail-panel created', this)
   },
 
   destroyed () {
@@ -60,7 +63,8 @@ export default {
     markerTopicIds: Array,                      // Optional: IDs of topics to render as "marked" in related-tab.
     types: Object,                              // Optional: "assocTypes" and "roleTypes" (arrays)
     quillConfig: Object,
-    noPinButton: Boolean
+    noPinButton: Boolean,
+    transX: {type: Number}                      // absolute x coordinate for show/hide transition (number)
   },
 
   data () {
@@ -75,7 +79,8 @@ export default {
       mode_:           this.mode,
       configDefs_:     this.configDefs,
       markerTopicIds_: this.markerTopicIds,
-      types_:          this.types
+      types_:          this.types,
+      transX_:         this.transX
     }
   },
 
@@ -119,6 +124,10 @@ export default {
   },
 
   watch: {
+    transX_ (transX) {
+      // console.log('watch transX', transX)
+      document.body.style.setProperty('--detail-panel-trans-x', transX + 'px')
+    },
     // needed when instantiated via template
     object   () {this.object_   = this.object},                                        /* eslint block-spacing: "off" */
     writable () {this.writable_ = this.writable},
@@ -185,6 +194,32 @@ export default {
 
     sortChange (sortMode) {
       this.sortMode = sortMode
+    },
+
+    // Show/hide transition
+
+    beforeEnter (el) {
+      // console.log('beforeEnter')
+      el.style.position = 'absolute'
+      el.style.height = '100%'
+    },
+
+    afterEnter (el) {
+      // console.log('afterEnter', document.querySelector('.dmx-detail-panel').__vue__.$parent)
+      el.style.position = 'unset'
+      el.style.height = 'unset'
+    },
+
+    beforeLeave (el) {
+      // console.log('beforeLeave', document.querySelector('.dmx-detail-panel').__vue__)
+      el.style.position = 'absolute'
+      el.style.height = '100%'
+    },
+
+    afterLeave (el) {
+      // console.log('afterLeave')
+      el.style.position = 'unset'
+      el.style.height = 'unset'
     },
 
     // Public API
@@ -264,5 +299,26 @@ export default {
   color: transparent;
   font-size: 15px !important;
   -webkit-text-stroke: 1px var(--highlight-color);
+}
+
+/* Show/hide transition */
+
+:root {
+  --detail-panel-trans-x: 70vw;         /* updated dynamically; initial value must match "resizerPos" webclient state */
+}
+
+.dmx-detail-panel.v-enter-active,
+.dmx-detail-panel.v-leave-active {
+  transition: left 0.3s;
+}
+
+.dmx-detail-panel.v-enter,
+.dmx-detail-panel.v-leave-to {
+  left: 100%;
+}
+
+.dmx-detail-panel.v-enter-to,
+.dmx-detail-panel.v-leave {
+  left: var(--detail-panel-trans-x);
 }
 </style>
