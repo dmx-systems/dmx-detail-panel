@@ -63,7 +63,8 @@ export default {
     markerTopicIds: Array,                      // Optional: IDs of topics to render as "marked" in related-tab.
     types: Object,                              // Optional: "assocTypes" and "roleTypes" (arrays)
     quillConfig: Object,
-    noPinButton: Boolean
+    noPinButton: Boolean,
+    transX: {type: Number}                      // absolute x coordinate for show/hide transition (number)
   },
 
   data () {
@@ -78,7 +79,8 @@ export default {
       mode_:           this.mode,
       configDefs_:     this.configDefs,
       markerTopicIds_: this.markerTopicIds,
-      types_:          this.types
+      types_:          this.types,
+      transX_:         this.transX
     }
   },
 
@@ -122,6 +124,10 @@ export default {
   },
 
   watch: {
+    transX_ (transX) {
+      // console.log('watch transX', transX)
+      document.body.style.setProperty('--detail-panel-trans-x', transX + 'px')
+    },
     // needed when instantiated via template
     object   () {this.object_   = this.object},                                        /* eslint block-spacing: "off" */
     writable () {this.writable_ = this.writable},
@@ -297,6 +303,10 @@ export default {
 
 /* Show/hide transition */
 
+:root {
+  --detail-panel-trans-x: 70vw;         /* updated dynamically; initial value must match "resizerPos" webclient state */
+}
+
 .dmx-detail-panel.detail-panel-enter-active,
 .dmx-detail-panel.detail-panel-leave-active {
   transition: left 0.3s;
@@ -309,6 +319,6 @@ export default {
 
 .dmx-detail-panel.detail-panel-enter-to,
 .dmx-detail-panel.detail-panel-leave {
-  left: 70%;
+  left: var(--detail-panel-trans-x);
 }
 </style>
