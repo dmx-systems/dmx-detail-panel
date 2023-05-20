@@ -292,7 +292,7 @@ export default {
   right: 6px;
   font-size: 16px !important;
   padding: 0 !important;
-  z-index: 3;                           /* stack above el-tabs__nav */
+  z-index: 3;                         /* stack above el-tabs__nav */
 }
 
 .dmx-detail-panel button.pin.unpinned {
@@ -304,7 +304,7 @@ export default {
 /* Show/hide transition */
 
 :root {
-  --detail-panel-trans-x: 70vw;         /* updated dynamically; initial value must match "resizerPos" webclient state */
+  --detail-panel-trans-x: 70vw;       /* synced with app state; initial value must match "resizerPos" webclient state */
 }
 
 .dmx-detail-panel.v-enter-active,

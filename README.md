@@ -2,6 +2,13 @@
 
 ## Version History
 
+**3.0** -- May 20, 2023
+
+* BREAKING CHANGES
+    * Make use of `dmx-api` 3.0
+* Features:
+    * Open/close detail panel is animated
+
 **2.2** -- Aug 27, 2021
 
 * Improvements:
