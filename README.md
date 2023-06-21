@@ -2,6 +2,11 @@
 
 ## Version History
 
+**3.0.1** -- Jun 21, 2023
+
+* Chore:
+    * Use semantic versioning for the `dmx-` dependencies, e.g. `dmx-object-renderer`
+
 **3.0** -- May 20, 2023
 
 * BREAKING CHANGES
