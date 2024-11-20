@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "dmx-inline-edit": "2.x",
-    "dmx-object-renderer": "3.x",
+    "dmx-object-renderer": "4.x",
     "dmx-topic-list": "2.x"
   }
 }
