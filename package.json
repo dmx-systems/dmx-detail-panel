@@ -1,6 +1,6 @@
 {
   "name": "dmx-detail-panel",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "The DMX 5 detail panel as a composable GUI component",
   "author": "Jörg Richter <jri@dmx.berlin>",
   "license": "AGPL-3.0",
