@@ -9,7 +9,6 @@
 
 <script>
 import dmx from 'dmx-api'
-import Vue from 'vue'
 
 export default {
 
@@ -23,8 +22,8 @@ export default {
 
   data () {
     return {
-      workspaces: [],               // all workspaces (array of dmx.Topic)
-      workspace_: this.workspace    // selected workspace (dmx.Topic)
+      workspaces: [],                 // all workspaces (array of dmx.Topic)
+      workspace_: this.workspace      // selected workspace (dmx.Topic)
     }
   },
 
@@ -35,7 +34,7 @@ export default {
         // set writable flags
         workspaces.forEach(workspace => {
           workspace.isWritable().then(writable => {
-            Vue.set(workspace, 'writable', writable)
+            workspace.writable = writable
           })
         })
       })
@@ -43,6 +42,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
