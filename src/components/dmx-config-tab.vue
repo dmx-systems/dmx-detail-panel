@@ -7,8 +7,8 @@
       <el-button v-if="buttonVisibility" @click="buttonAction">{{buttonLabel}}</el-button>
     </div>
     <div v-if="configTypeUris" class="config-topics">
-      <template v-for="(topic, i) in configTopics">
-        <dmx-object-renderer :object="topic" :mode="configTopicMode[i]" :renderers="detailRenderers" :key="topic.id">
+      <template v-for="(topic, i) in configTopics" :key="topic.id">
+        <dmx-object-renderer :object="topic" :mode="configTopicMode[i]" :renderers="detailRenderers">
         </dmx-object-renderer>
         <div>
           <el-button v-if="configButtonVisibility[i]" @click="configButtonAction(topic)">
