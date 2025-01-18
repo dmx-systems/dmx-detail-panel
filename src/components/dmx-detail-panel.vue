@@ -1,31 +1,28 @@
 <template>
   <transition @before-enter="beforeEnter" @after-enter="afterEnter" @before-leave="beforeLeave"
       @after-leave="afterLeave">
-    <div class="dmx-detail-panel" v-if="visible_">
-      <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned_}, 'fa', 'fa-thumb-tack']" type="text"
+    <div class="dmx-detail-panel" v-if="visible">
+      <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned}, 'fa', 'fa-thumb-tack']" type="text"
         :title="pinTitle" @click="togglePinned">
       </el-button>
-      <el-tabs v-if="object_" :value="tab_" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
-        <el-tab-pane :label="object_.typeName" name="info">
-          <dmx-info-tab :object="object_" :writable="writable_" :mode="mode_" :detail-renderers="detailRenderers"
-            :extra-buttons="extraButtons" :types="types_" :quill-config="quillConfig" @edit="edit" @submit="submit"
-            @submit-inline="submitInline" @child-topic-reveal="revealChildTopic" ref="infoTab">
+      <el-tabs v-if="object" :value="tab" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
+        <el-tab-pane :label="object.typeName" name="info">
+          <dmx-info-tab :object :writable :mode :detail-renderers :extra-buttons :types :quill-config @edit="edit"
+            @submit="submit" @submit-inline="submitInline" @child-topic-reveal="revealChildTopic" ref="infoTab">
           </dmx-info-tab>
         </el-tab-pane>
         <el-tab-pane label="Related" name="related">
-          <dmx-related-tab :object="object_" :tab="tab_" :sort-mode="sortMode" :marker-topic-ids="markerTopicIds_"
-            @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick" @sort-change="sortChange">
+          <dmx-related-tab :object :tab :sort-mode :marker-topic-ids @related-topic-click="relatedTopicClick"
+            @related-icon-click="relatedIconClick" @sort-change="sortChange">
           </dmx-related-tab>
         </el-tab-pane>
         <el-tab-pane label="Meta" name="meta">
-          <dmx-meta-tab :object="object_" :writable="writable_" :tab="tab_" :marker-topic-ids="markerTopicIds_"
-            @related-topic-click="relatedTopicClick" @related-icon-click="relatedIconClick"
-            @object-id-click="objectIdClick">
+          <dmx-meta-tab :object :writable :tab :marker-topic-ids @related-topic-click="relatedTopicClick"
+            @related-icon-click="relatedIconClick" @object-id-click="objectIdClick">
           </dmx-meta-tab>
         </el-tab-pane>
         <el-tab-pane label="Config" name="config" :disabled="configTabDisabled">
-          <dmx-config-tab :object="object_" :writable="writable_" :tab="tab_" :view-config-topic="viewConfigTopic"
-            :config-type-uris="configTypeUris" :detail-renderers="detailRenderers"
+          <dmx-config-tab :object :writable :tab :view-config-topic :config-type-uris :detail-renderers
             @submit-view-config="submitViewConfig" @submit-config-topic="submitConfigTopic">
           </dmx-config-tab>
         </el-tab-pane>
@@ -70,38 +67,26 @@ export default {
   data () {
     return {
       sortMode: 'type',                         // Related tab sort mode: 'topic', 'type', 'assoc'
-      // mirror props ### FIXME: add remaining props?
-      visible_:        this.visible,
-      pinned_:         this.pinned,
-      tab_:            this.tab,
-      object_:         this.object,
-      writable_:       this.writable,
-      mode_:           this.mode,
-      configDefs_:     this.configDefs,
-      markerTopicIds_: this.markerTopicIds,
-      types_:          this.types,
-      transX_:         this.transX
     }
   },
 
   computed: {
 
     pinTitle () {
-      return this.pinned_ ? 'Unpin Detail Panel\n\nIf unpinned, the detail panel closes if nothing is selected' :
+      return this.pinned ? 'Unpin Detail Panel\n\nIf unpinned, the detail panel closes if nothing is selected' :
         'Pin Detail Panel\n\nIf pinned, the detail panel remains open even if nothing is selected'
     },
 
     viewConfigTopic () {
-      // console.log('viewConfigTopic', this.object_)
-      if (this.object_ && (this.object_.isType || this.object_.isRoleType || this.object_.isCompDef)) {
-        const viewConfig = this.object_.viewConfig
+      if (this.object && (this.object.isType || this.object.isRoleType || this.object.isCompDef)) {
+        const viewConfig = this.object.viewConfig
         if (!viewConfig) {
-          console.warn('Type, or role type, or comp def is missing a view config', this.object_)
+          console.warn('Type, or role type, or comp def is missing a view config', this.object)
           return
         }
         const viewConfigTopic = viewConfig['dmx.webclient.view_config']
         if (!viewConfigTopic) {
-          console.warn('Type, or role type, or comp def is missing a view config topic', this.object_)
+          console.warn('Type, or role type, or comp def is missing a view config topic', this.object)
           return
         }
         return viewConfigTopic
@@ -112,9 +97,9 @@ export default {
      * @return  String array, never empty. Undefined if current `object` has no config.
      */
     configTypeUris () {
-      const hashKey = Object.keys(this.configDefs_).find(hashKey => this.matches(hashKey))
+      const hashKey = Object.keys(this.configDefs).find(hashKey => this.matches(hashKey))
       if (hashKey) {
-        return this.configDefs_[hashKey]
+        return this.configDefs[hashKey]
       }
     },
 
@@ -124,16 +109,10 @@ export default {
   },
 
   watch: {
-    transX_ (transX) {
+    transX (transX) {
       // console.log('watch transX', transX)
       document.body.style.setProperty('--detail-panel-trans-x', transX + 'px')
-    },
-    // needed when instantiated via template
-    object   () {this.object_   = this.object},                                        /* eslint block-spacing: "off" */
-    writable () {this.writable_ = this.writable},
-    tab      () {this.tab_      = this.tab},
-    mode     () {this.mode_     = this.mode}
-    // FIXME: add watchers for the remaining props?
+    }
   },
 
   methods: {
@@ -141,9 +120,9 @@ export default {
     matches (hashKey) {
       const s = hashKey.split(':')
       if (s[0] === 'typeUri') {
-        return this.object_.typeUri === s[1]
+        return this.object.typeUri === s[1]
       } else if (s[0] === 'topicUri') {
-        return this.object_.uri === s[1]
+        return this.object.uri === s[1]
       }
       throw Error(`Unexpected hash key: "${hashKey}"`)
     },
@@ -189,7 +168,7 @@ export default {
     },
 
     togglePinned () {
-      this.$emit('pin', !this.pinned_)
+      this.$emit('pin', !this.pinned)
     },
 
     sortChange (sortMode) {
