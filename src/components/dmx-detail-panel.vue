@@ -2,7 +2,7 @@
   <transition @before-enter="beforeEnter" @after-enter="afterEnter" @before-leave="beforeLeave"
       @after-leave="afterLeave">
     <div class="dmx-detail-panel" v-if="visible">
-      <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned}, 'fa', 'fa-thumb-tack']" type="text"
+      <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned}, 'fa', 'fa-thumb-tack']" type="primary" link
         :title="pinTitle" @click="togglePinned">
       </el-button>
       <el-tabs v-if="object" :value="tab" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
