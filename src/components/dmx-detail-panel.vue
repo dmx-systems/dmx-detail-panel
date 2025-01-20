@@ -5,7 +5,7 @@
       <el-button v-if="!noPinButton" :class="['pin', {unpinned: !pinned}, 'fa', 'fa-thumb-tack']" type="primary" link
         :title="pinTitle" @click="togglePinned">
       </el-button>
-      <el-tabs v-if="object" :value="tab" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
+      <el-tabs v-if="object" :model-value="tab" @tab-click="tabClick"><!-- tabs are shown once object arrives -->
         <el-tab-pane :label="object.typeName" name="info">
           <dmx-info-tab :object :writable :mode :detail-renderers :extra-buttons :types :quill-config @edit="edit"
             @submit="submit" @submit-inline="submitInline" @child-topic-reveal="revealChildTopic" ref="infoTab">
@@ -127,8 +127,8 @@ export default {
       throw Error(`Unexpected hash key: "${hashKey}"`)
     },
 
-    tabClick (tabPane) {
-      this.$emit('tab-click', tabPane.name)
+    tabClick (tab) {
+      this.$emit('tab-click', tab.paneName)
     },
 
     edit () {
@@ -224,34 +224,31 @@ export default {
 <style>
 .dmx-detail-panel .el-tabs {
   height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .dmx-detail-panel .el-tabs__header {
-  margin: 0;                            /* was 0 0 15px */
-  padding-left:  12px;
+  margin: 0;                            /* Element Plus default is "0 0 15px" */
+  padding-left: 12px;                   /* Element Plus default is 0 */
 }
 
 .dmx-detail-panel .el-tabs__header .el-tabs__item {
-  font-size: var(--label-font-size);    /* was 14px */
-  color: var(--label-color);            /* was #303133 (Element UI --color-text-primary) */
-  height: 36px;                         /* was 40px */
-  line-height: 36px;                    /* was 40px */
-  padding: 0 12px;                      /* was 0 20px */
+  font-size: var(--label-font-size);    /* Element Plus default is 14px (--el-font-size-base) */
+  color: var(--label-color);            /* Element Plus default is #303133 (--el-text-color-primary) */
+  height: 36px;                         /* Element Plus default is 40px (--el-tabs-header-height) */
+  padding: 0 12px;                      /* Element Plus default is 0 20px */
 }
 
 .dmx-detail-panel .el-tabs__header .el-tabs__item:hover {
-  color: var(--highlight-color);        /* restore original Element UI active color as accidentally */
-}                                       /* overridden by previous rule due to higher specificity    */
+  color: var(--highlight-color);        /* restore original Element Plus active color as accidentally */
+}                                       /* overridden by previous rule due to higher specificity */
 
 .dmx-detail-panel .el-tabs__header .el-tabs__item.is-active {
-  color: var(--highlight-color);        /* restore original Element UI active color as accidentally */
-}                                       /* overridden by previous rule due to higher specificity    */
+  color: var(--highlight-color);        /* restore original Element Plus active color as accidentally */
+}                                       /* overridden by previous rule due to higher specificity */
 
 .dmx-detail-panel .el-tabs__header .el-tabs__item.is-disabled {
-  color: var(--label-color-disabled);   /* restore original Element UI disabled color as accidentally */
-}                                       /* overridden by previous rule due to higher specificity      */
+  color: var(--label-color-disabled);   /* restore original Element Plus disabled color as accidentally */
+}                                       /* overridden by previous rule due to higher specificity */
 
 .dmx-detail-panel .el-tabs__content,
 .dmx-detail-panel .el-tabs__content .el-tab-pane {
