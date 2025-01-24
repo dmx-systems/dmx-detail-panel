@@ -42,3 +42,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.dmx-workspace-select.el-select {
+  width: 200px;
+}
+</style>
